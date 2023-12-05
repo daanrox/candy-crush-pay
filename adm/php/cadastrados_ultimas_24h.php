@@ -13,7 +13,7 @@ try {
     $leadAff = isset($_GET['leadAff']) ? $_GET['leadAff'] : null;
 
     // Consulta SQL para obter dados da tabela, ordenados pela hora em ordem ascendente
-    $sql = "SELECT id, data_cadastro, email, senha, telefone, saldo, linkafiliado, plano, depositou, bloc, saldo_comissao, percas, ganhos, cpa, cpafake, comissaofake 
+    $sql = "SELECT id
             FROM appconfig";
 
     // Adicionar cláusula WHERE se o parâmetro leadAff estiver presente
@@ -52,12 +52,34 @@ try {
         $data[] = $row;
     }
     
+    // Consulta para obter a quantidade total
+    $sqlTotal = "SELECT COUNT(*) as total FROM appconfig";
+
+    // Adicionar cláusula WHERE se o parâmetro leadAff estiver presente
+    if (!empty($leadAff)) {
+        $sqlTotal .= " WHERE lead_aff = '$leadAff'";
+    }
+
+    $resultTotal = $conn->query($sqlTotal);
+    $total = ($resultTotal && $resultTotal->num_rows > 0) ? $resultTotal->fetch_assoc()['total'] : 0;
+
+    // Consulta para obter a quantidade nas últimas 24 horas
+    $sqlUltimas24h = "SELECT COUNT(*) as ultimas_24h FROM appconfig WHERE STR_TO_DATE(data_cadastro, '%d-%m-%Y %H:%i:%s') >= NOW() - INTERVAL 24 HOUR";
+
+    // Adicionar cláusula WHERE se o parâmetro leadAff estiver presente
+    if (!empty($leadAff)) {
+        $sqlUltimas24h .= " AND lead_aff = '$leadAff'";
+    }
+
+    $resultUltimas24h = $conn->query($sqlUltimas24h);
+    $ultimas24h = ($resultUltimas24h && $resultUltimas24h->num_rows > 0) ? $resultUltimas24h->fetch_assoc()['ultimas_24h'] : 0;
+
     // Fechar a conexão com o banco de dados
     $conn->close();
     
     // Enviar os dados como JSON
     header('Content-Type: application/json');
-    echo json_encode($data);
+    echo json_encode(['data' => $data, 'total' => $total, 'ultimas_24h' => $ultimas24h]);
 } catch(Exception $e) {
     var_dump($e);
     http_response_code(200);

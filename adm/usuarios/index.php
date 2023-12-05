@@ -134,12 +134,46 @@ if (!isset($_SESSION['emailadm'])) {
     
     <?php include '../components/aside.php' ?>
    
+<div class="page-wrapper">
     
-   <div class="page-wrapper">
+</div> 
+<div class="page-wrapper">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Tabela de Usuários</h5>
+       <!-- Column -->
+        <div class="row">
+            <div class="col-md-12 col-lg-4 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-danger text-center">
+                        <h1 class="font-light text-white" id="valorUsuarios1">0</h1>
+                        <h4 class="text-white">Total de cadastros</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4 col-xlg-3">
+                <div class="card card-hover">
+                    <div class="box bg-danger text-center">
+                        <h1 class="font-light text-white" id="valorUsuarios2">0</h1>
+                        <h4 class="text-white">Total de cadastros nas últimas 24 horas</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        
       <div class="table-responsive">
+        <h5>Filtrar por link de afiliado</h5>
+        <select id="leadAffSelect">
+            <option value="">Todos</option>
+            <option value="ttk/">TikTok</option>
+            <option value="fb/">Facebook</option>
+            <option value="kwa/">Kway</option>
+            <option value="trake1/">Tracker 1</option>
+            <option value="trake2/">Tracker 2</option>
+        </select>
         <table id="user-table" class="table table-striped table-bordered">
           <thead>
             <tr>
@@ -230,6 +264,40 @@ if (!isset($_SESSION['emailadm'])) {
     </div>
   </div>
 </div>
+<script>
+    // Função para obter o valor selecionado do select
+    function getSelectedValue() {
+        return $("#leadAffSelect").val();
+    }
+
+    // Evento de clique ou outra ação que aciona a leitura
+    $(document).ready(function () {
+        // Adicione um evento para reagir a mudanças no campo de entrada
+        $('#leadAffSelect').on('change', function () {
+            // Obtenha o valor selecionado no <select>
+            var leadAffValue = getSelectedValue();
+
+            // Solicitação AJAX
+            $.ajax({
+                type: "GET",
+                url: "../php/cadastrados_ultimas_24h.php",
+                data: { leadAff: leadAffValue }, // Correção: chame a função para obter o valor
+                success: function (response) {
+                    // Atualiza o valor exibido na página
+                    $("#valorUsuarios1").text(response.total);
+                    $("#valorUsuarios2").text(response.ultimas_24h);
+                    console.log(response); // Exibe a resposta do servidor no console
+                },
+                error: function (error) {
+                    console.log("Erro na solicitação AJAX: " + error);
+                }
+            });
+        });
+
+        // Dispare o evento de mudança inicial para carregar os dados com base no valor padrão
+        $('#leadAffSelect').change();
+    });
+</script>
 
 <script>
 
@@ -249,6 +317,7 @@ if (!isset($_SESSION['emailadm'])) {
 
 <script>
   $(document).ready(function() {
+    
     // Use AJAX para buscar dados do arquivo PHP
     $.ajax({
       url: 'bd.php',
@@ -319,7 +388,84 @@ if (!isset($_SESSION['emailadm'])) {
         console.log('Erro ao obter dados do servidor.');
       }
     });
-  });
+    // Adicione um identificador ao seu campo de entrada
+    var leadAffInput = $('#leadAffInput');
+
+    // Adicione um evento para reagir a mudanças no campo de entrada
+    leadAffInput.on('input', function() {
+        // Recarregue os dados da tabela com o novo valor de lead_aff
+        loadData(leadAffInput.val());
+    });
+
+    // Função para carregar dados da tabela
+    function loadData(leadAff) {
+            $.ajax({
+                url: 'bd.php',
+                method: 'GET',
+                data: { leadAff: leadAff },
+                success: function(data) {
+                    // Limpar o corpo da tabela
+                    $('#table-body').empty();
+
+                    // Inserir dados na tabela
+                    data.forEach(function(row) {
+                        var newRow = "<tr>" +
+                            "<td>" + row.data_cadastro + "</td>" +
+                            "<td>" + row.email + "</td>" +
+                            "<td>" + row.telefone + "</td>" +
+                            "<td>" + row.saldo + "</td>" +
+                            "<td>" + row.depositou + "</td>" +
+                            "<td><button class='btn-edit' data-id='" + row.id + "'>Editar</button></td>" +
+                            "</tr>";
+                        $('#table-body').append(newRow);
+                    });
+
+                    // Inicializar DataTables após a conclusão da chamada AJAX
+                    var table = $('#user-table').DataTable();
+
+                    // Adicionar evento de clique para o botão de edição
+                    $('#user-table tbody').on('click', '.btn-edit', function() {
+                        var userId = $(this).data('id');
+                        // Preencher os campos do modal com os dados do usuário
+                        fillEditModal(userId);
+                        // Abrir o modal
+                        $('#editModal').modal('show');
+                    });
+                },
+                error: function() {
+                    console.log('Erro ao obter dados do servidor.');
+                }
+            });
+        }
+
+        // Adicione um identificador ao seu campo de entrada
+        var leadAffSelect = $('#leadAffSelect');
+
+        // Adicione um evento para reagir a mudanças no campo de entrada
+        leadAffSelect.on('change', function() {
+            // Obter o valor selecionado
+            var leadAffValue = leadAffSelect.val();
+        
+            // Se o valor selecionado for "Todos", reinicialize a tabela
+            if (leadAffValue === "") {
+                // Destrua e recrie a tabela
+                $('#user-table').DataTable().destroy();
+                
+                // Recarregue os dados da tabela com o novo valor de lead_aff
+                loadData('');
+        
+                // Inicialize novamente o DataTables
+                //$('#user-table').DataTable();
+            } else {
+                // Se o valor selecionado for diferente de "Todos", proceda normalmente
+                loadData(leadAffValue);
+            }
+        });
+
+
+        // Chame a função loadData inicialmente para carregar todos os dados
+        //loadData('');
+    });
 </script>
 
 
