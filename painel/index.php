@@ -399,6 +399,9 @@ $conn->close();
 
 <i style="font-size: 10px;">Sua meta(ganho) é 10x o valor apostado!</i>
 </div>
+
+
+
 <div id="wins" style="
                 display: block;
                 width: 240px;
@@ -412,7 +415,27 @@ $conn->close();
                 box-shadow: -3px 3px 0 0px #1f2024;
                 margin: -24px auto 0 auto;
                 z-index: 1000;
-            ">estef.rodri1<br class="jWQDfMST8B">Ganhou R$ 4.25</div>
+            ">
+            
+            
+            <?php
+                function obterNumeroAleatorio() {
+                $numeroAleatorio = rand(4000, 10000);
+
+                return $numeroAleatorio;
+                }
+
+                $numero = obterNumeroAleatorio();
+
+                ?>
+
+
+                Usuários Online:<br class="jWQDfMST8B"> <?php echo $numero; ?> </div>
+
+
+
+
+
 </section>
 <section id="mint" class="mint-section wf-section">
 <div class="minting-container w-container">
