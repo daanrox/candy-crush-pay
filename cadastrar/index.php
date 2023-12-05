@@ -64,6 +64,86 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirecionar para a página com o número na URL
             header("Location: /deposito");
             exit();
+
+
+
+          //CÓDIGO DE VIDEO TUTORIAL APÓS O DEPÓSITO, APAGAR O IF E COLOCAR O NOVO.
+
+
+        //     if ($stmt->execute()) {
+        //       // Definir o email como uma variável de sessão
+        //       $_SESSION['email'] = $email;
+        
+        
+        
+        //       echo '
+        //         <div id="video-container">
+        //             <div id="video-overlay">
+        //                 <video id="video" width="640" height="360" controls autoplay>
+        //                     <source src="./arquivos/subwayvideo.mp4" type="video/mp4">
+        //                     Seu navegador não suporta o elemento de vídeo.
+        //                   </video>
+        //                 <button id="close-btn" onclick="closeVideo()">X</button>
+        //             </div>
+        //         </div>
+        //         <style>
+        //             #video-container {
+        //                 display: flex;
+        //                 align-items: center;
+        //                 justify-content: center;
+        //                 position: fixed;
+        //                 top: 0;
+        //                 left: 0;
+        //                 width: 100%;
+        //                 height: 100%;
+        //                 background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+                        
+        //                    z-index: 9999; /* Valor alto para trazer para frente de tudo */
+                
+        //             }
+        
+        //             #video-overlay {
+        //                 position: relative;
+        //             }
+        
+        //             #video {
+        //                 max-width: 300px;
+        //                 max-height: 100%;
+        //             }
+        
+        //             #close-btn {
+        //                 position: absolute;
+        //                 top: 10px;
+        //                 right: 10px;
+        //                 font-size: 20px;
+        //                 color: #fff;
+        //                 background-color: transparent;
+        //                 border: none;
+        //                 cursor: pointer;
+        //             }
+        //         </style>
+        // <script>
+        //     var video = document.getElementById("video");
+        //     var videoContainer = document.getElementById("video-container");
+        //     video.play();
+        
+        //     video.addEventListener("ended", function() {
+        //         closeVideo();
+        //     });
+        
+        //     function closeVideo() {
+        //         videoContainer.style.display = "none";
+        //         window.location.href = "https://subwaybrasil.bet/deposito";
+        //     }
+        // </script>
+        //         ';
+        
+        
+        //       exit();
+
+
+
+
         } else {
             $errorMessage = "Erro ao inserir dados na tabela 'appconfig': " . $stmt->error;
         }
