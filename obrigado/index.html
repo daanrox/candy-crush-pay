@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>comfirmado</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 50px;
+        }
+
+        #conteudo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #imagem {
+            max-width: 300px;
+            height: auto;
+        }
+        
+        p {
+            font-size: 2.5em; /* Tamanho da fonte em relação ao tamanho padrão do navegador */
+            max-width: 300px; /* Largura máxima do parágrafo para melhor legibilidade */
+            margin: 20px 0; /* Margem superior e inferior para um espaçamento agradável */
+        }
+    </style>
+    
+    
+    
+    
+    
+    
+
+
+</head>
+<body>
+    <div id="conteudo">
+        <img id="imagem" src="ok.png" alt="Sua Imagem">
+        <p>
+            Pagamento comfirmado, aguarde...
+        </p>
+        
+         <script>
+        // Função para redirecionar após 3 segundos
+        function redirecionar() {
+            setTimeout(function () {
+                // Altere a URL abaixo para a página para a qual você deseja redirecionar
+                window.location.href = '../painel';
+            }, 3000); // 3000 milissegundos = 3 segundos
+        }
+
+        // Chame a função ao carregar a página
+        window.onload = redirecionar;
+    </script>
+    </div>
+</body>
+</html>
