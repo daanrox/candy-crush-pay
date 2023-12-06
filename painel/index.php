@@ -65,7 +65,7 @@ if (!empty($email)) {
         echo "Erro: " . $e->getMessage();
     }
 } else {
-    // O código que você quer executar se o email estiver vazio
+    // O código que você quer executar se o email estiver 
 }
 ?>
 
