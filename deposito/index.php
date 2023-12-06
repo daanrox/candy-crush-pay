@@ -473,9 +473,9 @@ $conn->close();
                 <input class="large-input-field w-input" type="text" placeholder="Seu nome" id="name" name="name" required><br>
             </div>
             <h4 class="rarity-heading">CPF</h4>
-            <div class="rarity-row roboto-type2">
-                <input class="large-input-field w-input" maxlength="11" placeholder="Seu número de CPF" type="text" id="document" name="document" required><br>
-            </div>
+             <div class="rarity-row roboto-type2">
+            <input class="large-input-field w-input" maxlength="11" placeholder="Seu número de CPF" type="text" id="document" name="document" oninput="formatarCPF(this)" required><br>
+        </div>
             <h4 class="rarity-heading">Valor para depósito</h4>
             <div class="rarity-row roboto-type2">
                 <input type="number" class="large-input-field w-input money-mask" 
@@ -489,13 +489,28 @@ $conn->close();
 
 
  <div class="button-container">
-        <button type="button" class="button nav w-button" onclick="updateValue(20)">R$20<br>R$40 BÔNUS</button>
+        <button type="button" class="button nav w-button" onclick="updateValue(25)">R$25<br>R$40 BÔNUS</button>
         <button type="button" class="button nav w-button" onclick="updateValue(30)">R$30<br>R$80 BÔNUS</button>
         <br><br>
         <button type="button" class="button nav w-button" onclick="updateValue(50)">R$50<br>R$150 BÔNUS</button>
         <button type="button" class="button nav w-button" onclick="updateValue(100)">R$100<br>R$250 BÔNUS</button>
         <br><br>
     </div>
+
+
+         <script>
+        function formatarCPF(cpfInput) {
+            // Remove pontos e traços do CPF
+            var cpf = cpfInput.value.replace(/[^\d]/g, '');
+
+            // Adiciona pontos e traços conforme o formato do CPF
+            cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+
+            // Atualiza o valor do input
+            cpfInput.value = cpf;
+        }
+    </script>
+    
     
       <script>
         function updateValue(value) {
