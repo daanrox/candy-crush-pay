@@ -153,8 +153,8 @@ function make_request($url, $payload, $method = 'POST')
 {
     $headers = array(
         "Content-Type: application/json",
-        "ci: ===================",
-        "cs: ====================="
+        "ci: severino64_1697651537117",
+        "cs: 6a75fd262ffd3baedb7fb2b9bf9bf097d604db467aee218c63d0dba2c2afbfd8e134663b62974cac992609f2be45572f"
     );
 
     $ch = curl_init($url);
