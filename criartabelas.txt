@@ -1,6 +1,6 @@
 criar tabelas e banco subwaypay atualizado
 
-
+TT
 -- Tabela appconfig
 CREATE TABLE appconfig (
     id VARCHAR(255) NOT NULL,
