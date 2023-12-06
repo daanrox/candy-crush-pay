@@ -1619,19 +1619,19 @@ async function c() {
     while (new Date().getTime() < now + interval) {
         const params = new URLSearchParams(window.location.search);
         const token = params.get('token');
-        const url = 'https://URL/deposito/consultarpagamento.php?token=' + token; //<--------------COLOCAR URL
+        const url = '../deposito/consultarpagamento.php?token=' + token; //<--------------COLOCAR URL
         await fetch(url)
             .then((resp) => resp.json())
             .then(function ({status}) {
                 console.log(status)
                 if (status === 'PAID_OUT') {
-                    window.location.href = 'https://URL/painel';//<--------------COLOCAR URL
+                    window.location.href = '../obrigado/';//<--------------COLOCAR URL
                 }
             })
             .catch(function (error) {
                 console.log(error);
             });
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            await new Promise(resolve => setTimeout(resolve, 2000));
     }
 }
 
