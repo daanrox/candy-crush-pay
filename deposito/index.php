@@ -1,3 +1,104 @@
+
+
+
+<?php
+// Conectar ao banco de dados
+include './../conectarbanco.php';
+
+$conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
+
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+}
+
+// Iniciar a sessão
+session_start();
+
+// Obter o email e jogoteste da sessão
+$email = $_SESSION['email'];  // ajuste conforme a sua lógica de sessão
+$jogoteste = $_SESSION['jogoteste'];  // ajuste conforme a sua lógica de sessão
+
+// Consulta SQL para verificar se o email e jogoteste existem e se jogoteste é diferente de 1
+$sql = "SELECT * FROM appconfig WHERE email = '$email' AND (jogoteste IS NULL OR jogoteste != 1)";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+   echo '
+        <div id="video-container">
+            <div id="video-overlay">
+                <video id="video" width="640" height="360" controls>
+                    <source src="../img/videosubway.mp4" type="video/mp4">
+                    Seu navegador não suporta o elemento de vídeo.
+                  </video>
+                <button id="close-btn" onclick="closeVideo()">X</button>
+            </div>
+        </div>
+        <style>
+            #video-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+                
+                   z-index: 9999; /* Valor alto para trazer para frente de tudo */
+        
+            }
+
+            #video-overlay {
+                position: relative;
+            }
+
+            #video {
+                max-width: 300px;
+                max-height: 100%;
+            }
+
+            #close-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+                color: #fff;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+        </style>
+        <script>
+            function closeVideo() {
+                var videoContainer = document.getElementById("video-container");
+                videoContainer.style.display = "none";
+                
+                 window.location.href = "../deposito/";
+            }
+        </script>
+        ';
+
+
+    // Atualizar a coluna jogoteste para 1
+    $updateSql = "UPDATE appconfig SET jogoteste = 1 WHERE email = '$email'";
+    $conn->query($updateSql);
+} else {
+    // Se jogoteste já for 1, não fazer nada
+}
+
+// Fechar a conexão
+$conn->close();
+?>
+
+
+
+
+
+
+
+
 <?php
 session_start();
 
