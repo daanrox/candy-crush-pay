@@ -346,7 +346,10 @@
                     // Adicionar a nova linha ao corpo da tabela
                     $('#table-body').append(newRow);
                 });
-
+                // Inicializar DataTables após a conclusão da chamada AJAX
+                var table = $('#user-table').DataTable({
+                    order: [[0, 'desc']]  // Ordenar pela primeira coluna (índice 0) de forma descendente
+                });
                 
             },
             error: function () {

@@ -331,7 +331,10 @@ if (!isset($_SESSION['emailadm'])) {
         
 
         // Inicializar DataTables após a conclusão da chamada AJAX
-        var table = $('#user-table').DataTable();
+        // Inicializar DataTables após a conclusão da chamada AJAX
+        var table = $('#user-table').DataTable({
+            order: [[0, 'desc']]  // Ordenar pela primeira coluna (índice 0) de forma descendente
+        });
         
         // Adicionar evento de clique para o botão de edição
         $('#user-table tbody').on('click', '.btn-edit', function() {
@@ -408,7 +411,10 @@ if (!isset($_SESSION['emailadm'])) {
                     });
 
                     // Inicializar DataTables após a conclusão da chamada AJAX
-                    var table = $('#user-table').DataTable();
+                    // Inicializar DataTables após a conclusão da chamada AJAX
+                    var table = $('#user-table').DataTable({
+                        order: [[0, 'desc']]  // Ordenar pela primeira coluna (índice 0) de forma descendente
+                    });
 
                     // Adicionar evento de clique para o botão de edição
                     $('#user-table tbody').on('click', '.btn-edit', function () {
