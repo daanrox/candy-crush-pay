@@ -215,6 +215,29 @@ $result = $result2->fetch_assoc();
               ><span class="hide-menu">Saques</span></a
             >
           </li>
+          
+          
+           <li class="sidebar-item">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href="pixels"
+              aria-expanded="false"
+              ><i class="mdi mdi-code-tags"></i
+              ><span class="hide-menu">Pixels</span></a
+            >
+          </li>
+          
+          
+          
+                   <li class="sidebar-item">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href="./gateway"
+              aria-expanded="false"
+              ><i class="mdi mdi-cash"></i
+              ><span class="hide-menu">Gateway</span></a
+            >
+          </li>
          
       
             <li class="sidebar-item p-3">

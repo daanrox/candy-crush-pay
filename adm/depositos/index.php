@@ -160,10 +160,10 @@
         
       <div class="table-responsive">
         <h5>Filtrar por status</h5>
-        <select id="leadAffSelect">
+        <select id="selectedStatus">
             <option value="">Todos</option>
-            <option value="aprovadp">Aprovado</option>
-            <option value="pendente">Pendete</option>
+            <option value="PAID_OUT">Aprovado</option>
+            <option value="WAITING_FOR_APPROVAL">Pendente</option>
         </select>
         <table id="user-table" class="table table-striped table-bordered">
           <thead>
@@ -189,45 +189,50 @@
 <script>
     // Função para obter o valor selecionado do select
     function getSelectedValue() {
-        return $("#leadAffSelect").val();
+        return $("#selectedStatus").val();
     }
-
-    // Evento de clique ou outra ação que aciona a leitura
     $(document).ready(function () {
-        // Adicione um evento para reagir a mudanças no campo de entrada
-        $('#leadAffSelect').on('change', function () {
-            // Obtenha o valor selecionado no <select>
-            var leadAffValue = getSelectedValue();
+    // Evento de mudança no elemento select
+    $('#selectedStatus').on('change', function () {
+        // Obtém o valor selecionado
+        var selectedStatus = getSelectedValue();
 
-            // Solicitação AJAX
-            $.ajax({
-                type: "GET",
-                url: "../php/depositados_ultimas_24h.php",
-                data: { leadAff: leadAffValue }, // Correção: chame a função para obter o valor
-                success: function (response) {
-                    // Atualiza o valor exibido na página
-                    //$("#valorUsuarios3").text(response.total);
-                    //$("#valorUsuarios4").text(response.ultimas_24h);
-                    console.log(response); // Exibe a resposta do servidor no console
-                },
-                error: function (error) {
-                    console.log("Erro na solicitação AJAX: " + error);
-                }
-            });
+        // Solicitação AJAX com o parâmetro status para filtrar
+        $.ajax({
+            type: "GET",
+            url: "../php/depositados_ultimas_24h.php",
+            data: { status: selectedStatus },
+            success: function (response) {
+                // Atualiza o valor exibido na página
+                $("#valorUsuarios6").text(response);
+                console.log(response); // Exibe a resposta do servidor no console
+            },
+            error: function (error) {
+                console.log("Erro na solicitação AJAX: " + error);
+            }
         });
-
-        // Dispare o evento de mudança inicial para carregar os dados com base no valor padrão
-        $('#leadAffSelect').change();
     });
+});
+
 </script>
 
+
 <script>
-    // Evento de clique ou outra ação que aciona a leitura
+    // Função para obter o valor selecionado do select
+    function getSelectedValue() {
+        return $("#selectedStatus").val();
+    }
     $(document).ready(function () {
-        // Solicitação AJAX
+    // Evento de mudança no elemento select
+    $('#selectedStatus').on('change', function () {
+        // Obtém o valor selecionado
+        var selectedStatus = getSelectedValue();
+
+        // Solicitação AJAX com o parâmetro status para filtrar
         $.ajax({
             type: "GET",
             url: "../php/total_depositos.php",
+            data: { status: selectedStatus },
             success: function (response) {
                 // Atualiza o valor exibido na página
                 $("#valorUsuarios5").text(response);
@@ -238,15 +243,26 @@
             }
         });
     });
+});
+
 </script>
 
 <script>
-    // Evento de clique ou outra ação que aciona a leitura
+    // Função para obter o valor selecionado do select
+    function getSelectedValue() {
+        return $("#selectedStatus").val();
+    }
     $(document).ready(function () {
-        // Solicitação AJAX
+    // Evento de mudança no elemento select
+    $('#selectedStatus').on('change', function () {
+        // Obtém o valor selecionado
+        var selectedStatus = getSelectedValue();
+
+        // Solicitação AJAX com o parâmetro status para filtrar
         $.ajax({
             type: "GET",
             url: "../php/numero_depositos.php",
+            data: { status: selectedStatus },
             success: function (response) {
                 // Atualiza o valor exibido na página
                 $("#valorUsuarios1").text(response);
@@ -256,18 +272,30 @@
                 console.log("Erro na solicitação AJAX: " + error);
             }
         });
+    });
 });
+
 </script>
+
 <script>
-    // Evento de clique ou outra ação que aciona a leitura
+    // Função para obter o valor selecionado do select
+    function getSelectedValue() {
+        return $("#selectedStatus").val();
+    }
     $(document).ready(function () {
-        // Solicitação AJAX
+    // Evento de mudança no elemento select
+    $('#selectedStatus').on('change', function () {
+        // Obtém o valor selecionado
+        var selectedStatus = getSelectedValue();
+
+        // Solicitação AJAX com o parâmetro status para filtrar
         $.ajax({
             type: "GET",
-            url: "../php/total_depositos.php",
+            url: "../php/numero_depositos_ultimas_24h.php",
+            data: { status: selectedStatus },
             success: function (response) {
                 // Atualiza o valor exibido na página
-                $("#valorUsuarios3").text(response);
+                $("#valorUsuarios2").text(response);
                 console.log(response); // Exibe a resposta do servidor no console
             },
             error: function (error) {
@@ -275,46 +303,74 @@
             }
         });
     });
+});
+
 </script>
 
+
 <script>
-  $(document).ready(function() {
-    // Use AJAX para buscar dados do arquivo PHP
-    $.ajax({
-      url: 'bd.php',
-      method: 'GET',
-      success: function(data) {
-        // Limpar o corpo da tabela
-        $('#table-body').empty();
+  $(document).ready(function () {
+    // Adicione um identificador ao seu campo de entrada
+    var statusInput = $('#selectedStatus');
 
-        // Inserir dados na tabela
-        data.forEach(function(row) {
-          // Definir a classe com base no status para estilização
-          var statusClass = (row.status === 'Aprovado') ? 'text-success' : 'text-black';
-
-          // Criar a nova linha da tabela com a classe de estilização
-          var newRow = "<tr class='" + statusClass + "'>" +
-            "<td>" + row.data + "</td>" +
-            "<td>" + row.email + "</td>" +
-            "<td>" + row.externalreference + "</td>" +
-            "<td>" + row.valor + "</td>" +
-            "<td>" + row.status + "</td>" +
-            "</tr>";
-
-          // Adicionar a nova linha ao corpo da tabela
-          $('#table-body').append(newRow);
-        });
-
-        // Inicializar DataTables após a conclusão da chamada AJAX
-        $('#user-table').DataTable({
-          ordering: false // Desativa a ordenação automática
-        });
-      },
-      error: function() {
-        console.log('Erro ao obter dados do servidor.');
-      }
+    // Adicione um evento para reagir a mudanças no campo de entrada
+    statusInput.on('input', function () {
+        // Recarregue os dados da tabela com o novo valor de lead_aff
+        loadData(statusInput.val());
     });
-  });
+
+    // Função para carregar dados da tabela
+    function loadData(status) {
+        $.ajax({
+            url: 'bd.php',
+            method: 'GET',
+            data: { status: status },
+            success: function (data) {
+                // Limpar o corpo da tabela
+                $('#table-body').empty();
+
+                // Inserir dados na tabela
+                data.forEach(function (row) {
+                    // Definir a classe com base no status para estilização
+                    var statusClass = (row.status === 'Aprovado') ? 'text-success' : 'text-black';
+
+                    // Criar a nova linha da tabela com a classe de estilização
+                    var newRow = "<tr class='" + statusClass + "'>" +
+                        "<td>" + row.data + "</td>" +
+                        "<td>" + row.email + "</td>" +
+                        "<td>" + row.externalreference + "</td>" +
+                        "<td>" + row.valor + "</td>" +
+                        "<td>" + row.status + "</td>" +
+                        "</tr>";
+
+                    // Adicionar a nova linha ao corpo da tabela
+                    $('#table-body').append(newRow);
+                });
+
+                
+            },
+            error: function () {
+                console.log('Erro ao obter dados do servidor.');
+            }
+        });
+    }
+
+    // Adicione um identificador ao seu campo de entrada
+    var statusSelect = $('#selectedStatus');
+
+    // Adicione um evento para reagir a mudanças no campo de entrada
+    statusSelect.on('change', function () {
+        // Obter o valor selecionado
+        var statusValue = statusSelect.val();
+
+        // Recarregue os dados da tabela com o novo valor de status
+        loadData(statusValue);
+    });
+
+    // Chame a função loadData inicialmente para carregar todos os dados
+    loadData('');
+});
+
 </script>
 
 

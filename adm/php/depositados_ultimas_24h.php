@@ -8,41 +8,41 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Obter a data e hora atual
-$currentDateTime = date('Y-m-d H:i:s');
-
 // Calcular a data e hora há 24 horas atrás
-$twentyFourHoursAgo = date('Y-m-d H:i:s', strtotime('-24 hours', strtotime($currentDateTime)));
+$currentDateTime = date('d-m-Y H:i:s');
+$twentyFourHoursAgo = date('d-m-Y H:i:s', strtotime('-24 hours', strtotime($currentDateTime)));
 
-// Query para calcular o valor total depositado
-$sqlTotal = "SELECT SUM(valor) as total FROM confirmar_deposito WHERE status = 'aprovado'";
+// Verificar se o parâmetro status está presente
+$status = isset($_GET['status']) ? $_GET['status'] : null;
 
-// Query para calcular o valor total depositado nas últimas 24 horas
-$sqlLast24h = "SELECT SUM(valor) as total FROM confirmar_deposito WHERE status = 'aprovado' AND data_cadastro >= '$twentyFourHoursAgo'";
+// Query de leitura para o valor total depositado nas últimas 24 horas com base no status
+$sqlLast24h = "SELECT SUM(valor) as totalLast24h FROM confirmar_deposito WHERE data >= ?";
 
-// Executar a consulta para o valor total
-$resultTotal = $conn->query($sqlTotal);
-
-if ($resultTotal->num_rows > 0) {
-    $rowTotal = $resultTotal->fetch_assoc();
-    $total = $rowTotal["total"];
-} else {
-    $total = 0;
+// Adicionar cláusula WHERE se o parâmetro status estiver presente
+if (!empty($status)) {
+    $sqlLast24h .= " AND status = ?";
 }
 
-// Executar a consulta para o valor total nas últimas 24 horas
-$resultLast24h = $conn->query($sqlLast24h);
+$stmt = $conn->prepare($sqlLast24h);
+
+// Se o status estiver presente, vincule os parâmetros
+if (!empty($status)) {
+    $stmt->bind_param("ss", $twentyFourHoursAgo, $status);
+} else {
+    $stmt->bind_param("s", $twentyFourHoursAgo);
+}
+
+$stmt->execute();
+$resultLast24h = $stmt->get_result();
+$stmt->close();
 
 if ($resultLast24h->num_rows > 0) {
     $rowLast24h = $resultLast24h->fetch_assoc();
-    $totalLast24h = $rowLast24h["total"];
+    echo "R$ " . $rowLast24h["totalLast24h"];
 } else {
-    $totalLast24h = 0;
+    echo "R$ 0";
 }
 
-// Exibir os resultados
-echo "Valor total depositado: R$ " . $total . "<br>";
-echo "Valor total depositado nas últimas 24 horas: R$ " . $totalLast24h;
-
+// Fechar a conexão com o banco de dados
 $conn->close();
 ?>
