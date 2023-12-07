@@ -40,6 +40,7 @@
               ><span class="hide-menu">Depositos</span></a
             >
           </li>
+          
           <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -49,6 +50,16 @@
               ><span class="hide-menu">Saques</span></a
             >
           </li>
+            <li class="sidebar-item">
+                            <a
+                              class="sidebar-link waves-effect waves-dark sidebar-link"
+                              href="../pixels"
+                              aria-expanded="false"
+                              ><i class="mdi mdi-code-tags"></i
+                              ><span class="hide-menu">Pixels</span></a
+                            >
+                         </li>
+          
         
             <li class="sidebar-item p-3">
             <a
