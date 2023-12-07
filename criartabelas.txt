@@ -1,160 +1,153 @@
-criar tabelas e banco subwaypay atualizado
-
--- Tabela appconfig
+- - Tabela appconfig
 CREATE TABLE appconfig (
-    id VARCHAR(255) NOT NULL,
-    nome VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    cpf VARCHAR(255) NOT NULL,
-    telefone VARCHAR(255) NOT NULL,
-    saldo VARCHAR(255) NOT NULL,
-    jogoteste VARCHAR(255) NOT NULL,
-    linkafiliado VARCHAR(255) NOT NULL,
-    depositou VARCHAR(255) NOT NULL,
-    lead_aff VARCHAR(255) NOT NULL,
-    leads_ativos VARCHAR(255) NOT NULL,
-    rollover1 VARCHAR(255) NOT NULL,
-    plano VARCHAR(255) NOT NULL,
-    demo VARCHAR(255) NOT NULL,
-    bloc VARCHAR(255) NOT NULL,
-    sacou VARCHAR(255) NOT NULL,
-    indicados VARCHAR(255) NOT NULL,
-    saldo_comissao VARCHAR(255) NOT NULL,
-    percas VARCHAR(255) NOT NULL,
-    ganhos VARCHAR(255) NOT NULL,
-    cpa VARCHAR(255) NOT NULL,
-    cpafake VARCHAR(255) NOT NULL,
-    jogo_demo VARCHAR(255) NOT NULL,
-    comissaofake VARCHAR(255) NOT NULL,
-    saldo_cpa VARCHAR(255) NOT NULL,
-    primeiro_deposito VARCHAR(255) NOT NULL,
-    status_primeiro_deposito VARCHAR(255) NOT NULL,
-    cont_cpa VARCHAR(255) NOT NULL,
-    data_cadastro VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id),
-    INDEX idx_lead_aff (lead_aff)
+id VARCHAR(255) NOT NULL,
+nome VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+senha VARCHAR(255) NOT NULL,
+cpf VARCHAR(255) NOT NULL,
+telefone VARCHAR(255) NOT NULL,
+saldo VARCHAR(255) NOT NULL,
+jogoteste VARCHAR(255) NOT NULL,
+linkafiliado VARCHAR(255) NOT NULL,
+depositou VARCHAR(255) NOT NULL,
+lead_aff VARCHAR(255) NOT NULL,
+leads_ativos VARCHAR(255) NOT NULL,
+rollover1 VARCHAR(255) NOT NULL,
+plano VARCHAR(255) NOT NULL,
+demo VARCHAR(255) NOT NULL,
+bloc VARCHAR(255) NOT NULL,
+sacou VARCHAR(255) NOT NULL,
+indicados VARCHAR(255) NOT NULL,
+saldo_comissao VARCHAR(255) NOT NULL,
+percas VARCHAR(255) NOT NULL,
+ganhos VARCHAR(255) NOT NULL,
+cpa VARCHAR(255) NOT NULL,
+cpafake VARCHAR(255) NOT NULL,
+jogo_demo VARCHAR(255) NOT NULL,
+comissaofake VARCHAR(255) NOT NULL,
+saldo_cpa VARCHAR(255) NOT NULL,
+primeiro_deposito VARCHAR(255) NOT NULL,
+status_primeiro_deposito VARCHAR(255) NOT NULL,
+cont_cpa VARCHAR(255) NOT NULL,
+data_cadastro VARCHAR(255) NOT NULL,
+PRIMARY KEY (id),
+INDEX idx_lead_aff (lead_aff)
 );
-
--- Tabela pix_deposito
+- - Tabela pix_deposito
 CREATE TABLE pix_deposito (
-    id VARCHAR(255) NOT NULL,
-    value VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    code VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    data VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id),
-    INDEX idx_email (email)
+id VARCHAR(255) NOT NULL,
+value VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+code VARCHAR(255) NOT NULL,
+status VARCHAR(255) NOT NULL,
+data VARCHAR(255) NOT NULL,
+PRIMARY KEY (id),
+INDEX idx_email (email)
 );
-
--- Tabela confirmar_deposito
+- - Tabela confirmar_deposito
 CREATE TABLE confirmar_deposito (
-    email VARCHAR(255) NOT NULL,
-    externalreference VARCHAR(255) NOT NULL,
-    valor VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    data VARCHAR(255) NOT NULL,
-    INDEX idx_email (email),
-    INDEX idx_externalreference (externalreference)
+email VARCHAR(255) NOT NULL,
+externalreference VARCHAR(255) NOT NULL,
+valor VARCHAR(255) NOT NULL,
+status VARCHAR(255) NOT NULL,
+data VARCHAR(255) NOT NULL,
+INDEX idx_email (email),
+INDEX idx_externalreference (externalreference)
 );
-
--- Tabela game
+- - Tabela game
 CREATE TABLE game (
-    email VARCHAR(255) NOT NULL,
-    entry_value VARCHAR(255) NOT NULL,
-    out_value VARCHAR(255) NOT NULL,
-    INDEX idx_email (email)
+email VARCHAR(255) NOT NULL,
+entry_value VARCHAR(255) NOT NULL,
+out_value VARCHAR(255) NOT NULL,
+INDEX idx_email (email)
 );
-
--- Tabela token
+- - Tabela token
 CREATE TABLE token (
-    email VARCHAR(255) NOT NULL,
-    value VARCHAR(255) NOT NULL,
-    INDEX idx_email (email)
+email VARCHAR(255) NOT NULL,
+value VARCHAR(255) NOT NULL,
+INDEX idx_email (email)
 );
-
--- Tabela admlogin
+- - Tabela admlogin
 CREATE TABLE admlogin (
-    email VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    INDEX idx_email (email)
+email VARCHAR(255) NOT NULL,
+senha VARCHAR(255) NOT NULL,
+INDEX idx_email (email)
 );
-
--- Tabela app
+- - Tabela app
 CREATE TABLE app (
-    token VARCHAR(255) NOT NULL,
-    depositos VARCHAR(255) NOT NULL,
-    saques VARCHAR(255) NOT NULL,
-    usuarios VARCHAR(255) NOT NULL,
-    faturamento_total VARCHAR(255) NOT NULL,
-    cadastros VARCHAR(255) NOT NULL,
-    saques_valor VARCHAR(255) NOT NULL,
-    deposito_min VARCHAR(255) NOT NULL,
-    saques_min VARCHAR(255) NOT NULL,
-    aposta_max VARCHAR(255) NOT NULL,
-    dificuldade_jogo VARCHAR(255) NOT NULL,
-    aposta_min VARCHAR(255) NOT NULL,
-    rollover_saque VARCHAR(255) NOT NULL,
-    taxa_saque VARCHAR(255) NOT NULL,
-    PRIMARY KEY (token)
+token VARCHAR(255) NOT NULL,
+depositos VARCHAR(255) NOT NULL,
+saques VARCHAR(255) NOT NULL,
+usuarios VARCHAR(255) NOT NULL,
+faturamento_total VARCHAR(255) NOT NULL,
+cadastros VARCHAR(255) NOT NULL,
+saques_valor VARCHAR(255) NOT NULL,
+deposito_min VARCHAR(255) NOT NULL,
+saques_min VARCHAR(255) NOT NULL,
+aposta_max VARCHAR(255) NOT NULL,
+dificuldade_jogo VARCHAR(255) NOT NULL,
+aposta_min VARCHAR(255) NOT NULL,
+rollover_saque VARCHAR(255) NOT NULL,
+taxa_saque VARCHAR(255) NOT NULL,
+PRIMARY KEY (token)
 );
-
--- Tabela ggr
+- - Tabela ggr
 CREATE TABLE ggr (
-    token VARCHAR(255) NOT NULL,
-    ggr_taxa VARCHAR(255) NOT NULL,
-    data VARCHAR(255) NOT NULL,
-    situacao VARCHAR(255) NOT NULL,
-    total_ganhos VARCHAR(255) NOT NULL,
-    percas_24h VARCHAR(255) NOT NULL,
-    percas_1m VARCHAR(255) NOT NULL,
-    total_percas VARCHAR(255) NOT NULL,
-    ggr_24h VARCHAR(255) NOT NULL,
-    ggr_1m VARCHAR(255) NOT NULL,
-    credito_ggr VARCHAR(255) NOT NULL,
-    debito_ggr VARCHAR(255) NOT NULL,
-    ggr_pago VARCHAR(255) NOT NULL,
-    status_ggr VARCHAR(255) NOT NULL,
-    ggr_total VARCHAR(255) NOT NULL,
-    saldo_inserido VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    PRIMARY KEY (token),
-    INDEX idx_data (data)
+token VARCHAR(255) NOT NULL,
+ggr_taxa VARCHAR(255) NOT NULL,
+data VARCHAR(255) NOT NULL,
+situacao VARCHAR(255) NOT NULL,
+total_ganhos VARCHAR(255) NOT NULL,
+percas_24h VARCHAR(255) NOT NULL,
+percas_1m VARCHAR(255) NOT NULL,
+total_percas VARCHAR(255) NOT NULL,
+ggr_24h VARCHAR(255) NOT NULL,
+ggr_1m VARCHAR(255) NOT NULL,
+credito_ggr VARCHAR(255) NOT NULL,
+debito_ggr VARCHAR(255) NOT NULL,
+ggr_pago VARCHAR(255) NOT NULL,
+status_ggr VARCHAR(255) NOT NULL,
+ggr_total VARCHAR(255) NOT NULL,
+saldo_inserido VARCHAR(255) NOT NULL,
+senha VARCHAR(255) NOT NULL,
+PRIMARY KEY (token),
+INDEX idx_data (data)
 );
-
--- Tabela planos
+- - Tabela planos
 CREATE TABLE planos (
-    nome VARCHAR(255) NOT NULL,
-    cpa VARCHAR(255) NOT NULL,
-    rev VARCHAR(255) NOT NULL,
-    indicacao VARCHAR(255) NOT NULL,
-    valor_saque_maximo VARCHAR(255) NOT NULL,
-    saque_diario VARCHAR(255) NOT NULL,
-    data VARCHAR(255) NOT NULL,
-    situacao VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    PRIMARY KEY (nome),
-    INDEX idx_data (data)
+nome VARCHAR(255) NOT NULL,
+cpa VARCHAR(255) NOT NULL,
+rev VARCHAR(255) NOT NULL,
+indicacao VARCHAR(255) NOT NULL,
+valor_saque_maximo VARCHAR(255) NOT NULL,
+saque_diario VARCHAR(255) NOT NULL,
+data VARCHAR(255) NOT NULL,
+situacao VARCHAR(255) NOT NULL,
+senha VARCHAR(255) NOT NULL,
+PRIMARY KEY (nome),
+INDEX idx_data (data)
 );
-
--- Tabela saques
+- - Tabela saques
 CREATE TABLE saques (
-    email VARCHAR(255) NOT NULL,
-    externalreference VARCHAR(255) NOT NULL,
-    valor VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    INDEX idx_email (email),
-    INDEX idx_externalreference (externalreference)
+email VARCHAR(255) NOT NULL,
+externalreference VARCHAR(255) NOT NULL,
+valor VARCHAR(255) NOT NULL,
+status VARCHAR(255) NOT NULL,
+INDEX idx_email (email),
+INDEX idx_externalreference (externalreference)
 );
-
-
--- Tabela pix
+- - Tabela pix
 CREATE TABLE pix (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    value VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    code VARCHAR(255) NOT NULL,
-    status VARCHAR(255) NOT NULL,
-    data VARCHAR(255) NOT NULL
+id INT AUTO_INCREMENT PRIMARY KEY,
+value VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+code VARCHAR(255) NOT NULL,
+status VARCHAR(255) NOT NULL,
+data VARCHAR(255) NOT NULL
+);
+- - Tabela Gateway
+CREATE TABLE gateway (
+id INT AUTO_INCREMENT PRIMARY KEY,
+client_id VARCHAR(255) NOT NULL,
+client_secret VARCHAR(255) NOT NULL
 );
