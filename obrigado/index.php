@@ -60,12 +60,16 @@ $saldo = 1;
 
     <link rel="stylesheet" href="../arquivos/css" media="all">
 
-
+<?php
+        include '../pixels.php';
+        ?>
 </head>
 
 <body>
 
-
+<?php
+        include '../pixels.php';
+        ?>
 
 
 
