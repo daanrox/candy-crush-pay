@@ -314,7 +314,7 @@ $conn->close();
                 line-height: 65px;
                 font-size: 12px;
                 margin: -60px 0 0 0;
-                background-image: url(/assets/img/game/escudo-branco.png);
+                background-image: url(./arquivos/escudo-branco.png);
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center;
