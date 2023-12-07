@@ -1,4 +1,22 @@
 <?php
+$baseUrl = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+$baseUrl .= "://".$_SERVER['HTTP_HOST'];
+
+
+$staticPart = '/cadastrar/?aff=';
+
+$callbackUrl = $baseUrl . $staticPart;
+
+
+
+echo '<script>';
+echo 'console.log("Callback URL:", ' . json_encode($callbackUrl) . ');'; // Adicione esta linha para depurar
+echo 'var callbackUrl = ' . json_encode($callbackUrl) . ';';
+echo '</script>';
+?>
+
+
+<?php
 session_start();
 
 // Função para validar os dados do formulário
@@ -45,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $saldo_comissao = 0; // Valor fixo para a coluna saldo_comissao
 
         // Construir o link de afiliado
-        $linkAfiliado = "https://jogosubwaysurf.com/cadastrar/?aff=" . $nextId;
+        $linkAfiliado = $callbackUrl . $nextId;
 
         // Obter a data e hora atual no fuso horário de São Paulo
         $dataCadastro = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
@@ -155,6 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 
+
 // Função para verificar se um ID já existe na tabela
 function idExists($id, $conn) {
     $checkIdQuery = "SELECT id FROM appconfig WHERE id = ?";
@@ -179,8 +198,6 @@ function emailExists($email, $conn) {
     return $exists;
 }
 ?>
-
-
 
 <!DOCTYPE html>
 
@@ -228,24 +245,20 @@ function emailExists($email, $conn) {
 
 
 
-
-
 <?php
         include '../pixels.php';
         ?>
 
 
 
+
+
 </head>
 <body>
-
-
-    <?php
+<div>
+<?php
         include '../pixels.php';
         ?>
-<div>
-
-
 
 <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
 <div class="container w-container">
