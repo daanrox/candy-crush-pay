@@ -166,14 +166,7 @@ if (!isset($_SESSION['emailadm'])) {
         
       <div class="table-responsive">
         <h5>Filtrar por link de afiliado</h5>
-        <select id="leadAffSelect">
-            <option value="">Todos</option>
-            <option value="ttk/">TikTok</option>
-            <option value="fb/">Facebook</option>
-            <option value="kwa/">Kway</option>
-            <option value="trake1/">Tracker 1</option>
-            <option value="trake2/">Tracker 2</option>
-        </select>
+        <input type="text" id="leadAffInput" placeholder="Filtrar por lead_aff">
         <table id="user-table" class="table table-striped table-bordered">
           <thead>
             <tr>
@@ -265,23 +258,17 @@ if (!isset($_SESSION['emailadm'])) {
   </div>
 </div>
 <script>
-    // Função para obter o valor selecionado do select
-    function getSelectedValue() {
-        return $("#leadAffSelect").val();
-    }
-
-    // Evento de clique ou outra ação que aciona a leitura
     $(document).ready(function () {
         // Adicione um evento para reagir a mudanças no campo de entrada
-        $('#leadAffSelect').on('change', function () {
-            // Obtenha o valor selecionado no <select>
-            var leadAffValue = getSelectedValue();
+        $('#leadAffInput').on('input', function () {
+            // Obtenha o valor digitado no campo de entrada
+            var leadAffValue = $(this).val();
 
             // Solicitação AJAX
             $.ajax({
                 type: "GET",
                 url: "../php/cadastrados_ultimas_24h.php",
-                data: { leadAff: leadAffValue }, // Correção: chame a função para obter o valor
+                data: { leadAff: leadAffValue },
                 success: function (response) {
                     // Atualiza o valor exibido na página
                     $("#valorUsuarios1").text(response.total);
@@ -295,7 +282,7 @@ if (!isset($_SESSION['emailadm'])) {
         });
 
         // Dispare o evento de mudança inicial para carregar os dados com base no valor padrão
-        $('#leadAffSelect').change();
+        $('#leadAffInput').trigger('input');
     });
 </script>
 
@@ -392,23 +379,23 @@ if (!isset($_SESSION['emailadm'])) {
     var leadAffInput = $('#leadAffInput');
 
     // Adicione um evento para reagir a mudanças no campo de entrada
-    leadAffInput.on('input', function() {
-        // Recarregue os dados da tabela com o novo valor de lead_aff
-        loadData(leadAffInput.val());
-    });
+    $('#leadAffInput').on('input', function () {
+            // Recarregue os dados da tabela com o novo valor de lead_aff
+            loadData($(this).val());
+        });
 
-    // Função para carregar dados da tabela
-    function loadData(leadAff) {
+        // Função para carregar dados da tabela
+        function loadData(leadAff) {
             $.ajax({
                 url: 'bd.php',
                 method: 'GET',
                 data: { leadAff: leadAff },
-                success: function(data) {
+                success: function (data) {
                     // Limpar o corpo da tabela
                     $('#table-body').empty();
 
                     // Inserir dados na tabela
-                    data.forEach(function(row) {
+                    data.forEach(function (row) {
                         var newRow = "<tr>" +
                             "<td>" + row.data_cadastro + "</td>" +
                             "<td>" + row.email + "</td>" +
@@ -424,7 +411,7 @@ if (!isset($_SESSION['emailadm'])) {
                     var table = $('#user-table').DataTable();
 
                     // Adicionar evento de clique para o botão de edição
-                    $('#user-table tbody').on('click', '.btn-edit', function() {
+                    $('#user-table tbody').on('click', '.btn-edit', function () {
                         var userId = $(this).data('id');
                         // Preencher os campos do modal com os dados do usuário
                         fillEditModal(userId);
@@ -432,7 +419,7 @@ if (!isset($_SESSION['emailadm'])) {
                         $('#editModal').modal('show');
                     });
                 },
-                error: function() {
+                error: function () {
                     console.log('Erro ao obter dados do servidor.');
                 }
             });
