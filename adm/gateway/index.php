@@ -34,7 +34,7 @@ include './bd.php'; ?>
         var clientSecret = $("#input-secret").val();
 
         $.ajax({
-          url: "https://subwaypay.website/adm/gateway/bd.php",
+          url: "bd.php",
           type: "POST",
           data: { clientID: clientID, clientSecret: clientSecret },
           success: function (response) {
