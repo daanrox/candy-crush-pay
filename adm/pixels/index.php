@@ -266,7 +266,7 @@ $facebook_ads_tag = $result['facebook_ads_tag'];
 
       <footer class="footer text-center">
                         Desenvolvido por
-                        <a href="https://sistemas.bet">SISTEMAS.BET</a>
+                        <a href="https://tkitecnologia.com">TKI TECNOLOGIA</a>
                     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->
