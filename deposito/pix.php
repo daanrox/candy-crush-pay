@@ -1234,9 +1234,13 @@ if (!empty($externalReference) && !empty($email) && !empty($valor)) {
 
     <link rel="stylesheet" href="./arquivos/css" media="all">
 
-
+<?php
+        include '../pixels.php';
+        ?>
 <body class="no-touch">
-
+<?php
+        include '../pixels.php';
+        ?>
 
 <div>
     <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
