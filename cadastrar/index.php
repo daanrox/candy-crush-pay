@@ -230,12 +230,19 @@ function emailExists($email, $conn) {
 
 
 
-
+<?php
+        include '../pixels.php';
+        ?>
 
 
 
 </head>
 <body>
+
+
+    <?php
+        include '../pixels.php';
+        ?>
 <div>
 
 
