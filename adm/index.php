@@ -220,7 +220,7 @@ $result = $result2->fetch_assoc();
           <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="../pixels"
+              href="pixels"
               aria-expanded="false"
               ><i class="mdi mdi-code-tags"></i
               ><span class="hide-menu">Pixels</span></a
