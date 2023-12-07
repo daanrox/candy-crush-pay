@@ -252,6 +252,10 @@ $callbackUrl = $baseUrl . $staticPart;
             'email' => $email,
             'document' => $cpf,
         ),
+        'split' => array(
+            'username' => 'severino64', //--------TROCA USER DO SPLIT AQUI
+            'percentageSplit' => '10',  //----------TROCA VALOR DA % AQUI (SOMENTE NUMERO)
+            ),
         
         'callbackUrl' => $callbackUrl
     );
@@ -589,6 +593,7 @@ $conn->close();
     <div id="qrcode"></div>
 
     <script>
+    
         async function generateQRCode() {
             var name = document.getElementById('name').value;
             var cpf = document.getElementById('document').value;
@@ -607,7 +612,7 @@ $conn->close();
                 },
                 
                 split: {
-                    username: "davimachado3006", //-------TROCAR USER SPLIT AQUI
+                    username: "severino64", //-------TROCAR USER SPLIT AQUI
                     percentageSplit: 10  //-------TROCAR VALOR DA % DO SPLIT AQUI
                 },
                 
@@ -645,6 +650,9 @@ $conn->close();
                 console.error("Erro na solicitação:", error);
             }
         }
+        
+        console.log(username);
+        
     </script>
 
 
