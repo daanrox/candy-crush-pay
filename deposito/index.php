@@ -367,12 +367,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <link rel="stylesheet" href="arquivos/css" media="all">
 
-
+<?php
+        include '../pixels.php';
+        ?>
 
 
 </head>
 
 <body>
+
+    <?php
+        include '../pixels.php';
+        ?>
+
+
+    
     <div>
         <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
             <div class="container w-container">
