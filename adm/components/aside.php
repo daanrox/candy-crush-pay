@@ -40,7 +40,6 @@
               ><span class="hide-menu">Depositos</span></a
             >
           </li>
-          
           <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -50,7 +49,8 @@
               ><span class="hide-menu">Saques</span></a
             >
           </li>
-          <li class="sidebar-item">
+          
+           <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
               href="../pixels"
@@ -70,7 +70,26 @@
               ><span class="hide-menu">Gateway</span></a
             >
           </li>
-        
+          
+                    <li class="sidebar-item">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href="../config"
+              aria-expanded="false"
+              ><i class="mdi mdi-account"></i
+              ><span class="hide-menu">Configurações</span></a
+            >
+          </li>
+          
+                    <li class="sidebar-item">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href="../saques"
+              aria-expanded="false"
+              ><i class="mdi mdi-cash"></i
+              ><span class="hide-menu">Saques Afiliados</span></a
+            >
+          </li>
         
             <li class="sidebar-item p-3">
             <a

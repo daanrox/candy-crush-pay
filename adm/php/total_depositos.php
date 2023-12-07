@@ -8,10 +8,28 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Query de leitura
-$sql = "SELECT SUM(valor) as total FROM confirmar_deposito WHERE status = 'PAID_OUT'";
+// Verificar se o parâmetro status está presente
+$status = isset($_GET['status']) ? $_GET['status'] : null;
 
-$result = $conn->query($sql);
+// Query de leitura com base no status
+$sql = "SELECT SUM(valor) as total FROM confirmar_deposito";
+
+// Adicionar cláusula WHERE se o parâmetro status estiver presente
+if (!empty($status)) {
+    $sql .= " WHERE status = ?";
+}
+
+$result = null;
+
+// Use prepared statement se o parâmetro status estiver presente
+if (!empty($status)) {
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $status);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $result = $conn->query($sql);
+}
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();

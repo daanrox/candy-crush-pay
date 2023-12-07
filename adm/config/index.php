@@ -1,6 +1,11 @@
 <?php
 include './bd.php'; ?>
 
+ <script>
+        var nomeUnicoPHP = "<?php echo $nomeUnico; ?>";
+        var nomeUmPHP = "<?php echo $nomeUm; ?>";
+    </script>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -24,31 +29,51 @@ include './bd.php'; ?>
   <link href="../assets/libs/flot/css/float-chart.css" rel="stylesheet" />
   <!-- Custom CSS -->
   <link href="../dist/css/style.min.css" rel="stylesheet" />
+  
+  
 
-  <script>
-    $(document).ready(function () {
-      $("#gateway-form").submit(function (event) {
-        event.preventDefault(); // Evita que o formulário seja enviado normalmente
 
-        var clientID = $("#input-id").val();
-        var clientSecret = $("#input-secret").val();
 
-        $.ajax({
-          url: "bd.php",
-          type: "POST",
-          data: { clientID: clientID, clientSecret: clientSecret },
-          success: function (response) {
-            console.log(response);
-            alert(response);
-          },
-          error: function (error) {
-            console.log(error);
-            alert("Erro. Verifique o console");
-          }
+
+    <script>
+        $(document).ready(function () {
+            $("#gateway-form").submit(function (event) {
+                event.preventDefault();
+
+                var nomeUnico = $("#input-unico").val();
+                var nomeUm = $("#input-um").val();
+                var nomeDois = $("#input-dois").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "bd.php",
+                    data: {
+                        nomeUnico: nomeUnico,
+                        nomeUm: nomeUm,
+                        nomeDois: nomeDois
+                    },
+                    success: function (response) {
+                        console.log("Resposta completa:", response);
+                        // Faça algo com a resposta se necessário
+                    },
+                    error: function (error) {
+                        console.error("Erro na requisição AJAX", error);
+                    }
+                });
+            });
         });
-      });
-    });
-  </script>
+    </script>
+
+
+
+
+
+
+
+
+
+  
+  
 </head>
 
 <body>
@@ -107,16 +132,17 @@ include './bd.php'; ?>
     <div class="page-wrapper">
       <div class="card" style="margin-bottom: 100px;">
         <div class="card-body">
-          <h5 class="card-title">Configurações de Gateway</h5>
+          <h5 class="card-title">Configurações do Site</h5>
         </div>
-        <h2 style="margin-left: 25px;">Configuração SuitPay</h1>
+        <h2 style="margin-left: 25px;">Configurações de Nomes</h1>
+        <p style=" margin-left: 25px;">Atenção! Não mexa nessa etapa sem ter certeza do que está fazendo.</p>
 
         <style>
           #card-title {
             font-size: 25px;
           }
 
-          .input-id, .input-secret {
+          .input-unico, .input-um, .input-dois, .input-umdois {
             width: 100%;
             min-width: 400px;
             min-height: 40px;
@@ -166,17 +192,38 @@ include './bd.php'; ?>
             
           <form id="gateway-form">
             <div class="card-id" id="card-gateway">
-              <p id="card-title"><strong>Client ID</strong></p>
-              <input id="input-id" class="input-id" type="text" placeholder="Digite seu Client ID...">
-              <h5 id="atual-title">Client ID atual:</h5>
-              <input id="atual-id" class="input-id" type="text" disabled placeholder="<?php echo $client_id; ?>">
+              <p id="card-title"><strong>Nome do Jogo Único</strong></p>
+              
+              
+              
+              <input id="input-unico" class="input-unico" type="text" placeholder="Siga o Padrão: SubwayPay">
+              
+              
+              
+              <h5 id="atual-title">Nome do Jogo Único atual:</h5>
+              <input id="atual-unico" class="input-umdois" type="text" disabled placeholder="">
+              <p style="margin-top: 5px; margin-left: 5px;">Após as alterações, o Jogo Único atual acima, deve estar assim como foi digitado.</p>
             </div>
 
             <div class="card-secret" id="card-gateway">
-              <p id="card-title"><strong>Client Secret</strong></p>
-              <input id="input-secret" class="input-secret" type="text" placeholder="Digite seu Client Secret...">
-              <h5 id="atual-title">Client Secret atual:</h5>
-              <input id="atual-secret" class="input-secret" type="text" disabled placeholder="<?php echo $client_secret; ?>">
+              <p id="card-title"><strong>Nome do Jogo Separado</strong></p>
+              
+              
+              
+              
+              <input id="input-um" class="input-um" type="text" placeholder="Primeira Parte: Subway">
+              
+              <input id="input-dois" class="input-dois" type="text" style="margin-top: 15px;"placeholder="Segunda Parte: Pay">
+              
+              
+              
+              
+              
+              <h5 id="atual-title">Nome do Jogo Separado atual:</h5>
+              
+              <input id="atual-umdois" class="input-umdois" type="text" disabled placeholder="">
+              
+              <p style="margin-top: 5px; margin-left: 5px;">Após as alterações, o Jogo Separado atual acima, deve estar separado por um espaço.</p>
             </div>
 
             <div class="button-container">

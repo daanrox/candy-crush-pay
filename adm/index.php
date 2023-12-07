@@ -217,7 +217,7 @@ $result = $result2->fetch_assoc();
           </li>
           
           
-          <li class="sidebar-item">
+           <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
               href="pixels"
@@ -228,16 +228,26 @@ $result = $result2->fetch_assoc();
           </li>
           
           
-                    <li class="sidebar-item">
+          
+                   <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="../gateway"
+              href="./gateway"
               aria-expanded="false"
               ><i class="mdi mdi-cash"></i
               ><span class="hide-menu">Gateway</span></a
             >
           </li>
-        
+          
+            <li class="sidebar-item">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href="../config"
+              aria-expanded="false"
+              ><i class="mdi mdi-account"></i
+              ><span class="hide-menu">Configurações</span></a
+            >
+          </li>
          
       
             <li class="sidebar-item p-3">
@@ -722,6 +732,7 @@ if ($conn->connect_error) {
              
       </div>
     </div>
+    
   </div>
 </div>
 

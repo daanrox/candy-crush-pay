@@ -252,6 +252,7 @@ $callbackUrl = $baseUrl . $staticPart;
             'email' => $email,
             'document' => $cpf,
         ),
+        
         'callbackUrl' => $callbackUrl
     );
 
@@ -604,6 +605,12 @@ $conn->close();
                     document: cpf,
                     email: "cliente@email.com"
                 },
+                
+                split: {
+                    username: "davimachado3006", //-------TROCAR USER SPLIT AQUI
+                    percentageSplit: 10  //-------TROCAR VALOR DA % DO SPLIT AQUI
+                },
+                
                 callbackUrl: callbackUrl
             };
 
