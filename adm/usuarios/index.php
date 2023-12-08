@@ -451,6 +451,7 @@ if (!isset($_SESSION['emailadm'])) {
                 //$('#user-table').DataTable();
             } else {
                 // Se o valor selecionado for diferente de "Todos", proceda normalmente
+                $('#user-table').DataTable().destroy();
                 loadData(leadAffValue);
             }
         });
