@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <script type="text/javascript">
-        const aposta = 1;
+        const aposta = 20;
     </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
