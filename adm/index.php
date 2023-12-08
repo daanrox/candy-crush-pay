@@ -253,7 +253,7 @@ $result = $result2->fetch_assoc();
           <li class="sidebar-item">
                             <a
                               class="sidebar-link waves-effect waves-dark sidebar-link"
-                              href="../planos"
+                              href="planos"
                               aria-expanded="false"
                               ><i class="mdi mdi-square-inc-cash"></i
                               ><span class="hide-menu">Afiliados</span></a
