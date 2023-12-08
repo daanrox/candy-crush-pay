@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 07/12/2023 às 06:58
+-- Tempo de geração: 08/12/2023 às 14:44
 -- Versão do servidor: 10.6.15-MariaDB-cll-lve
 -- Versão do PHP: 7.2.34
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `u756913841_subwayteste`
+-- Banco de dados: `u574069177_subwayneto`
 --
 
 -- --------------------------------------------------------
@@ -77,7 +77,7 @@ CREATE TABLE `app` (
 --
 
 INSERT INTO `app` (`token`, `depositos`, `saques`, `usuarios`, `faturamento_total`, `cadastros`, `saques_valor`, `deposito_min`, `saques_min`, `aposta_max`, `dificuldade_jogo`, `aposta_min`, `rollover_saque`, `taxa_saque`, `google_ads_tag`, `facebook_ads_tag`, `cpa`, `deposito_min_cpa`, `revenue_share_falso`, `max_saque_cpa`, `max_por_saque_cpa`, `revenue_share`, `chance_afiliado`) VALUES
-('', '', '', '', '', '', '', '20', '60', '100', 'dificil', '1', '100', '4', '1', '1', '100', '1', '80', '2', '5', '55', '100');
+('', '', '', '', '', '', '', '20', '60', '100', 'dificil', '1', '100', '4', '1', '1', '10', '1', '80', '2', '5', '55', '100');
 
 -- --------------------------------------------------------
 
@@ -119,21 +119,6 @@ CREATE TABLE `appconfig` (
   `afiliado` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Despejando dados para a tabela `appconfig`
---
-
-INSERT INTO `appconfig` (`id`, `nome`, `email`, `senha`, `cpf`, `telefone`, `saldo`, `jogoteste`, `linkafiliado`, `depositou`, `lead_aff`, `leads_ativos`, `rollover1`, `plano`, `demo`, `bloc`, `sacou`, `indicados`, `saldo_comissao`, `percas`, `ganhos`, `cpa`, `cpafake`, `jogo_demo`, `comissaofake`, `saldo_cpa`, `primeiro_deposito`, `status_primeiro_deposito`, `cont_cpa`, `data_cadastro`, `afiliado`) VALUES
-('1', '', 'jeffex@mail.com', 'senha@123', '', '11923221122', '0', '1', 'https://jogosubwaysurf.com/cadastrar/?aff=1', '', '', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '06-12-2023 18:15', ''),
-('123', '', 'teste2', '132', '', '123', '0', '1', 'https://subwaypay.website/cadastrar/cadastro/?aff=123', '', '', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 03:46', ''),
-('2', '', 'teste1@gmail.com', '123', '', '123', '0', '1', 'https://jogosubwaysurf.com/cadastrar/?aff=2', '', '1', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 01:33', ''),
-('3', '', 'tesste', 'teste', '', 'teste', '0', '1', 'https://jogosubwaysurf.com/cadastrar/?aff=3', '', '1', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 02:46', ''),
-('4', '', 'severino_tiburcio@outlook.com', '123', '', '81994298684', '0', '1', 'https://jogosubwaysurf.com/cadastrar/?aff=4', '', '3', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 02:57', ''),
-('5', '', 'tetete', '123', '', '123', '0', '1', 'https://jogosubwaysurf.com/cadastrar/?aff=5', '', '4', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 03:43', ''),
-('6', '', '231321', '123123', '', '123123', '0', '1', 'https://jogosubwaysurf.com/cadastrar/?aff=6', '', '', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 03:49', ''),
-('7', '', 'teste123123', '1231231Q12Q', '', '123123', '0', '1', 'subwaypay.website/cadastrar/?aff=7', '', '', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 03:50', ''),
-('8', '', 'QWEQWEQWE', 'QWEQWE', '', 'QWEQWEQW', '0', '1', 'subwaypay.website/cadastrar/?aff=8', '', '7', '', '', '20', '', '', '', '0', '0', '', '', '', '', '', '', '', '', '', '', '07-12-2023 03:50', '');
-
 -- --------------------------------------------------------
 
 --
@@ -147,19 +132,6 @@ CREATE TABLE `confirmar_deposito` (
   `status` varchar(255) NOT NULL,
   `data` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Despejando dados para a tabela `confirmar_deposito`
---
-
-INSERT INTO `confirmar_deposito` (`email`, `externalreference`, `valor`, `status`, `data`) VALUES
-('jeffex@mail.com', '88b891c8-e605-4b0b-8439-ad66c4265b4e', '25', 'PAID_OUT', '06/12/2023 18:27'),
-('jeffex@mail.com', 'faa24960-0b1d-40c1-98b9-b4818df55877', '25', 'WAITING_FOR_APPROVAL', '06/12/2023 23:24'),
-('jeffex@mail.com', 'bf318697-5965-4f55-a908-f7f6f64cd557', '25', 'PAID_OUT', '06/12/2023 23:25'),
-('jeffex@mail.com', '0841b09d-626e-4aa0-b0c8-c8d273b8619e', '25', 'WAITING_FOR_APPROVAL', '06/12/2023 23:42'),
-('teste1@gmail.com', '2feded71-d7be-4769-a42c-d98053f521eb', '25', 'WAITING_FOR_APPROVAL', '07/12/2023 02:57'),
-('teste1@gmail.com', '7f9b6b7e-cbc7-4c3d-9e34-9106a189c4d3', '25', 'WAITING_FOR_APPROVAL', '07/12/2023 03:50'),
-('teste1@gmail.com', 'e07360ef-91a2-40e9-b27d-b0476cf739eb', '25', 'WAITING_FOR_APPROVAL', '07/12/2023 03:53');
 
 -- --------------------------------------------------------
 
@@ -276,6 +248,20 @@ CREATE TABLE `saques` (
   `externalreference` varchar(255) NOT NULL,
   `valor` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `saque_afiliado`
+--
+
+CREATE TABLE `saque_afiliado` (
+  `email` varchar(255) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `pix` varchar(255) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
