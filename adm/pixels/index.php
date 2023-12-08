@@ -187,58 +187,6 @@ $facebook_meta_key = $result['facebook_ads_key'];
 
 
 
-
-    <?php
-    // Configurações do banco de dados
-    $dbname = "u574069177_frutinhamoney";
-    $dbuser = "u574069177_tki3";
-    $dbpass = "Severino@123";
-
-    // Conectar ao banco de dados
-    $conn = new mysqli('localhost', $dbuser, $dbpass, $dbname);
-
-    // Verificar a conexão
-    if ($conn->connect_error) {
-        die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-    }
-
-    // Atualizar os dados no banco de dados se o formulário for enviado
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Certifique-se de validar e filtrar os dados do formulário para evitar SQL injection
-
-        // Os arrays $_POST['cpa'], $_POST['rev'], $_POST['indicacao'] conterão os novos valores
-        $cpa = $_POST['cpa'];
-        $rev = $_POST['rev'];
-        $indicacao = $_POST['indicacao'];
-        $valor_saque_maximo = $_POST['valor_saque_maximo'];
-        $saque_diario = $_POST['saque_diario'];
-
-
-        // Loop através dos arrays e atualizar os valores no banco de dados
-        for ($i = 0; $i < count($cpa); $i++) {
-            $nome = $_POST['nome'][$i]; // Se necessário, adicione um campo de input hidden para o nome na tabela
-
-            // Use declarações preparadas para evitar SQL injection
-            $stmt = $conn->prepare("UPDATE planos SET cpa = ?, rev = ?, indicacao = ?, valor_saque_maximo = ?, saque_diario = ? WHERE nome = ?");
-            $stmt->bind_param("ssssss", $cpa[$i], $rev[$i], $indicacao[$i],$valor_saque_maximo[$i],$saque_diario[$i], $nome);
-            $stmt->execute();
-        }
-
-        // Redirecionar ou exibir uma mensagem de sucesso
-        // header('Location: sua_pagina_de_sucesso.php');
-        // exit();
-    }
-
-    // Consulta SQL para obter dados da tabela
-    $sql = "SELECT nome, cpa, rev, indicacao, valor_saque_maximo, saque_diario FROM planos";
-    $result = $conn->query($sql);
-
-    // Verificar se a consulta foi bem-sucedida
-    if (!$result) {
-        die("Erro na consulta: " . $conn->error);
-    }
-    ?>
-
     <div class="page-wrapper">
         <div class="card">
             <div class="card-body">
