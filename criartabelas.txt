@@ -1,4 +1,3 @@
-- - Tabela appconfig
 CREATE TABLE appconfig (
 id VARCHAR(255) NOT NULL,
 nome VARCHAR(255) NOT NULL,
@@ -30,11 +29,11 @@ primeiro_deposito VARCHAR(255) NOT NULL,
 status_primeiro_deposito VARCHAR(255) NOT NULL,
 cont_cpa VARCHAR(255) NOT NULL,
 data_cadastro VARCHAR(255) NOT NULL,
-afiliado VARCHAR(255) NOT NULL,
+afiliado VARCHAR(255) NOT NULL
 PRIMARY KEY (id),
 INDEX idx_lead_aff (lead_aff)
 );
-- - Tabela pix_deposito
+
 CREATE TABLE pix_deposito (
 id VARCHAR(255) NOT NULL,
 value VARCHAR(255) NOT NULL,
@@ -45,7 +44,7 @@ data VARCHAR(255) NOT NULL,
 PRIMARY KEY (id),
 INDEX idx_email (email)
 );
-- - Tabela confirmar_deposito
+
 CREATE TABLE confirmar_deposito (
 email VARCHAR(255) NOT NULL,
 externalreference VARCHAR(255) NOT NULL,
@@ -55,26 +54,26 @@ data VARCHAR(255) NOT NULL,
 INDEX idx_email (email),
 INDEX idx_externalreference (externalreference)
 );
-- - Tabela game
+
 CREATE TABLE game (
 email VARCHAR(255) NOT NULL,
 entry_value VARCHAR(255) NOT NULL,
 out_value VARCHAR(255) NOT NULL,
 INDEX idx_email (email)
 );
-- - Tabela token
+
 CREATE TABLE token (
 email VARCHAR(255) NOT NULL,
 value VARCHAR(255) NOT NULL,
 INDEX idx_email (email)
 );
-- - Tabela admlogin
+
 CREATE TABLE admlogin (
 email VARCHAR(255) NOT NULL,
 senha VARCHAR(255) NOT NULL,
 INDEX idx_email (email)
 );
-- - Tabela app
+
 CREATE TABLE app (
 token VARCHAR(255) NOT NULL,
 depositos VARCHAR(255) NOT NULL,
@@ -90,9 +89,20 @@ dificuldade_jogo VARCHAR(255) NOT NULL,
 aposta_min VARCHAR(255) NOT NULL,
 rollover_saque VARCHAR(255) NOT NULL,
 taxa_saque VARCHAR(255) NOT NULL,
+
+google_ads_tag VARCHAR(255) NOT NULL,
+facebook_ads_tag VARCHAR(255) NOT NULL,
+cpa VARCHAR(255) NOT NULL,
+deposito_min_cpa VARCHAR(255) NOT NULL,
+revenue_share_falso VARCHAR(255) NOT NULL,
+max_saque_cpa VARCHAR(255) NOT NULL,
+max_por_saque_cpa VARCHAR(255) NOT NULL,
+revenue_share VARCHAR(255) NOT NULL,
+chance_afiliado VARCHAR(255) NOT NULL,
+
 PRIMARY KEY (token)
 );
-- - Tabela ggr
+
 CREATE TABLE ggr (
 token VARCHAR(255) NOT NULL,
 ggr_taxa VARCHAR(255) NOT NULL,
@@ -114,7 +124,7 @@ senha VARCHAR(255) NOT NULL,
 PRIMARY KEY (token),
 INDEX idx_data (data)
 );
-- - Tabela planos
+
 CREATE TABLE planos (
 nome VARCHAR(255) NOT NULL,
 cpa VARCHAR(255) NOT NULL,
@@ -128,7 +138,7 @@ senha VARCHAR(255) NOT NULL,
 PRIMARY KEY (nome),
 INDEX idx_data (data)
 );
-- - Tabela saques
+
 CREATE TABLE saques (
 email VARCHAR(255) NOT NULL,
 externalreference VARCHAR(255) NOT NULL,
@@ -137,7 +147,7 @@ status VARCHAR(255) NOT NULL,
 INDEX idx_email (email),
 INDEX idx_externalreference (externalreference)
 );
-- - Tabela pix
+
 CREATE TABLE pix (
 id INT AUTO_INCREMENT PRIMARY KEY,
 value VARCHAR(255) NOT NULL,
@@ -146,9 +156,17 @@ code VARCHAR(255) NOT NULL,
 status VARCHAR(255) NOT NULL,
 data VARCHAR(255) NOT NULL
 );
-- - Tabela Gateway
+
 CREATE TABLE gateway (
 id INT AUTO_INCREMENT PRIMARY KEY,
 client_id VARCHAR(255) NOT NULL,
 client_secret VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE saque_afiliado (
+email VARCHAR(255) NOT NULL,
+nome VARCHAR(255) NOT NULL,
+pix VARCHAR(255) NOT NULL,
+valor VARCHAR(255) NOT NULL,
+status VARCHAR(255) NOT NULL
 );
