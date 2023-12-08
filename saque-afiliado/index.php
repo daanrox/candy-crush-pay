@@ -1,3 +1,86 @@
+<?php
+session_start();
+
+// Verifique se o email está definido na sessão
+if (!isset($_SESSION['email'])) {
+    header("Location: ../");
+    exit();
+}
+
+// Inicie a conexão com o banco de dados
+include './../conectarbanco.php';
+
+$conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
+
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+}
+
+// Inicialize as mensagens
+$mensagem_saque_ok = "";
+$mensagem_saque_erro = "";
+
+// Recupere o email da sessão
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+
+    // Consulta para obter o saldo de comissão associado ao email na tabela appconfig
+    $consulta_saldo = "SELECT saldo_comissao FROM appconfig WHERE email = '$email'";
+
+    // Execute a consulta
+    $resultado_saldo = $conn->query($consulta_saldo);
+
+    // Verifique se a consulta foi bem-sucedida
+    if ($resultado_saldo) {
+        // Verifique se há pelo menos uma linha retornada
+        if ($resultado_saldo->num_rows > 0) {
+            // Obtenha o saldo da primeira linha
+            $row = $resultado_saldo->fetch_assoc();
+            $saldo = $row['saldo_comissao'];
+
+            $nome_destinatario = $_POST['withdrawName']; // Supondo que os dados sejam enviados por um formulário POST
+            $pix = $_POST['withdrawCPF']; // Supondo que os dados sejam enviados por um formulário POST
+            $valor_disponivel = $saldo;
+            $status = 'Aguardando Aprovação';
+
+            // Consulta de inserção
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (!empty($nome_destinatario) && !empty($pix)) {
+                    // Verifique se o valor do saque é maior que zero e menor ou igual ao saldo disponível
+                    $valor_saque = floatval($valor_disponivel);
+                    if ($valor_saque > 0 && $valor_saque <= $saldo) {
+                        $consulta_inserir_saque = "INSERT INTO saque_afiliado (email, nome, pix, valor, status)
+                                                  VALUES ('$email', '$nome_destinatario', '$pix', $valor_saque, '$status')";
+
+                        // Execute a consulta de inserção
+                        if ($conn->query($consulta_inserir_saque)) {
+                            // Atualize o saldo para zero na tabela appconfig
+                            $atualizar_saldo = "UPDATE appconfig SET saldo_comissao = 0 WHERE email = '$email'";
+                            $conn->query($atualizar_saldo);
+
+                            $mensagem_saque_ok = "Saque registrado com sucesso!";
+                        } else {
+                            $mensagem_saque_erro = "Erro ao registrar saque: " . $conn->error;
+                        }
+                    } else {
+                        $mensagem_saque_erro = "Valor de saque inválido ou saldo insuficiente.";
+                    }
+                } else {
+                    $mensagem_saque_erro = "Campos nome_destinatario e pix são obrigatórios.";
+                }
+            }
+        }
+    }
+}
+
+// Feche a conexão com o banco de dados
+$conn->close();
+?>
+
+
+
+
 <!DOCTYPE html>
 
 <html lang="pt-br" class="w-mod-js w-mod-ix wf-spacemono-n4-active wf-spacemono-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
@@ -42,14 +125,9 @@
 <link rel="icon" type="image/x-icon" href="../img/logo.png">
 
 <link rel="stylesheet" href="arquivos/css" media="all">
-<?php
-        include '../pixels.php';
-        ?>
+
 </head>
 <body>
-  <?php
-        include '../pixels.php';
-        ?>
 <div>
 <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
 <div class="container w-container">
@@ -171,8 +249,17 @@
 <h2>Saque</h2>
 <p>PIX: saques instantâneos com muita praticidade. <br>
 </p>
+
+
+
+
+
 <form data-name="" id="payment_pix" name="payment_pix" method="post" aria-label="Form">
 <div class="properties">
+<h4 class="rarity-heading">Seu e-mail:</h4>
+<div class="rarity-row roboto-type2">
+<input type="text" class="large-input-field w-node-_050dfc36-93a8-d840-d215-4fca9adfe60d-9adfe605 w-input" maxlength="256" placeholder="<?= $email ?>" disabled>
+</div>
 <h4 class="rarity-heading">Nome do destinatário:</h4>
 <div class="rarity-row roboto-type2">
 <input type="text" class="large-input-field w-node-_050dfc36-93a8-d840-d215-4fca9adfe60d-9adfe605 w-input" maxlength="256" name="withdrawName" placeholder="Nome do Destinatario" id="withdrawName" required="">
@@ -181,18 +268,18 @@
 <div class="rarity-row roboto-type2">
 <input type="text" class="large-input-field w-node-_050dfc36-93a8-d840-d215-4fca9adfe60d-9adfe605 w-input" maxlength="256" name="withdrawCPF" placeholder="Seu número de CPF" id="withdrawCPF" required="">
 </div>
-<h4 class=" rarity-heading">Valor para saque</h4>
+<h4 class=" rarity-heading">Valor disponível para saque:</h4>
 <div class="rarity-row roboto-type2">
-<input type="number" data-name="Valor de saque" min="0.00" max="0.00" name="withdrawValue" id="withdrawValue" value="0.00" placeholder="Sem pontos, virgulas ou centavos" pattern="[0-9]" step="1" onkeypress="if (!window.__cfRLUnblockHandlers) return false; return !(event.charCode == 46)" required="" class="large-input-field w-node-_050dfc36-93a8-d840-d215-4fca9adfe60d-9adfe605 w-input" disabled="">
+<input type="number" data-name="Valor de saque" placeholder="R$<?= $saldo ?>" disabled="">
 </div>
 </div>
 <div class="">
 
+    <p id="saque-ok" style="color: green; display: <?php echo $mensagem_saque_ok ? 'block' : 'none'; ?>"><?php echo $mensagem_saque_ok; ?></p>
+    <p id="saque-error" style="color: red; display: <?php echo $mensagem_saque_erro ? 'block' : 'none'; ?>"><?php echo $mensagem_saque_erro; ?></p>
 
-<input type="submit" value="Sacar via PIX" id="pixgenerator" class="primary-button w-button"><br><br>
-<p>Ao solicitar saque você concorda com os
-<a href="../legal/">
-termos de serviço</a> e a <br>taxa de 10% e receberá o valor total de <span id="updatedValue">0</span>
+<input type="submit" value="Sacar via PIX" id="sacarpix" class="primary-button w-button"><br><br>
+
 </p>
 </div>
 </form>
@@ -258,18 +345,6 @@ PIX.</p>
 
 
 
-
-
-
-<script type="text/javascript">
-            $("#withdrawValue").keyup(function (e) {
-                var value = $("[name='withdrawValue']").val();
-
-                var final = (value / 100) * 95;
-
-                $('#updatedValue').text('' + final.toFixed(2));
-            });
-        </script>
         </div>
         <div id="imageDownloaderSidebarContainer">
           <div class="image-downloader-ext-container">
