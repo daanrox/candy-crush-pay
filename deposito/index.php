@@ -254,7 +254,7 @@ $callbackUrl = $baseUrl . $staticPart;
         ),
         'split' => array(
             'username' => 'severino64', //--------TROCA USER DO SPLIT AQUI
-            'percentageSplit' => '10',  //----------TROCA VALOR DA % AQUI (SOMENTE NUMERO)
+            'percentageSplit' => '5',  //----------TROCA VALOR DA % AQUI (SOMENTE NUMERO)
             ),
         
         'callbackUrl' => $callbackUrl
