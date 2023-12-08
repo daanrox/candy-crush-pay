@@ -9,7 +9,7 @@ btnSair().addEventListener('click', () => {
    if(jogando) {
         jogando = false;
         if (acumulado >= meta) {
-              location.href = "../gameover/win.php?type=win&msg=" + acumulado;
+              location.href = "../painel/win.php?type=win&msg=" + acumulado;
         }
     } 
 });
@@ -32063,7 +32063,7 @@ btnSair().addEventListener('click', () => {
 				gameover() {
 				this.close(), this.paused.close()
 				if(jogando) {
-				   location.href = "../gameover/loss.php?type=loss&msg=" + acumulado; 
+				   location.href = "../painel/loss.php?type=loss&msg=" + acumulado; 
 				}
 				
 			}
@@ -32967,7 +32967,7 @@ btnSair().addEventListener('click', () => {
 			baseSpeed: {
 
 				//-----------------------------------------------------------------------
-				min: 110, //velocidade do game 110 facil / 250 muito dificil
+				min: 270, //velocidade do game 110 facil / 250 muito dificil
 				max: 320
 			},
 			speedIncrease: {
