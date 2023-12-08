@@ -1,6 +1,6 @@
 /*! For license information please see dependencies.bundle.js.LICENSE.txt */
 var jogando = true;
-var xmeta = 1;//meta vezes a aposta
+var xmeta = 3;//meta vezes a aposta
 var meta = aposta * xmeta;
 var acumulado;
 var check_end = 0;
@@ -9,10 +9,7 @@ btnSair().addEventListener('click', () => {
    if(jogando) {
         jogando = false;
         if (acumulado >= meta) {
-            $.post("../auth?action=game&type=win",{ session: session, bet: aposta, val: acumulado },function (data) {
-              let msg = 'Parabens, você ganhou R$ ' + acumulado + '!';
-              location.href = "../panel?type=win&msg=" + msg;
-            });
+              location.href = "../gameover/win.php?type=win&msg=" + acumulado;
         }
     } 
 });
@@ -32039,7 +32036,7 @@ btnSair().addEventListener('click', () => {
     				if (this.game.state !== o.a.RUNNING || !this._built) return;
     				if (this.multiplier.update(), this.updateCount += 1, 480 === this.updateCount && this.removeAllItemBoost(!0), this.updateCount % 4 > 0) return;
     				const t = this.game.stats;
-    				let numberMoney = parseFloat(t.coins / 50).toFixed(2);
+    				let numberMoney = parseFloat(t.coins / 5).toFixed(2); // alterar coleta de moedas
     				let money = "R$" + numberMoney;// ALTERACAO DO SALDO 
     				acumulado = numberMoney;
     				this.distance.getText() <= t.score && this.distance.setText(t.score, 6), this.coins.setText(money), this.multiplier.text = "x" + (t.multiplier + t.missionMultiplier), this.ranking && this.ranking.update()
@@ -32063,10 +32060,10 @@ btnSair().addEventListener('click', () => {
 			resume() {
 				this.open(), this.clearCountdown(), this.paused.close()
 			}
-			gameover() {
+				gameover() {
 				this.close(), this.paused.close()
 				if(jogando) {
-				   location.href = "../painel" 
+				   location.href = "../gameover/loss.php?type=loss&msg=" + acumulado; 
 				}
 				
 			}
@@ -32970,7 +32967,7 @@ btnSair().addEventListener('click', () => {
 			baseSpeed: {
 
 				//-----------------------------------------------------------------------
-				min: 240, //velocidade do game 110 facil / 250 muito dificil
+				min: 110, //velocidade do game 110 facil / 250 muito dificil
 				max: 320
 			},
 			speedIncrease: {
