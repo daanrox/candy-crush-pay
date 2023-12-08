@@ -329,9 +329,9 @@ $conn->close();
 
         <div class="minting-container w-container">
             <div class="escudo">
-                <a href="#">Ranking</a>
+                
                 <img src="arquivos/trophy.gif">
-                <a href="../painel/">Painel</a>
+                
             </div>
             <h2>Iniciar corrida</h2>
             <p>Pronto para iniciar mais uma corrida?</p>
