@@ -119,7 +119,7 @@ if (isset($_GET['msg'])) {
                 <p>Para continuar faturando e sacar seu dinheiro, continue jogando. #ficadica!</p>
                 <strong style="margin-top: 20px"> ⬇️ Clique no Botão Abaixo para Jogar Novamente</strong>
 
-                <a href="../cadastrar/" class="cadastro-btn">JOGAR</a>
+                <a href="../painel/" class="cadastro-btn">JOGAR</a>
 
                 <style>
                     .win-warn {
