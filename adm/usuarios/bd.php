@@ -19,7 +19,7 @@ try {
     // Adicionar cláusula WHERE se o parâmetro leadAff estiver presente
     if (!empty($leadAff)) {
         // Use prepared statement para evitar injeção de SQL
-        $sql .= " WHERE lead_aff = ?";
+        $sql .= " WHERE afiliado = ?";
     }
 
     $sql .= " ORDER BY 

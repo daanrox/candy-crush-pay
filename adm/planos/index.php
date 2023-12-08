@@ -1,3 +1,32 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['emailadm'])) {
+        header("Location: ../login");
+        exit();
+    }
+    
+    include './../../conectarbanco.php';
+    $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
+    
+    if ($conn->connect_error) {
+        die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+    }
+    
+    $result = $conn->query("SELECT * FROM app LIMIT 1");
+    $result = $result->fetch_assoc();
+    
+    $cpa = $result['cpa'];
+    $chance_afiliado = $result['chance_afiliado'];
+    $deposito_min_cpa = $result['deposito_min_cpa'];
+    $revenue_share_falso = $result['revenue_share_falso'];
+    $max_saque_cpa = $result['max_saque_cpa'];
+    $revenue_share = $result['revenue_share'];
+    
+    
+    
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <head>
@@ -160,96 +189,11 @@
 </style>
 
 
-
-
-
-
-<?php
-// Configurações do banco de dados
-$dbname = "u574069177_frutinhamoney";
-$dbuser = "u574069177_tki3";
-$dbpass = "Severino@123";
-
-// Conectar ao banco de dados
-$conn = new mysqli('localhost', $dbuser, $dbpass, $dbname);
-
-// Verificar a conexão
-if ($conn->connect_error) {
-    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-}
-
-// Atualizar os dados no banco de dados se o formulário for enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Certifique-se de validar e filtrar os dados do formulário para evitar SQL injection
-
-    // Os arrays $_POST['cpa'], $_POST['rev'], $_POST['indicacao'] conterão os novos valores
-    $cpa = $_POST['cpa'];
-    $rev = $_POST['rev'];
-    $indicacao = $_POST['indicacao'];
-    $valor_saque_maximo = $_POST['valor_saque_maximo'];
-    $saque_diario = $_POST['saque_diario'];
-
-
-    // Loop através dos arrays e atualizar os valores no banco de dados
-    for ($i = 0; $i < count($cpa); $i++) {
-        $nome = $_POST['nome'][$i]; // Se necessário, adicione um campo de input hidden para o nome na tabela
-
-        // Use declarações preparadas para evitar SQL injection
-        $stmt = $conn->prepare("UPDATE planos SET cpa = ?, rev = ?, indicacao = ?, valor_saque_maximo = ?, saque_diario = ? WHERE nome = ?");
-        $stmt->bind_param("ssssss", $cpa[$i], $rev[$i], $indicacao[$i],$valor_saque_maximo[$i],$saque_diario[$i], $nome);
-        $stmt->execute();
-    }
-
-    // Redirecionar ou exibir uma mensagem de sucesso
-    // header('Location: sua_pagina_de_sucesso.php');
-    // exit();
-}
-
-// Consulta SQL para obter dados da tabela
-$sql = "SELECT nome, cpa, rev, indicacao, valor_saque_maximo, saque_diario FROM planos";
-$result = $conn->query($sql);
-
-// Verificar se a consulta foi bem-sucedida
-if (!$result) {
-    die("Erro na consulta: " . $conn->error);
-}
-?>
-
 <div class="page-wrapper">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Planos</h5>
-      <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <div class="table-responsive">
-          <table id="user-table" class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>CPA Afiliado</th>
-                <th>REV Afiliado</th>
-                <th>Comissão por indicação</th>
-                <th>Maximo Por Saque</th>
-                <th>Saque diários</th>
-              </tr>
-            </thead>
-            <tbody id="table-body">
-              <?php
-                // Extrair dados da consulta e gerar as linhas da tabela com inputs para edição
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>" .
-                        "<td>" . $row['nome'] . "<input type='hidden' name='nome[]' value='" . $row['nome'] . "'></td>" .
-                        "<td><input type='text' name='cpa[]' value='" . $row['cpa'] . "'></td>" .
-                        "<td><input type='text' name='rev[]' value='" . $row['rev'] . "'></td>" .
-                        "<td><input type='text' name='indicacao[]' value='" . $row['indicacao'] . "'></td>" .
-                        "<td><input type='text' name='valor_saque_maximo[]' value='" . $row['valor_saque_maximo'] . "'></td>" .
-                        "<td><input type='text' name='saque_diario[]' value='" . $row['saque_diario'] . "'></td>" .
-                        "</tr>";
-                }
-              ?>
-            </tbody>
-          </table>
-        </div>
-        <button type="submit" class="btn btn-success">Salvar Alterações</button>
+     
+       
         <style>
             .box-container {
                 display: flex;
@@ -263,8 +207,8 @@ if (!$result) {
                 border: 1px solid white;
                 padding: 20px;
                 margin: 20px 0;
-                min-width: 360px;
-                width: 360px;
+                min-width: 320px;
+                width: 320px;
                 background-color: #1f262d;
                 border-radius: 15px;
                 display: block;
@@ -295,47 +239,63 @@ if (!$result) {
         </style>
         <div class="box-container">
             <div class="box">
-                <form>
-                    <p class="title">CPA Lvl 1 (RS):</p> 
-                    <p class="description">Ganho em RS pelo primeiro depósito do indicado, feito ao afiliado Lvl 1.</p>
-                    <input class="box-input" name="cpa" value="20"/>
+                <form action='update.php?field=cpa' method='post'>
+                    <p class="title">CPA (R$):</p> 
+                    <p class="description">Ganho em R$ pelo primeiro depósito do indicado, feito ao afiliado.</p>
+                    <input class="box-input" name="value" value="<?php echo $cpa?>"/>
                     <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
                 </form>
             </div>
             <div class="box">
-                <form>
+                <form action='update.php?field=chance_afiliado' method='post'>
                     <p class="title">Chance do afiliado ganhar CPA (%):</p> 
-                    <p class="description">Quantos porcentos dos afiliados irá contar com CPA (aumentar lucros do site).</p>
-                    <input class="box-input" name="cpa" value="20"/>
+                    <p class="description">Quantos % dos indicados irá contar o CPA pro afiliado (aumentar lucros do site).</p>
+                    <input class="box-input" name="value" value="<?php echo $chance_afiliado?>"/>
                     <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
                 </form>
             </div>
             <div class="box">
-                <form>
+                <form action='update.php?field=deposito_min_cpa' method='post'>
                     <p class="title">Depósito Mínimo Para Afiliado Ganhar CPA:</p> 
                     <p class="description">Valor de depósito mínimo que os convidados do afiliado devem fazer para gerar receita de CPA.</p>
-                    <input class="box-input" name="cpa" value="20"/>
+                    <input class="box-input" name="value"value="<?php echo $deposito_min_cpa?>"/>
                     <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
                 </form>
             </div>
             <div class="box">
-                <form>
+                <form action='update.php?field=revenue_share_falso' method='post'>
                     <p class="title">Porcentagem de Rev. Share Falso (%):</p> 
                     <p class="description">Valor a mais de revenue share que irá aparecer aos usuários (aumentar lucros do site).</p>
-                    <input class="box-input" name="cpa" value="20"/>
+                    <input class="box-input" name="value" value="<?php echo $revenue_share_falso?>"/>
                     <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
                 </form>
             </div>
             <div class="box">
-                <form>
-                    <p class="title">Revenue Share LvL 1 (%):</p> 
-                    <p class="description">Procentagem dad aos afiliados por cada perca real dos indicados Lvl 1.</p>
-                    <input class="box-input" name="cpa" value="20"/>
+                <form action='update.php?field=max_saque_cpa' method='post'>
+                    <p class="title">Saque máximo:</p> 
+                    <p class="description">Quantidade de saques máxima que um afiliado pode fazer por dia.</p>
+                    <input class="box-input" name="value" value="<?php echo $max_saque_cpa?>"/>
+                    <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
+                </form>
+            </div>
+            <div class="box">
+                <form action='update.php?field=max_por_saque_cpa' method='post'>
+                    <p class="title">Máximo por saque:</p> 
+                    <p class="description">Valor máximo que um afiliado irá conseguir sacar por dia.</p>
+                    <input class="box-input" name="value" value="<?php echo $max_por_saque_cpa?>"/>
+                    <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
+                </form>
+            </div>
+            <div class="box">
+                <form action='update.php?field=revenue_share' method='post'>
+                    <p class="title">Revenue Share (%):</p> 
+                    <p class="description">Porcentagem dada aos afiliados por cada perca real dos indicados.</p>
+                    <input class="box-input" name="value" value="<?php echo $revenue_share?>"/>
                     <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
                 </form>
             </div>
         </div>
-      </form>
+
     </div>
   </div>
 </div>
@@ -356,10 +316,10 @@ $conn->close();
 
 
       
-        <footer class="footer text-center">
-          Desenvolvido por
-          <a href="http://tkitecnologia.com/">TKI TECNOLOGIA</a>.
-        </footer>
+         <footer class="footer text-center">
+                        Desenvolvido por
+                        <a href="https://tkitecnologia.com">TKI TECNOLOGIA</a>
+                    </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
         <!-- ============================================================== -->

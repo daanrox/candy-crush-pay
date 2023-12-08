@@ -166,7 +166,7 @@ if (!isset($_SESSION['emailadm'])) {
         
       <div class="table-responsive">
         <h5>Filtrar por link de afiliado</h5>
-        <input type="text" id="leadAffInput" placeholder="Filtrar por lead_aff">
+        <input type="text" id="leadAffInput" placeholder="Filtrar por afiliado">
         <table id="user-table" class="table table-striped table-bordered">
           <thead>
             <tr>
@@ -331,10 +331,7 @@ if (!isset($_SESSION['emailadm'])) {
         
 
         // Inicializar DataTables após a conclusão da chamada AJAX
-        // Inicializar DataTables após a conclusão da chamada AJAX
-        var table = $('#user-table').DataTable({
-            order: [[0, 'desc']]  // Ordenar pela primeira coluna (índice 0) de forma descendente
-        });
+        var table = $('#user-table').DataTable();
         
         // Adicionar evento de clique para o botão de edição
         $('#user-table tbody').on('click', '.btn-edit', function() {
@@ -411,10 +408,7 @@ if (!isset($_SESSION['emailadm'])) {
                     });
 
                     // Inicializar DataTables após a conclusão da chamada AJAX
-                    // Inicializar DataTables após a conclusão da chamada AJAX
-                    var table = $('#user-table').DataTable({
-                        order: [[0, 'desc']]  // Ordenar pela primeira coluna (índice 0) de forma descendente
-                    });
+                    var table = $('#user-table').DataTable();
 
                     // Adicionar evento de clique para o botão de edição
                     $('#user-table tbody').on('click', '.btn-edit', function () {

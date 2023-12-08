@@ -1,4 +1,4 @@
-  <aside class="left-sidebar" data-sidebarbg="skin5">
+<aside class="left-sidebar" data-sidebarbg="skin5">
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar">
       <!-- Sidebar navigation-->
@@ -81,10 +81,20 @@
             >
           </li>
           
+           <li class="sidebar-item">
+                            <a
+                              class="sidebar-link waves-effect waves-dark sidebar-link"
+                              href="../planos"
+                              aria-expanded="false"
+                              ><i class="mdi mdi-square-inc-cash"></i
+                              ><span class="hide-menu">Afiliados</span></a
+                            >
+                        </li>
+          
                     <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="../saques"
+              href="../saques-afiliados"
               aria-expanded="false"
               ><i class="mdi mdi-cash"></i
               ><span class="hide-menu">Saques Afiliados</span></a

@@ -30,6 +30,7 @@ primeiro_deposito VARCHAR(255) NOT NULL,
 status_primeiro_deposito VARCHAR(255) NOT NULL,
 cont_cpa VARCHAR(255) NOT NULL,
 data_cadastro VARCHAR(255) NOT NULL,
+afiliado VARCHAR(255) NOT NULL,
 PRIMARY KEY (id),
 INDEX idx_lead_aff (lead_aff)
 );
