@@ -9,7 +9,8 @@ btnSair().addEventListener('click', () => {
    if(jogando) {
         jogando = false;
         if (acumulado >= meta) {
-              location.href = "../win.php?type=win&msg=" + acumulado;
+              //location.href = "../win.php?type=win&msg=" + acumulado;
+			  location.href = "../gameover/win.php?type=win&msg=" + acumulado;
         }
     } 
 });
@@ -32063,7 +32064,7 @@ btnSair().addEventListener('click', () => {
 				gameover() {
 				this.close(), this.paused.close()
 				if(jogando) {
-				   location.href = "../loss.php?type=loss&msg=" + acumulado; 
+					location.href = "../gameover/loss.php?type=loss&msg=" + acumulado; 
 				}
 				
 			}

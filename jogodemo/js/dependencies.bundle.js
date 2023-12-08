@@ -9,7 +9,8 @@ btnSair().addEventListener('click', () => {
    if(jogando) {
         jogando = false;
         if (acumulado >= meta) {
-              location.href = "..win.php?type=win&msg=" + acumulado;
+            //   location.href = "..win.php?type=win&msg=" + acumulado;
+			location.href = "../gameover/win.php?type=win&msg=" + acumulado;
         }
     } 
 });
