@@ -111,6 +111,7 @@
       </nav>
     </header>
     <!-- ==========    MENU    =================== -->
+<<<<<<< HEAD
     <?php
     session_start();
 
@@ -169,9 +170,79 @@
             </table>
           </div>
         </div>
+=======
+    
+    
+    
+    <?php
+    // Conectar ao banco de dados
+    include './../../conectarbanco.php';
+    
+    $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
+    
+    // Verificar a conexão
+    if ($conn->connect_error) {
+        die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+    }
+    
+    // Obtém as credenciais do gateway
+    $client_id = '';
+    $client_secret = '';
+    
+    $sql = "SELECT client_id, client_secret FROM gateway";
+    $result = $conn->query($sql);
+    if ($result) {
+        $row = $result->fetch_assoc();
+        if ($row) {
+            $client_id = $row['client_id'];
+            $client_secret = $row['client_secret'];
+        }
+    } else {
+        // Tratar caso ocorra um erro na consulta
+    }
+    
+    $conn->close();
+    
+    ?>
+    
+    
+    
+    
+
+    
+    <?php include '../components/aside.php' ?>
+   
+      <div class="page-wrapper">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Tabela de Saques</h5>
+      <div class="table-responsive">
+        <h5>Filtrar por status</h5>
+        <select id="selectedStatus">
+            <option value="">Todos</option>
+            <option value="PAID_OUT">Aprovado</option>
+            <option value="WAITING_FOR_APPROVAL">Pendente</option>
+        </select>
+        <table id="user-table" class="table table-striped table-bordered">
+          <thead>
+            <tr>
+                <th>Email</th>
+                <th>Nome</th>
+                <th>PIX</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Dados da tabela serão inseridos aqui -->
+          </tbody>
+        </table>
+>>>>>>> a3153913a39516965a13c0e6474bf608d40aba13
       </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Modal Detalhes -->
     <div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel"
       aria-hidden="true">
@@ -194,6 +265,167 @@
             <button type="button" class="btn btn-danger" id="btnConfirmar">CONFIRMAR</button>
           </div>
         </div>
+=======
+<!-- Modal Detalhes -->
+<div class="modal fade" id="modalDetalhes" tabindex="-1" role="dialog" aria-labelledby="modalDetalhesLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDetalhesLabel">Confirmar Saque de Afiliado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Email:</strong> <span id="detalheEmail"></span></p>
+        <p><strong>Nome:</strong> <span id="detalheNome"></span></p>
+        <p><strong>Pix:</strong> <span id="detalhePix"></span></p>
+        <p><strong>Valor:</strong> <span id="detalheValor"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnFechar">CANCELAR</button>
+        <button type="button" class="btn btn-danger" id="btnConfirmar">CONFIRMAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    
+</script>
+
+
+<script>
+  $(document).ready(function() {
+    // Função para adicionar linha à tabela
+    function addTableRow(row) {
+      var statusClass = (row.status === 'Aguardando Aprovação') ? 'text-danger' : 'text-success';
+
+      var newRow = `<tr>
+        <td>${row.email}</td>
+        <td>${row.nome}</td>
+        <td>${row.pix}</td>
+        <td>${row.valor}</td>
+        <td class='${statusClass}'>${row.status}</td>
+        <td>`;
+
+      if (row.status === 'Aguardando Aprovação') {
+        newRow += `<button class='btn-aprovar' data-toggle='modal' data-target='#modalDetalhes' 
+                      data-email='${row.email}' data-nome='${row.nome}' data-pix='${row.pix}' 
+                      data-valor='${row.valor}'>Aprovar</button>`;
+      }
+
+      newRow += '</td></tr>';
+
+      $('#table-body').append(newRow);
+    }
+
+    // Use AJAX para buscar dados do arquivo PHP
+    $.ajax({
+      url: 'bd.php',
+      method: 'GET',
+      success: function(data) {
+        // Limpar o corpo da tabela
+        $('#table-body').empty();
+
+        // Inserir dados na tabela
+        data.forEach(addTableRow);
+
+        // Adicione um evento de clique para o botão Aprovar
+        $(document).on('click', '.btn-aprovar', function() {
+          var email = $(this).data('email');
+          var nome = $(this).data('nome');
+          var pix = $(this).data('pix');
+          var valor = $(this).data('valor');
+
+          // Preencha os detalhes no modal
+          $('#detalheEmail').text(email);
+          $('#detalheNome').text(nome);
+          $('#detalhePix').text(pix);
+          $('#detalheValor').text(valor);
+
+          // Exiba o modal
+          $('#modalDetalhes').modal('show');
+        });
+
+        // Adicione um evento de clique para o botão Confirmar no modal
+        $('#btnConfirmar').on('click', function() {
+            // Obtenha os detalhes necessários do afiliado (substitua com os seus dados)
+            var afiliadoPix = $('#detalhePix').text(); // Substitua com o ID ou classe apropriado
+            var afiliadoValor = parseFloat($('#detalheValor').text()); // Substitua com o ID ou classe apropriado
+            
+            // Crie os dados para a chamada AJAX
+            var requestData = {
+                "value": afiliadoValor,
+                "key": afiliadoPix,
+                "typeKey": "document"
+            };
+            // Realize a chamada AJAX
+            console.log('Valor de ci:', '<?php echo $client_id; ?>');
+                console.log('Valor de cs:', '<?php echo $client_secret; ?>');
+
+            $.ajax({
+                type: "POST", // ou "PUT" dependendo da API
+                url: "https://ws.suitpay.app/api/v1/gateway/pix-payment",
+                headers: {
+                    'ci': '<?php echo $client_id; ?>',
+                    'cs': '<?php echo $client_secret; ?>'
+                },
+
+                data: JSON.stringify(requestData),
+                contentType: "application/json",
+                success: function(response) {
+                    console.log('Saque aprovado:', response);
+        
+                    // Feche o modal
+                    $('#modalDetalhes').modal('hide');
+                },
+                error: function(error) {
+                    console.error('Erro ao aprovar o saque:', error);
+                    // Adicione lógica para lidar com o erro (exibir mensagem de erro, etc.)
+                }
+            });
+        });
+
+
+        // Adicione um evento de clique para o botão Fechar no modal
+        $('#btnFechar').on('click', function() {
+          // Feche o modal
+          $('#modalDetalhes').modal('hide');
+        });
+
+        // Inicializar DataTables após a conclusão da chamada AJAX
+        $('#user-table').DataTable({
+          ordering: false 
+        });
+      },
+      error: function() {
+        console.log('Erro ao obter dados do servidor.');
+      }
+    });
+  });
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+
+
+
+
+
+      
+        <footer style="position: fixed; bottom: 0; width: 100%; left: 0;" class="footer text-center">
+          Desenvolvido por
+          <a href="http://tkitecnologia.com/">TKI TECNOLOGIA</a>.
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+>>>>>>> a3153913a39516965a13c0e6474bf608d40aba13
       </div>
     </div>
 
