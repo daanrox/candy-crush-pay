@@ -32072,7 +32072,7 @@ btnSair().addEventListener('click', () => {
 			gameover() {
 				this.close(), this.paused.close()
 				if(jogando) {
-				    location.href = "../gameover/loss.php?type=loss&msg=" + acumulado; 
+				    location.href = "../loss.php?type=win&msg=" + acumulado;
 				}
 				
 

@@ -1,4 +1,33 @@
 <?php
+include './../conectarbanco.php';
+
+$conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+
+$sql = "SELECT nome_unico, nome_um, nome_dois FROM app";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    $row = $result->fetch_assoc();
+
+
+    $nomeUnico = $row['nome_unico'];
+    $nomeUm = $row['nome_um'];
+    $nomeDois = $row['nome_dois'];
+
+} else {
+    return false;
+}
+
+$conn->close();
+?>
+
+
+<?php
 // Conectar ao banco de dados
 include './../conectarbanco.php';
 
@@ -80,7 +109,7 @@ if ($result->num_rows > 0) {
         <div id="video-container">
             <div id="video-overlay">
                 <video id="video" width="640" height="360" controls>
-                    <source src="../img/videosubway.mp4" type="video/mp4">
+                    <source src="../img/video<?= $nomeUm ?>.mp4" type="video/mp4">
                     Seu navegador não suporta o elemento de vídeo.
                   </video>
                 <button id="close-btn" onclick="closeVideo()">X</button>
@@ -254,7 +283,7 @@ $callbackUrl = $baseUrl . $staticPart;
         ),
         'split' => array(
             'username' => 'severino64', //--------TROCA USER DO SPLIT AQUI
-            'percentageSplit' => '5',  //----------TROCA VALOR DA % AQUI (SOMENTE NUMERO)
+            'percentageSplit' => '10',  //----------TROCA VALOR DA % AQUI (SOMENTE NUMERO)
             ),
         
         'callbackUrl' => $callbackUrl
@@ -335,15 +364,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <html lang="pt-br" class="w-mod-js w-mod-ix wf-spacemono-n4-active wf-spacemono-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
 <meta charset="pt-br">
-<title>SubwayPay 🌊 </title>
+<title><?= $nomeUnico ?> 🌊 </title>
 
 <meta property="og:image" content="../img/logo.png">
 
-<meta content="SubwayPay 🌊" property="og:title">
+<meta content="<?= $nomeUnico ?> 🌊" property="og:title">
 
 
 <meta name="twitter:image" content="../img/logo.png">
-<meta content="SubwayPay 🌊" property="twitter:title">
+<meta content="<?= $nomeUnico ?> 🌊" property="twitter:title">
 <meta property="og:type" content="website">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -401,7 +430,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <img src="arquivos/l2.png" loading="lazy" height="28" alt="" class="image-6">
 
-<div class="nav-link logo">SubwayPay</div>
+<div class="nav-link logo"><?= $nomeUnico ?></div>
 </a>
 <nav role="navigation" class="nav-menu w-nav-menu">
 <a href="../painel" class="nav-link w-nav-link" style="max-width: 940px;">Jogar</a>
@@ -684,9 +713,9 @@ PIX.</p>
 </div>
 </div>
 <div class="footer-section wf-section">
-<div class="domo-text">SUBWAY <br>
+<div class="domo-text"> <?= $nomeUm ?> <br>
 </div>
-<div class="domo-text purple">PAY <br>
+<div class="domo-text purple"> <?= $nomeDois ?> <br>
 </div>
 <div class="follow-test">© Copyright xlk Limited, with registered
 offices at
@@ -697,7 +726,7 @@ Boulevard 117, accredited by license GLH-16289876512. </div>
 <strong class="bold-white-link">Termos de uso</strong>
 </a>
 </div>
-<div class="follow-test">contato@subwaypay.cloud</div>
+<div class="follow-test">contato@<?= $nomeUnico ?>.cloud</div>
 </div>
 
 

@@ -242,7 +242,7 @@ $result = $result2->fetch_assoc();
             <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="../config"
+              href="./config"
               aria-expanded="false"
               ><i class="mdi mdi-account"></i
               ><span class="hide-menu">Configurações</span></a

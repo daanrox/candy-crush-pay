@@ -1,4 +1,36 @@
 <?php
+include '../conectarbanco.php';
+
+$conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+
+$sql = "SELECT nome_unico, nome_um, nome_dois FROM app";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    $row = $result->fetch_assoc();
+
+
+    $nomeUnico = $row['nome_unico'];
+    $nomeUm = $row['nome_um'];
+    $nomeDois = $row['nome_dois'];
+
+} else {
+    return false;
+}
+
+$conn->close();
+?>
+
+
+
+
+
+<?php
 session_start(); ?>
 
 
@@ -29,9 +61,9 @@ $saldo = 1;
         }
     </style>
     <meta charset="pt-br">
-    <title>SubwayPay 🌊 </title>
+    <title><?= $nomeUnico ?> 🌊 </title>
     <meta property="og:image" content="../img/logo.png">
-    <meta content="SubwayPay 🌊" property="og:title">
+    <meta content="<?= $nomeUnico ?> 🌊" property="og:title">
     <meta name="twitter:image" content="../img/logo.png">
 
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -60,17 +92,22 @@ $saldo = 1;
 
     <link rel="stylesheet" href="../arquivos/css" media="all">
 
+
 <?php
         include '../pixels.php';
         ?>
+        
+
 </head>
 
 <body>
 
+
+
+
 <?php
         include '../pixels.php';
         ?>
-
 
 
     <div>

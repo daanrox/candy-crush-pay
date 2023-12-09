@@ -1,10 +1,40 @@
 <?php
+include './../../conectarbanco.php';
+
+$conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+
+$sql = "SELECT nome_unico, nome_um, nome_dois FROM app";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    $row = $result->fetch_assoc();
+
+
+    $nomeUnicoPlace = $row['nome_unico'];
+    $nomeUmPlace = $row['nome_um'];
+    $nomeDoisPlace = $row['nome_dois'];
+
+} else {
+    return false;
+}
+
+$conn->close();
+?>
+
+
+<?php
 include './bd.php'; ?>
 
  <script>
         var nomeUnicoPHP = "<?php echo $nomeUnico; ?>";
         var nomeUmPHP = "<?php echo $nomeUm; ?>";
     </script>
+    
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -34,7 +64,6 @@ include './bd.php'; ?>
 
 
 
-
     <script>
         $(document).ready(function () {
             $("#gateway-form").submit(function (event) {
@@ -53,8 +82,7 @@ include './bd.php'; ?>
                         nomeDois: nomeDois
                     },
                     success: function (response) {
-                        console.log("Resposta completa:", response);
-                        // Faça algo com a resposta se necessário
+                        alert("Valores atualizados com sucesso!");
                     },
                     error: function (error) {
                         console.error("Erro na requisição AJAX", error);
@@ -63,8 +91,6 @@ include './bd.php'; ?>
             });
         });
     </script>
-
-
 
 
 
@@ -199,9 +225,8 @@ include './bd.php'; ?>
               <input id="input-unico" class="input-unico" type="text" placeholder="Siga o Padrão: SubwayPay">
               
               
-              
               <h5 id="atual-title">Nome do Jogo Único atual:</h5>
-              <input id="atual-unico" class="input-umdois" type="text" disabled placeholder="">
+              <input id="atual-unico" class="input-umdois" type="text" disabled placeholder="<?= $nomeUnicoPlace ?>">
               <p style="margin-top: 5px; margin-left: 5px;">Após as alterações, o Jogo Único atual acima, deve estar assim como foi digitado.</p>
             </div>
 
@@ -221,7 +246,7 @@ include './bd.php'; ?>
               
               <h5 id="atual-title">Nome do Jogo Separado atual:</h5>
               
-              <input id="atual-umdois" class="input-umdois" type="text" disabled placeholder="">
+              <input id="atual-umdois" class="input-umdois" type="text" disabled placeholder="<?= $nomeUmPlace ?> <?= $nomeDoisPlace ?>">
               
               <p style="margin-top: 5px; margin-left: 5px;">Após as alterações, o Jogo Separado atual acima, deve estar separado por um espaço.</p>
             </div>

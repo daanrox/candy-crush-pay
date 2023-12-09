@@ -39,11 +39,6 @@ if (isset($_GET['msg'])) {
             $updateQuery = "UPDATE appconfig SET saldo = $novoSaldo WHERE email = '$email'";
             $updateResult = $conn->query($updateQuery);
 
-            if ($updateResult) {
-                echo "Saldo atualizado com sucesso!";
-            } else {
-                echo "Erro ao atualizar o saldo: " . $conn->error;
-            }
         } else {
             echo "Erro ao obter o saldo: " . $conn->error;
         }

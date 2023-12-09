@@ -1,13 +1,42 @@
+<?php
+include '../conectarbanco.php';
+
+$conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+
+$sql = "SELECT nome_unico, nome_um, nome_dois FROM app";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    $row = $result->fetch_assoc();
+
+
+    $nomeUnico = $row['nome_unico'];
+    $nomeUm = $row['nome_um'];
+    $nomeDois = $row['nome_dois'];
+
+} else {
+    return false;
+}
+
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="pt-br" class="w-mod-js w-mod-ix wf-spacemono-n4-active wf-spacemono-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
 <meta charset="pt-br">
-<title>SubwayPay 🌊 </title>
+<title><?= $nomeUnico ?> 🌊 </title>
 
 <meta property="og:image" content="../img/logo.png">
 
-<meta content="SubwayPay 🌊" property="og:title">
-<meta name="twitter:site" content="@subwaypay">
+<meta content="<?= $nomeUnico ?> 🌊" property="og:title">
+<meta name="twitter:site" content="@<?= $nomeUnico ?>">
 <meta name="twitter:image" content="../img/logo.png">
 <meta property="og:type" content="website">
 
@@ -50,7 +79,7 @@
 <div class="container w-container">
 <a href="/painel" aria-current="page" class="brand w-nav-brand" aria-label="home">
 <img src="arquivos/l2.png" loading="lazy" height="28" alt="" class="image-6">
-<div class="nav-link logo">SubwayPay</div>
+<div class="nav-link logo"><?= $nomeUnico ?></div>
 </a>
 <nav role="navigation" class="nav-menu w-nav-menu">
 <a href="../painel/" class="nav-link w-nav-link" style="max-width: 940px;">Jogar</a>
@@ -185,10 +214,7 @@
 
 
 <input type="submit" value="Sacar via PIX" id="pixgenerator" class="primary-button w-button"><br><br>
-<p>Ao solicitar saque você concorda com os
-<a href="../legal/">
-termos de serviço</a> e a <br>taxa de 10% e receberá o valor total de <span id="updatedValue">0</span>
-</p>
+
 </div>
 </form>
 
@@ -235,9 +261,9 @@ PIX.</p>
 </div>
 </div>
 <div class="footer-section wf-section">
-<div class="domo-text">SUBWAY <br>
+<div class="domo-text"><?= $nomeUm ?> <br>
 </div>
-<div class="domo-text purple">PAY <br>
+<div class="domo-text purple"><?= $nomeDois ?> <br>
 </div>
 <div class="follow-test">© Copyright xlk Limited, with registered
   offices at
@@ -248,7 +274,7 @@ PIX.</p>
 <strong class="bold-white-link">Termos de uso</strong>
 </a>
 </div>
-<div class="follow-test">contato@subwaypay.net</div>
+<div class="follow-test">contato@<?= $nomeUnico ?>.net</div>
 </div>
 
 

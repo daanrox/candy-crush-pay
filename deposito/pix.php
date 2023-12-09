@@ -1,4 +1,33 @@
 <?php
+include '../conectarbanco.php';
+
+$conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+
+$sql = "SELECT nome_unico, nome_um, nome_dois FROM app";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    $row = $result->fetch_assoc();
+
+
+    $nomeUnico = $row['nome_unico'];
+    $nomeUm = $row['nome_um'];
+    $nomeDois = $row['nome_dois'];
+
+} else {
+    return false;
+}
+
+$conn->close();
+?>
+
+
+<?php
     // Inicia a sessão
     session_start();
 
@@ -891,7 +920,7 @@ if (!empty($externalReference) && !empty($email) && !empty($valor)) {
             }
         }</style>
     <meta charset="pt-br">
-    <title>SUBWAYPAY</title>
+    <title><?= $nomeUnico ?></title>
 
 
     <meta name="twitter:image" content="../img/logo.png">
@@ -1234,13 +1263,9 @@ if (!empty($externalReference) && !empty($email) && !empty($valor)) {
 
     <link rel="stylesheet" href="./arquivos/css" media="all">
 
-<?php
-        include '../pixels.php';
-        ?>
+
 <body class="no-touch">
-<?php
-        include '../pixels.php';
-        ?>
+
 
 <div>
     <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
@@ -1249,7 +1274,7 @@ if (!empty($externalReference) && !empty($email) && !empty($valor)) {
 
             <a href="/painel" aria-current="page" class="brand w-nav-brand" aria-label="home">
                 <img src="../img/logo.png" loading="lazy" height="28" alt="" class="image-6">
-                <div class="nav-link logo">SubwayPay</div>
+                <div class="nav-link logo"><?= $nomeUnico ?></div>
             </a>
             <nav role="navigation" class="nav-menu w-nav-menu">
                 <a href="../painel" class="nav-link w-nav-link" style="max-width: 940px;">Jogar</a>
@@ -1470,9 +1495,9 @@ if (!empty($externalReference) && !empty($email) && !empty($valor)) {
         }
     </script>
     <div class="footer-section wf-section">
-        <div class="domo-text">SUBWAY <br>
+        <div class="domo-text"><?= $nomeUm ?> <br>
         </div>
-        <div class="domo-text purple">PAY <br>
+        <div class="domo-text purple"><?= $nomeDois ?> <br>
         </div>
         <div class="follow-test">© Copyright</div>
         <div class="follow-test">
@@ -1480,10 +1505,8 @@ if (!empty($externalReference) && !empty($email) && !empty($valor)) {
                 <strong class="bold-white-link">Termos de uso</strong>
             </a>
         </div>
-        <div class="follow-test">contato@subwaypay.cloud</div>
-        <div class="follow-test"><a href="===" target="_blank"><img src="../img/logo.png" width="40px"
-                                                                    height="40px"><strong class="bold-white-link">
-                    Telegram</strong></a></div>
+        <div class="follow-test">contato@<?= $nomeUnico ?>.cloud</div>
+   
     </div>
 
     <script type="text/javascript">

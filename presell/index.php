@@ -1,4 +1,33 @@
 <?php
+include '../conectarbanco.php';
+
+$conn = new mysqli($config['db_host'], $config['db_user'], $config['db_pass'], $config['db_name']);
+
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+
+$sql = "SELECT nome_unico, nome_um, nome_dois FROM app";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    $row = $result->fetch_assoc();
+
+
+    $nomeUnico = $row['nome_unico'];
+    $nomeUm = $row['nome_um'];
+    $nomeDois = $row['nome_dois'];
+
+} else {
+    return false;
+}
+
+$conn->close();
+?>
+
+
+<?php
 session_start();
 
 
@@ -40,9 +69,9 @@ $saldo = 10
         }
     </style>
     <meta charset="pt-br">
-    <title>SubwayPay 🌊 </title>
+    <title><?= $nomeUnico ?> 🌊 </title>
     <meta property="og:image" content="../img/logo.png">
-    <meta content="SubwayPay 🌊" property="og:title">
+    <meta content="<?= $nomeUnico ?> 🌊" property="og:title">
     <meta name="twitter:image" content="../img/logo.png">
 
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -138,7 +167,7 @@ $saldo = 10
                 $jogo_demo = 2;
 
                 // Configurações do banco de dados
-                $dbname = "u756913841_subwaypaypv";
+                $dbname = "u756913841_<?= $nomeUnico ?>pv";
                 $dbuser = "u756913841_tki20";
                 $dbpass = "Severino@123";
 
@@ -183,7 +212,7 @@ $saldo = 10
                 </style>
 
 
-                <i style="font-size: 10px;">Teste agora o SubwayPay!</i>
+                <i style="font-size: 10px;">Teste agora o <?= $nomeUnico ?>!</i>
             </div>
             <div id="wins" style="
                 display: block;
@@ -220,12 +249,12 @@ $saldo = 10
         <section id="mint" class="mint-section wf-section">
             <div class="minting-container w-container">
                 <img src="arquivos/jake.gif" loading="lazy" width="240" alt="" class="mint-card-image">
-                <h2>SubwayPay</h2>
-                <p class="paragraph">Bem-vindo ao mundo emocionante de SubwayPay!
+                <h2><?= $nomeUnico ?></h2>
+                <p class="paragraph">Bem-vindo ao mundo emocionante de <?= $nomeUnico ?>!
                     Prepare-se para uma aventura eletrizante nos trilhos, onde cada curva guarda a promessa de fortuna.
                     Desvie dos obstáculos, colete moedas reluzentes e desbloqueie novos percursos enquanto corre em
                     busca da riqueza. Sua jornada pela cidade começa agora – acelere, desfrute e acumule sua fortuna nos
-                    trilhos de SubwayPay!. </p>
+                    trilhos de <?= $nomeUnico ?>!. </p>
 
 
                 <a href="../painel" class="primary-button hero w-button">JOGAR AGORA</a>
@@ -256,7 +285,7 @@ $saldo = 10
             <div class="question first">
                 <img src="arquivos/60f988c9d3d37e14794eca22_head 25.svg" loading="lazy" width="110" alt="">
                 <h3>Como funciona?</h3>
-                <div>SubwayPay é o mais novo jogo divertido e lucrativo da galera! Lembra daquele joguinho de surfar
+                <div><?= $nomeUnico ?> é o mais novo jogo divertido e lucrativo da galera! Lembra daquele joguinho de surfar
                     por cima dos trens que todo mundo era viciado? Ele voltou e agora dá para ganhar dinheiro de
                     verdade, mas cuidado com os obstáculos para você garantir o seu prêmio. É super simples, surf,
                     desvie dos obstáculos e colete seus prêmios.
@@ -284,7 +313,7 @@ $saldo = 10
                 <img src="arquivos/60fa004b7690e70dded91f9a_light.svg" loading="lazy" width="80" alt="">
                 <h3>É tipo foguetinho?</h3>
                 <div>
-                    <b>Não</b>! SubwayPay é totalmente diferente, basta apenas estar atento para desviar dos
+                    <b>Não</b>! <?= $nomeUnico ?> é totalmente diferente, basta apenas estar atento para desviar dos
                     obstáculos na hora certa. Não existe sua sorte em jogo, basta ter foco e completar o percurso
                     até resgatar o máximo de moedas que conseguir.
                 </div>
@@ -327,9 +356,9 @@ $saldo = 10
                         <li>Seu amigo deve se inscrever através do seu link de convite pessoal. </li>
                         <li>Seu amigo deve ter depositado pelo menos R$25.00 BRL para receber o prêmio do convite.
                         </li>
-                        <li>Você não pode criar novas contas na SubwayPay e se inscrever através do seu próprio link
+                        <li>Você não pode criar novas contas na <?= $nomeUnico ?> e se inscrever através do seu próprio link
                             para receber a recompensa. O programa Indique um Amigo é feito para nossos jogadores
-                            convidarem amigos para a plataforma SubwayPay. Qualquer outro uso deste programa é
+                            convidarem amigos para a plataforma <?= $nomeUnico ?>. Qualquer outro uso deste programa é
                             estritamente proibido. </li>
                     </ol>
                     <p>‍</p>
@@ -387,9 +416,9 @@ $saldo = 10
     </div>
 
     <div class="footer-section wf-section">
-        <div class="domo-text">SUBWAY <br>
+        <div class="domo-text"><?= $nomeUm ?> <br>
         </div>
-        <div class="domo-text purple">PAY <br>
+        <div class="domo-text purple"><?= $nomeDois ?> <br>
         </div>
         <div class="follow-test">© Copyright xlk Limited, with registered
             offices at
@@ -400,7 +429,7 @@ $saldo = 10
                 <strong class="bold-white-link">Termos de uso</strong>
             </a>
         </div>
-        <div class="follow-test">contato@subwaypay.cloud</div>
+        <div class="follow-test">contato@<?= $nomeUnico ?>.cloud</div>
     </div>
 
 
