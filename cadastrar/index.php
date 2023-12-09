@@ -1,3 +1,6 @@
+
+
+
 <?php
 include '../conectarbanco.php';
 
@@ -34,21 +37,23 @@ $baseUrl .= "://".$_SERVER['HTTP_HOST'];
 $staticPart = '/cadastrar/?aff=';
 
 $callbackUrl = $baseUrl . $staticPart;
+
+
+
+echo '<script>';
+echo 'console.log("Callback URL:", ' . json_encode($callbackUrl) . ');'; // Adicione esta linha para depurar
+echo 'var callbackUrl = ' . json_encode($callbackUrl) . ';';
+echo '</script>';
 ?>
 
 
+
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
 session_start();
-
-$baseUrl = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-$baseUrl .= "://".$_SERVER['HTTP_HOST'];
-
-
-$staticPart = '/cadastrar/?aff=';
-
-$callbackUrl = $baseUrl . $staticPart;
-
-
 
 // Função para validar os dados do formulário
 function validateForm($input) {
@@ -65,6 +70,11 @@ $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config[
 // Verifica se houve algum erro na conexão
 if ($conn->connect_error) {
     die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+}
+
+function getParamFromUrl($url, $paramName){
+    parse_str(parse_url($url, PHP_URL_QUERY), $op);
+    return array_key_exists($paramName, $op) ? $op[$paramName] : '';
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -92,20 +102,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $saldo = 0;
         $plano = 20; // Valor fixo para a coluna plano
         $saldo_comissao = 0; // Valor fixo para a coluna saldo_comissao
+        $cpa= 0; // Valor fixo para o cpa unico
+        
 
         // Construir o link de afiliado
         $linkAfiliado = $callbackUrl . $nextId;
-        
 
         // Obter a data e hora atual no fuso horário de São Paulo
         $dataCadastro = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
         $dataCadastroFormatada = $dataCadastro->format('d-m-Y H:i');
-
+        
+        $afiliado = isset($_GET['aff']) ? $_GET['aff'] : '';
+        
         // Inserir dados no banco de dados
-        $insertQuery = "INSERT INTO appconfig (id, email, senha, telefone, saldo, lead_aff, linkafiliado, indicados, plano, saldo_comissao, data_cadastro) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?)";
+        $insertQuery = "INSERT INTO appconfig (id,cpa, email, senha, telefone, saldo, lead_aff, linkafiliado, indicados, plano, saldo_comissao, data_cadastro, afiliado) 
+                        VALUES (?,0, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("isssissiis", $nextId, $email, $senha, $telefone, $saldo, $leadAff, $linkAfiliado, $plano, $saldo_comissao, $dataCadastroFormatada);
+        $stmt->bind_param("isssissiiss", $nextId, $email, $senha, $telefone, $saldo, $leadAff, $linkAfiliado, $plano, $saldo_comissao, $dataCadastroFormatada, $afiliado);
 
         if ($stmt->execute()) {
             // Definir o email como uma variável de sessão
@@ -114,86 +127,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirecionar para a página com o número na URL
             header("Location: /deposito");
             exit();
-
-
-
-          //CÓDIGO DE VIDEO TUTORIAL APÓS O DEPÓSITO, APAGAR O IF E COLOCAR O NOVO.
-
-
-        //     if ($stmt->execute()) {
-        //       // Definir o email como uma variável de sessão
-        //       $_SESSION['email'] = $email;
-        
-        
-        
-        //       echo '
-        //         <div id="video-container">
-        //             <div id="video-overlay">
-        //                 <video id="video" width="640" height="360" controls autoplay>
-        //                     <source src="./arquivos/video.mp4" type="video/mp4">
-        //                     Seu navegador não suporta o elemento de vídeo.
-        //                   </video>
-        //                 <button id="close-btn" onclick="closeVideo()">X</button>
-        //             </div>
-        //         </div>
-        //         <style>
-        //             #video-container {
-        //                 display: flex;
-        //                 align-items: center;
-        //                 justify-content: center;
-        //                 position: fixed;
-        //                 top: 0;
-        //                 left: 0;
-        //                 width: 100%;
-        //                 height: 100%;
-        //                 background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
-                        
-        //                    z-index: 9999; /* Valor alto para trazer para frente de tudo */
-                
-        //             }
-        
-        //             #video-overlay {
-        //                 position: relative;
-        //             }
-        
-        //             #video {
-        //                 max-width: 300px;
-        //                 max-height: 100%;
-        //             }
-        
-        //             #close-btn {
-        //                 position: absolute;
-        //                 top: 10px;
-        //                 right: 10px;
-        //                 font-size: 20px;
-        //                 color: #fff;
-        //                 background-color: transparent;
-        //                 border: none;
-        //                 cursor: pointer;
-        //             }
-        //         </style>
-        // <script>
-        //     var video = document.getElementById("video");
-        //     var videoContainer = document.getElementById("video-container");
-        //     video.play();
-        
-        //     video.addEventListener("ended", function() {
-        //         closeVideo();
-        //     });
-        
-        //     function closeVideo() {
-        //         videoContainer.style.display = "none";
-        //         window.location.href = "https://brasil.bet/deposito";
-        //     }
-        // </script>
-        //         ';
-        
-        
-        //       exit();
-
-
-
-
         } else {
             $errorMessage = "Erro ao inserir dados na tabela 'appconfig': " . $stmt->error;
         }
@@ -203,7 +136,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$conn->close();
 
 
 // Função para verificar se um ID já existe na tabela
@@ -229,7 +161,10 @@ function emailExists($email, $conn) {
     $checkEmailStmt->close();
     return $exists;
 }
+$conn->close();
 ?>
+
+
 
 <!DOCTYPE html>
 
@@ -237,6 +172,7 @@ function emailExists($email, $conn) {
 <meta charset="pt-br">
 <title><?= $nomeUnico ?> 🌊</title>
 <meta property="og:image" content="../img/logo.png">
+
 
 <meta content="<?= $nomeUnico ?> 🌊" property="og:title">
 
@@ -249,6 +185,8 @@ function emailExists($email, $conn) {
 <link href="arquivos/page.css" rel="stylesheet" type="text/css">
 <script src="arquivos/webfont.js" type="text/javascript"></script>
 
+
+
 <script type="text/javascript">
                 WebFont.load({
                     google: {
@@ -260,7 +198,6 @@ function emailExists($email, $conn) {
 
 
 
-
 <link rel="apple-touch-icon" sizes="180x180" href="../img/logo.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../img/logo.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../img/logo.png">
@@ -268,29 +205,16 @@ function emailExists($email, $conn) {
 
 <link rel="icon" type="image/x-icon" href="../img/logo.png">
 
-
-
-
-
-
-
-
-
-
-<?php
-        include '../pixels.php';
-        ?>
-
-
-
+<?php 
+    include '../pixels.php';
+?>
 
 
 </head>
 <body>
 <div>
-<?php
-        include '../pixels.php';
-        ?>
+
+
 
 <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
 <div class="container w-container">
@@ -408,7 +332,7 @@ if (!empty($errorMessage)) {
 
 
 
-<form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+<form method="POST" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
   
 
 
@@ -420,7 +344,7 @@ if (!empty($errorMessage)) {
   </div>
   <h4 class="rarity-heading">Telefone</h4>
   <div class="rarity-row roboto-type2">
-      <input type="tel" class="large-input-field w-input" maxlength="20" name="telefone_confirmation" placeholder="Telefone" id="telefone_confirmation" required>
+      <input type="tel" class="large-input-field w-input" maxlength="20" name="telefone_confirmation" placeholder="Seu telefone" id="telefone_confirmation" required>
   </div>
   <h4 class="rarity-heading">Senha</h4>
   <div class="rarity-row roboto-type2">
@@ -527,10 +451,7 @@ if (!empty($errorMessage)) {
 </div>
 <div class="domo-text purple"><?= $nomeDois ?> <br>
 </div>
-<div class="follow-test">© Copyright xlk Limited, with registered
-offices at
-Dr. M.L. King
-Boulevard 117, accredited by license GLH-16289876512. </div>
+<div class="follow-test">© Copyright </div>
 <div class="follow-test">
 <a href="../legal">
 <strong class="bold-white-link">Termos de uso</strong>
