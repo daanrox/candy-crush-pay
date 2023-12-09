@@ -25,6 +25,22 @@ if (!isset($_SESSION['emailadm'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 
+
+
+<!-- Adicione essas linhas ao cabeçalho do seu HTML -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+
+
+
+
+
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="keywords"
@@ -136,6 +152,9 @@ if (!isset($_SESSION['emailadm'])) {
    
 <div class="page-wrapper">
     
+    
+    
+    
 </div> 
 <div class="page-wrapper">
   <div class="card">
@@ -161,12 +180,70 @@ if (!isset($_SESSION['emailadm'])) {
             </div>
         </div>
 
-        
+        <div class="row">
+    <div class="col-md-12 mb-3">
+        <button class="btn btn-success" id="exportCsvBtn">Exportar CSV</button>
+    </div>
+</div>
+
+<script>
+$('#exportCsvBtn').on('click', function () {
+    exportTableToCsv('user-table.csv');
+});
+
+function exportTableToCsv(filename) {
+    var csv = [];
+    var headers = [];
+
+    // Adicione os cabeçalhos da tabela ao CSV
+    $('#user-table thead th').each(function () {
+        headers.push(escapeCsvValue($(this).text().trim()));
+    });
+    csv.push(headers.join(','));
+
+    // Use a API do DataTables para obter todos os dados
+    var table = $('#user-table').DataTable();
+    table.rows().data().each(function (row) {
+        var csvRow = [];
+        row.forEach(function (value) {
+            csvRow.push(escapeCsvValue(value));
+        });
+        csv.push(csvRow.join(','));
+    });
+
+    // Crie um link de download e simule um clique para iniciar o download
+    var csvContent = csv.join('\n');
+    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    var link = document.createElement('a');
+    if (link.download !== undefined) {
+        var url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+// Função para escapar valores CSV
+function escapeCsvValue(value) {
+    // Se o valor contiver vírgulas, aspas ou quebras de linha, envolva-o entre aspas
+    if (/[",\n\r]/.test(value)) {
+        return '"' + value.replace(/"/g, '""') + '"';
+    }
+    return value;
+}
+</script>
+
+
+
 
         
       <div class="table-responsive">
         <h5>Filtrar por link de afiliado</h5>
         <input type="text" id="leadAffInput" placeholder="Filtrar por afiliado">
+        <br>
         <table id="user-table" class="table table-striped table-bordered">
           <thead>
             <tr>
