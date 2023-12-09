@@ -110,7 +110,7 @@ if (isset($_SESSION['email'])) {
   $stmt->close();
 
   
-  $getLinkQuery = "SELECT count(*) FROM appconfig WHERE afiliado = (SELECT id FROM appconfig WHERE email = ? LIMIT 1) AND primeiro_deposito = 1";
+  $getLinkQuery = "SELECT count(*) FROM appconfig WHERE afiliado = (SELECT id FROM appconfig WHERE email = ? LIMIT 1) AND status_primeiro_deposito = 1";
   $stmt = $conn->prepare($getLinkQuery);
   $stmt->bind_param("s", $email);
   $stmt->execute();
@@ -118,16 +118,26 @@ if (isset($_SESSION['email'])) {
   $stmt->fetch();
   $stmt->close();
 
-  $getLinkQuery = "SELECT count(*) FROM appconfig WHERE afiliado = (SELECT id FROM appconfig WHERE email = ? LIMIT 1) AND primeiro_deposito = 1";
+	//original
+  //$getLinkQuery = "SELECT count(*) FROM appconfig WHERE afiliado = (SELECT id FROM appconfig WHERE email = ? LIMIT 1) AND status_primeiro_deposito = 1";
+  //$getLinkQuery = "SELECT count(*) FROM appconfig WHERE afiliado = (SELECT id FROM appconfig WHERE email = ? LIMIT 1)";
+  //$stmt = $conn->prepare($getLinkQuery);
+  //$stmt->bind_param("s", $email);
+  //$stmt->execute();
+  //$stmt->bind_result($cad_ativo_sum);
+  //$stmt->fetch();
+  //$stmt->close();
+  //$cad_ativo_sum = $cad_ativo_sum * $cpa;
+  
+  $getLinkQuery = "SELECT saldo_cpa FROM appconfig WHERE email = ?";
   $stmt = $conn->prepare($getLinkQuery);
   $stmt->bind_param("s", $email);
   $stmt->execute();
-  $stmt->bind_result($cad_ativo_sum);
+  $stmt->bind_result($saldo_cpa);
   $stmt->fetch();
   $stmt->close();
-
   
-  $getLinkQuery = "SELECT IFNULL(revenue_share * (SELECT sum(percas) FROM appconfig WHERE afiliado = (SELECT id from appconfig WHERE email = ? LIMIT 1) AND primeiro_deposito = 1) / 100, 0) FROM app";
+  $getLinkQuery = "SELECT IFNULL(revenue_share * (SELECT sum(percas) FROM appconfig WHERE afiliado = (SELECT id from appconfig WHERE email = ? LIMIT 1) AND status_primeiro_deposito = 1) / 100, 0) FROM app";
   $stmt = $conn->prepare($getLinkQuery);
   $stmt->bind_param("s", $email);
   $stmt->execute();
@@ -206,9 +216,10 @@ if (isset($_SESSION['email'])) {
 
   <link rel="stylesheet" href="arquivos/css" media="all">
 
- <?php
-        include '../pixels.php';
-        ?>
+  <?php
+  include '../pixels.php';
+  ?>
+
 </head>
 
 <body>
@@ -217,7 +228,7 @@ if (isset($_SESSION['email'])) {
       <div class="container w-container">
         <a href="/painel" aria-current="page" class="brand w-nav-brand" aria-label="home">
           <img src="arquivos/l2.png" loading="lazy" height="28" alt="" class="image-6">
-          <div class="nav-link logo"><?= $nomeUnico ?></div>
+         <div class="nav-link logo"><?= $nomeUnico ?></div>
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <a href="../painel" class="nav-link w-nav-link" style="max-width: 940px;">Jogar</a>
@@ -331,7 +342,7 @@ if (isset($_SESSION['email'])) {
 
     <section id="hero" class="hero-section dark wf-section">
       <div class="minting-container w-container">
-        <img src="arquivos/image.gif" loading="lazy" width="240" data-w-id="6449f730-ebd9-23f2-b6ad-c6fbce8937f7" alt="Roboto #6340" class="mint-card-image">
+        <img src="arquivos/affiliate.gif" loading="lazy" width="240" data-w-id="6449f730-ebd9-23f2-b6ad-c6fbce8937f7" alt="Roboto #6340" class="mint-card-image">
 
         <h<h2>Divulgue & Ganhe</h2>
           <p>Este é o resumo de seu resultado divulgando. <br>
@@ -368,13 +379,14 @@ if (isset($_SESSION['email'])) {
               </div>
               <div class="rarity-row roboto-type">
                 <div class="rarity-number full">Saldo disponível:</div>
-                <div class="padded">R$<?php echo $cad_ativo_sum + $rev_ativo_sum; ?></div>
+      <div class="padded">R$<?php echo floatval($saldo_cpa) + floatval($rev_ativo_sum); ?></div>
+
               </div>
               <div class="w-layout-grid grid">
                 <div>
                   <div class="rarity-row blue">
                     <div class="rarity-number">Cadastro ativo</div>
-                    <div>R$ <?php echo $cad_ativo_sum; ?> </div>
+                    <div>R$ <?php echo $saldo_cpa; ?> </div>
                   </div>
                   <div class="rarity-row">
                     <div class="rarity-number">Recorrência</div>
@@ -447,22 +459,33 @@ if (isset($_SESSION['email'])) {
         </div>
       </div>
     </div>
-
+    <div id="rarity" class="rarity-section wf-section">
+      <div class="minting-container w-container">
+        <img src="arquivos/withdraw.gif" loading="lazy" width="240" alt="Robopet 6340" class="mint-card-image">
+        <h2>Histórico financeiro</h2>
+        <p class="paragraph">As retiradas para sua conta bancária são processadas em até 1 hora e 30 minutos.
+          <br>
+          <br>Você já sacou <b>R$
+            0.00.
+          </b>
+        </p>
+        <div class="properties">
+          <h3 class="rarity-heading">Saques realizados</h3>
+        </div>
+      </div>
+    </div>
     <div class="footer-section wf-section">
-      <div class="domo-text"><?= $nomeUm ?> <br>
+  <div class="domo-text"><?= $nomeUm ?> <br>
       </div>
       <div class="domo-text purple"><?= $nomeDois ?> <br>
       </div>
-      <div class="follow-test">© Copyright xlk Limited, with registered
-        offices at
-        Dr. M.L. King
-        Boulevard 117, accredited by license GLH-16289876512. </div>
+      <div class="follow-test">© Copyright </div>
       <div class="follow-test">
         <a href="#">
           <strong class="bold-white-link">Termos de uso</strong>
         </a>
       </div>
-      <div class="follow-test">contato@<?= $nomeUnico ?>.cloud</div>
+   <div class="follow-test">contato@<?= $nomeUnico ?>.cloud</div>
     </div>
 
 
