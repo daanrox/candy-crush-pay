@@ -90,16 +90,7 @@
                               ><span class="hide-menu">Afiliados</span></a
                             >
                         </li>
-          
-                    <li class="sidebar-item">
-            <a
-              class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="../saques-afiliados"
-              aria-expanded="false"
-              ><i class="mdi mdi-cash"></i
-              ><span class="hide-menu">Saques Afiliados</span></a
-            >
-          </li>
+        
         
             <li class="sidebar-item p-3">
             <a

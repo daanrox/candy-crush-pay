@@ -89,7 +89,6 @@ dificuldade_jogo VARCHAR(255) NOT NULL,
 aposta_min VARCHAR(255) NOT NULL,
 rollover_saque VARCHAR(255) NOT NULL,
 taxa_saque VARCHAR(255) NOT NULL,
-
 google_ads_tag VARCHAR(255) NOT NULL,
 facebook_ads_tag VARCHAR(255) NOT NULL,
 cpa VARCHAR(255) NOT NULL,
@@ -99,6 +98,9 @@ max_saque_cpa VARCHAR(255) NOT NULL,
 max_por_saque_cpa VARCHAR(255) NOT NULL,
 revenue_share VARCHAR(255) NOT NULL,
 chance_afiliado VARCHAR(255) NOT NULL,
+nome_unico VARCHAR(255) NOT NULL,
+nome_um VARCHAR(255) NOT NULL,
+nome_dois VARCHAR(255) NOT NULL,
 
 PRIMARY KEY (token)
 );

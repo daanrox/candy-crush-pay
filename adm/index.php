@@ -209,7 +209,7 @@ $result = $result2->fetch_assoc();
           <li class="sidebar-item">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="saques-afiliados"
+              href="saques"
               aria-expanded="false"
               ><i class="mdi mdi-cash"></i
               ><span class="hide-menu">Saques</span></a
@@ -259,16 +259,7 @@ $result = $result2->fetch_assoc();
                               ><span class="hide-menu">Afiliados</span></a
                             >
                         </li>
-                        
-                                   <li class="sidebar-item">
-            <a
-              class="sidebar-link waves-effect waves-dark sidebar-link"
-              href="../saques"
-              aria-expanded="false"
-              ><i class="mdi mdi-cash"></i
-              ><span class="hide-menu">Saques Afiliados</span></a
-            >
-          </li>
+                      
          
       
          
