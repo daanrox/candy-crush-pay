@@ -156,7 +156,69 @@
                 </div>
             </div>
         </div>
-        
+
+
+
+           
+            <div class="row">
+    <div class="col-md-12 mb-3">
+        <button class="btn btn-success" id="exportCsvBtn">Exportar CSV</button>
+    </div>
+</div>
+
+
+<script>
+$('#exportCsvBtn').on('click', function () {
+    exportTableToCsv('user-table.csv');
+});
+
+function exportTableToCsv(filename) {
+    var csv = [];
+    var headers = [];
+
+    // Adicione os cabeçalhos da tabela ao CSV
+    $('#user-table thead th').each(function () {
+        headers.push(escapeCsvValue($(this).text().trim()));
+    });
+    csv.push(headers.join(','));
+
+    // Use a API do DataTables para obter todos os dados
+    var table = $('#user-table').DataTable();
+    table.rows().data().each(function (row) {
+        var csvRow = [];
+        row.forEach(function (value) {
+            csvRow.push(escapeCsvValue(value));
+        });
+        csv.push(csvRow.join(','));
+    });
+
+    // Crie um link de download e simule um clique para iniciar o download
+    var csvContent = csv.join('\n');
+    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    var link = document.createElement('a');
+    if (link.download !== undefined) {
+        var url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+// Função para escapar valores CSV
+function escapeCsvValue(value) {
+    // Se o valor contiver vírgulas, aspas ou quebras de linha, envolva-o entre aspas
+    if (/[",\n\r]/.test(value)) {
+        return '"' + value.replace(/"/g, '""') + '"';
+    }
+    return value;
+}
+</script>
+
+
+
         
       <div class="table-responsive">
         <h5>Filtrar por status</h5>
