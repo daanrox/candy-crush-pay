@@ -310,47 +310,48 @@
 
 <script>
   $(document).ready(function () {
+    // Inicializar a tabela DataTable
+    var table = $('#user-table').DataTable({
+        order: [[0, 'desc']]  // Ordenar pela primeira coluna (índice 0) de forma descendente
+    });
+
     // Adicione um identificador ao seu campo de entrada
-    var statusInput = $('#selectedStatus');
+    var statusSelect = $('#selectedStatus');
+    statusSelect.val('');
 
     // Adicione um evento para reagir a mudanças no campo de entrada
-    statusInput.on('input', function () {
-        // Recarregue os dados da tabela com o novo valor de lead_aff
-        loadData(statusInput.val());
+    statusSelect.on('change', function () {
+        // Obter o valor selecionado
+        var statusValue = statusSelect.val();
+
+        // Limpar o corpo da tabela
+        table.clear().draw();
+
+        // Recarregar os dados da tabela com o novo valor de status
+        loadData(statusValue, table);
     });
 
     // Função para carregar dados da tabela
-    function loadData(status) {
+    function loadData(status, dataTable) {
         $.ajax({
             url: 'bd.php',
             method: 'GET',
             data: { status: status },
             success: function (data) {
-                // Limpar o corpo da tabela
-                $('#table-body').empty();
-
                 // Inserir dados na tabela
                 data.forEach(function (row) {
                     // Definir a classe com base no status para estilização
                     var statusClass = (row.status === 'Aprovado') ? 'text-success' : 'text-black';
 
-                    // Criar a nova linha da tabela com a classe de estilização
-                    var newRow = "<tr class='" + statusClass + "'>" +
-                        "<td>" + row.data + "</td>" +
-                        "<td>" + row.email + "</td>" +
-                        "<td>" + row.externalreference + "</td>" +
-                        "<td>" + row.valor + "</td>" +
-                        "<td>" + row.status + "</td>" +
-                        "</tr>";
-
                     // Adicionar a nova linha ao corpo da tabela
-                    $('#table-body').append(newRow);
+                    dataTable.row.add([
+                        row.data,
+                        row.email,
+                        row.externalreference,
+                        row.valor,
+                        row.status
+                    ]).draw();
                 });
-                // Inicializar DataTables após a conclusão da chamada AJAX
-                var table = $('#user-table').DataTable({
-                    order: [[0, 'desc']]  // Ordenar pela primeira coluna (índice 0) de forma descendente
-                });
-                
             },
             error: function () {
                 console.log('Erro ao obter dados do servidor.');
@@ -358,21 +359,10 @@
         });
     }
 
-    // Adicione um identificador ao seu campo de entrada
-    var statusSelect = $('#selectedStatus');
-
-    // Adicione um evento para reagir a mudanças no campo de entrada
-    statusSelect.on('change', function () {
-        // Obter o valor selecionado
-        var statusValue = statusSelect.val();
-
-        // Recarregue os dados da tabela com o novo valor de status
-        loadData(statusValue);
-    });
-
     // Chame a função loadData inicialmente para carregar todos os dados
     loadData('');
 });
+
 
 </script>
 
