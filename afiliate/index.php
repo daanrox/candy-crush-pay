@@ -145,7 +145,15 @@ if (isset($_SESSION['email'])) {
   $stmt->fetch();
   $stmt->close();
   
-  
+  $saldo_comissao = floatval($saldo_cpa) + floatval($rev_ativo_sum);
+
+// Atualizar o valor na tabela appconfig apenas para a linha com o email da sessão
+$query = "UPDATE appconfig SET saldo_comissao = ? WHERE email = ?";
+$stmt = $conn->prepare($query);
+
+// Vincular os parâmetros e executar a declaração
+$stmt->bind_param("ds", $saldo_comissao, $_SESSION['email']);
+$stmt->execute();
   
   
   // Consultar o valor da coluna indicados para o email atual
@@ -167,39 +175,6 @@ if (isset($_SESSION['email'])) {
 
 ?>
 
-<?php
-
-
-include './../conectarbanco.php';
-
-$conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
-
-// Verificar a conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-// Calcular o saldo_comissao
-$saldo_comissao = floatval($saldo_cpa) + floatval($rev_ativo_sum);
-
-// Atualizar o valor na tabela appconfig apenas para a linha com o email da sessão
-$query = "UPDATE appconfig SET saldo_comissao = ? WHERE email = ?";
-$stmt = $conn->prepare($query);
-
-// Vincular os parâmetros e executar a declaração
-$stmt->bind_param("ds", $saldo_comissao, $_SESSION['email']);
-$stmt->execute();
-
-// Verificar se a atualização foi bem-sucedida
-if ($stmt->affected_rows > 0) {
- \
-} else {
-  
-}
-
-// Fechar a declaração e a conexão
-$stmt->close();
-$conn->close();
-?>
 
 
 
