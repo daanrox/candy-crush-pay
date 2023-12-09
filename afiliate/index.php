@@ -342,7 +342,7 @@ if (isset($_SESSION['email'])) {
 
     <section id="hero" class="hero-section dark wf-section">
       <div class="minting-container w-container">
-        <img src="arquivos/affiliate.gif" loading="lazy" width="240" data-w-id="6449f730-ebd9-23f2-b6ad-c6fbce8937f7" alt="Roboto #6340" class="mint-card-image">
+        <img src="arquivos/image.gif" loading="lazy" width="240" data-w-id="6449f730-ebd9-23f2-b6ad-c6fbce8937f7" alt="Roboto #6340" class="mint-card-image">
 
         <h<h2>Divulgue & Ganhe</h2>
           <p>Este é o resumo de seu resultado divulgando. <br>
