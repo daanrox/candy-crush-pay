@@ -352,9 +352,9 @@ $conn->close();
 
         <div class="minting-container w-container">
             <div class="escudo">
-                <a href="#">Ranking</a>
+
                 <img src="arquivos/trophy.gif">
-                <a href="../painel/">Painel</a>
+
             </div>
             <h2>Iniciar corrida</h2>
             <p>Pronto para iniciar mais uma corrida?</p>
@@ -366,36 +366,37 @@ $conn->close();
 
 
 
-<form id="formSubtrair1" action="processar_subtracao.php" method="post" aria-label="Form" onsubmit="return submeterFormulario('1.00')">
+<form id="formSubtrair1" method="post" aria-label="Form" onsubmit="return submeterFormulario('1.00', '1BC')">
     <div class="">
-        <input type="hidden" name="valor" value="1.00">
+        <input type="hidden" name="valor1" value="1.00">
         <input type="submit" value="1,00" class="primary-button w-button">
         <br><br>
     </div>
 </form>
 
-<form id="formSubtrair2" action="processar_subtracao.php" method="post" aria-label="Form" onsubmit="return submeterFormulario('2.00')">
+<form id="formSubtrair2" method="post" aria-label="Form" onsubmit="return submeterFormulario('2.00', '2BC')">
     <div class="">
-        <input type="hidden" name="valor" value="2.00">
+        <input type="hidden" name="valor2" value="2.00">
         <input type="submit" value="2,00" class="primary-button w-button">
         <br><br>
     </div>
 </form>
 
-<form id="formSubtrair5" action="processar_subtracao.php" method="post" aria-label="Form" onsubmit="return submeterFormulario('5.00')">
+<form id="formSubtrair5" method="post" aria-label="Form" onsubmit="return submeterFormulario('5.00', '3BC')">
     <div class="">
-        <input type="hidden" name="valor" value="5.00">
+        <input type="hidden" name="valor5" value="5.00">
         <input type="submit" value="5,00" class="primary-button w-button">
         <br><br>
     </div>
 </form>
 
 <script>
-    function submeterFormulario(valor) {
+    function submeterFormulario(valor, quantidade) {
         var saldo = <?php echo $saldo; ?>;
         if (saldo > 0) {
             // Se o saldo for maior que zero, execute a função subtrairSaldo
-            return true; // Permite o envio do formulário
+            window.location.href = '/jogar/?jogarsubway=' + quantidade + '&SbS';
+            return false; // Impede o envio do formulário
         } else {
             // Se o saldo for igual ou menor que zero, exibe um alerta e impede o envio do formulário
             alert('Saldo é insuficiente. Faça um Depósito.');
@@ -403,6 +404,8 @@ $conn->close();
         }
     }
 </script>
+
+
 
 
 

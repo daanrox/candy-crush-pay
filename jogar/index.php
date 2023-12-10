@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script type="text/javascript">
-        const aposta = 20;
+
+        function extrairvalorAposta() {
+
+            var url = window.location.href;
+
+            var match = url.match(/jogarsubway=(\d+BC)/);
+
+            if (match) {
+
+                var valorAposta = match[1];
+
+                var valorMapeado;
+                switch (valorAposta) {
+                    case '1BC':
+                        valorMapeado = 1;
+                        break;
+                    case '2BC':
+                        valorMapeado = 2;
+                        break;
+                    case '3BC':
+                        valorMapeado = 5;
+                        break;
+                    default:
+                        valorMapeado = 0;
+                }
+
+                return valorMapeado;
+            }
+
+
+            return 0;
+        }
+
+
+        var valorAposta = extrairvalorAposta();
+
+
+        const aposta = extrairvalorAposta();
+
+
     </script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="viewport" content="height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, viewport-fit=cover" />
+    <meta name="viewport"
+        content="height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui, viewport-fit=cover" />
     <link rel="manifest" href="subwaysurfers.webmanifest">
     <link rel="icon" href="assets/images/app-icon-16.png" type="image/png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/app-icon-114.png">
@@ -19,7 +60,8 @@
     <meta name="robots" content="noindex,nofollow" />
     <title>Subway Surfers Web</title>
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             height: 100%;
             background-color: #0b316b;
@@ -51,15 +93,34 @@
             animation: showHideDot 2.5s ease-in-out infinite;
         }
 
-        .dot.one { animation-delay: 0.2s; }
-        .dot.two { animation-delay: 0.4s; }
-        .dot.three { animation-delay: 0.6s; }
+        .dot.one {
+            animation-delay: 0.2s;
+        }
+
+        .dot.two {
+            animation-delay: 0.4s;
+        }
+
+        .dot.three {
+            animation-delay: 0.6s;
+        }
 
         @keyframes showHideDot {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            60% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         button#sair {
@@ -81,6 +142,7 @@
         }
     </style>
 </head>
+
 <body>
     <button id="sair">ENCERRAR APOSTA</button>
     <script>
@@ -92,10 +154,13 @@
     </script>
     <div id="message">
         <h1>Loading</h1>
-        <h1 class="dot one">.</h1><h1 class="dot two">.</h1><h1 class="dot three">.</h1>
+        <h1 class="dot one">.</h1>
+        <h1 class="dot two">.</h1>
+        <h1 class="dot three">.</h1>
     </div>
     <script src="js/loading.js"></script>
     <script src="js/boot.js?v=<?php echo time(); ?>"></script>
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool@latest'></script>
 </body>
+
 </html>

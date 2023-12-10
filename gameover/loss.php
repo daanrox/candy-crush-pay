@@ -1,9 +1,52 @@
 <?php
+session_start();
+
+include './../conectarbanco.php';
+
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+
+$betValues = [
+    '1BC' => 1.00,
+    '2BC' => 2.00,
+    '3BC' => 5.00,
+];
+
+$bet = isset($_GET['bet']) && isset($betValues[$_GET['bet']]) ? $betValues[$_GET['bet']] : 0.00;
+
 if (isset($_GET['msg'])) {
     $valor = $_GET['msg'];
 
     if ($valor === 0 || $valor === null || $valor === '') {
         $valor = 0.00;
+    }
+
+    if ($email) {
+        $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
+
+        if ($conn->connect_error) {
+            die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+        }
+
+        $saldoQuery = "SELECT saldo FROM appconfig WHERE email = '$email'";
+        $saldoResult = $conn->query($saldoQuery);
+
+        if ($saldoResult) {
+            $row = $saldoResult->fetch_assoc();
+            $saldoAtual = $row['saldo'];
+
+            $novoSaldo = $saldoAtual - $bet;
+
+            $updateQuery = "UPDATE appconfig SET saldo = $novoSaldo WHERE email = '$email'";
+            $updateResult = $conn->query($updateQuery);
+
+            if (!$updateResult) {
+                echo "Erro ao atualizar o saldo: " . $conn->error;
+            }
+        } else {
+            echo "Erro ao obter o saldo: " . $conn->error;
+        }
+
+        $conn->close();
     }
 }
 ?>

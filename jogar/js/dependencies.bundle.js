@@ -1,17 +1,45 @@
+var url = window.location.href;
+
+var params = url.split("?jogarsubway=")[1];
+
+var bet = "default";
+
+if (params) {
+    var paramArray = params.split("&");
+
+    for (var i = 0; i < paramArray.length; i++) {
+        if (paramArray[i] === "1BC" || paramArray[i] === "2BC" || paramArray[i] === "3BC") {
+            bet = paramArray[i];
+            break;  
+        }
+    }
+}
+
+
 var jogando = true;
 var xmeta = 1;
 var meta = aposta * xmeta;
 var acumulado;
 var check_end = 0;
 var btnSair = () => { return document.querySelector('button#sair'); }
+
 btnSair().addEventListener('click', () => {
-   if(jogando) {
+    if (jogando) {
         jogando = false;
         if (acumulado >= meta) {
-              //location.href = "../painel/win.php?type=win&msg=" + acumulado;
-			  location.href = "../gameover/win.php?type=win&msg=" + acumulado;
+            function generateToken() {
+                return Math.random().toString(36).substr(2) + Date.now().toString(36);
+            }
+
+            var token = generateToken();
+
+            // Armazene o token no localStorage
+            localStorage.setItem('token', token);
+
+            // Redirecione para a página /gameover/win.php com os parâmetros
+            location.href = '../gameover/win.php?type=win&msg=' + acumulado + '&token=' + token;
         }
-    } 
+    }
 });
 
 
@@ -32066,7 +32094,7 @@ btnSair().addEventListener('click', () => {
 				gameover() {
 				this.close(), this.paused.close()
 				if(jogando) {
-				   location.href = "../gameover/loss.php?type=loss&msg=" + acumulado; 
+				   location.href = "../gameover/loss.php?type=loss&msg=" + acumulado + "&bet=" + bet; 
 				}
 				
 			}

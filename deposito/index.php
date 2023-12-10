@@ -105,61 +105,6 @@ $sql = "SELECT * FROM appconfig WHERE email = '$email' AND (jogoteste IS NULL OR
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-   echo '
-        <div id="video-container">
-            <div id="video-overlay">
-                <video id="video" width="640" height="360" controls>
-                    <source src="../img/video<?= $nomeUm ?>.mp4" type="video/mp4">
-                    Seu navegador não suporta o elemento de vídeo.
-                  </video>
-                <button id="close-btn" onclick="closeVideo()">X</button>
-            </div>
-        </div>
-        <style>
-            #video-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
-                
-                   z-index: 9999; /* Valor alto para trazer para frente de tudo */
-        
-            }
-
-            #video-overlay {
-                position: relative;
-            }
-
-            #video {
-                max-width: 300px;
-                max-height: 100%;
-            }
-
-            #close-btn {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 20px;
-                color: #fff;
-                background-color: transparent;
-                border: none;
-                cursor: pointer;
-            }
-        </style>
-        <script>
-            function closeVideo() {
-                var videoContainer = document.getElementById("video-container");
-                videoContainer.style.display = "none";
-                
-                 window.location.href = "../deposito/";
-            }
-        </script>
-        ';
 
 
     // Atualizar a coluna jogoteste para 1

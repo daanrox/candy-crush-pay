@@ -1,10 +1,25 @@
 <?php
 session_start();
-// Conectar ao banco de dados
+
 include './../conectarbanco.php';
 
-// Obtém o email da sessão
+
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+
+
+echo '<script>';
+echo 'function verificarToken() {';
+echo '    var tokenFromURL = new URLSearchParams(window.location.search).get("token");';
+echo '    var tokenFromLocalStorage = localStorage.getItem("token");';
+echo '    if (tokenFromURL !== tokenFromLocalStorage) {';
+echo '        window.location.href = "/painel/";';
+echo '    } else {';
+echo '        localStorage.removeItem("token");';
+echo '    }';
+echo '}';
+echo '';
+echo 'verificarToken();';
+echo '</script>';
 
 
 if (isset($_GET['msg'])) {
@@ -23,7 +38,6 @@ if (isset($_GET['msg'])) {
             die("Erro na conexão com o banco de dados: " . $conn->connect_error);
         }
 
-
         // Consulta para obter o saldo atual do usuário
         $saldoQuery = "SELECT saldo FROM appconfig WHERE email = '$email'";
         $saldoResult = $conn->query($saldoQuery);
@@ -39,6 +53,7 @@ if (isset($_GET['msg'])) {
             $updateQuery = "UPDATE appconfig SET saldo = $novoSaldo WHERE email = '$email'";
             $updateResult = $conn->query($updateQuery);
 
+
         } else {
             echo "Erro ao obter o saldo: " . $conn->error;
         }
@@ -47,7 +62,6 @@ if (isset($_GET['msg'])) {
         $conn->close();
     }
 }
-
 ?>
 
 
