@@ -32067,7 +32067,7 @@ btnSair().addEventListener('click', () => {
     				if (this.game.state !== o.a.RUNNING || !this._built) return;
     				if (this.multiplier.update(), this.updateCount += 1, 480 === this.updateCount && this.removeAllItemBoost(!0), this.updateCount % 4 > 0) return;
     				const t = this.game.stats;
-    				let numberMoney = parseFloat(t.coins / 25).toFixed(2); // alterar coleta de moedas
+    				let numberMoney = parseFloat(t.coins / 45).toFixed(2); // alterar coleta de moedas
     				let money = "R$" + numberMoney;// ALTERACAO DO SALDO 
     				acumulado = numberMoney;
     				this.distance.getText() <= t.score && this.distance.setText(t.score, 6), this.coins.setText(money), this.multiplier.text = "x" + (t.multiplier + t.missionMultiplier), this.ranking && this.ranking.update()
