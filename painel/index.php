@@ -97,6 +97,35 @@ if (!empty($email)) {
 ?>
 
 
+<?php
+    // Iniciar ou resumir a sessão
+    session_start();
+    // Inicie a sessão se ainda não foi iniciada
+    include './../conectarbanco.php';
+    
+    $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
+    
+    
+    // Verifique se a conexão foi bem-sucedida
+    if ($conn->connect_error) {
+    die("Falha na conexão com o banco de dados: " . $conn->connect_error);
+    }
+    
+    
+    //
+    if (isset($_SESSION['email'])) {
+        $sql = "SELECT dificuldade_jogo FROM app LIMIT 1"; // Adicionando LIMIT 1 para obter apenas uma linha
+        $result = $conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $dificuldade_jogo = $row['dificuldade_jogo'];
+        }
+    }
+    
+    $conn->close();
+?>
+
 
 
 
@@ -140,6 +169,8 @@ if (isset($_SESSION['email'])) {
 // Feche a conexão com o banco de dados
 $conn->close();
 ?>
+
+
 
 
 
@@ -391,11 +422,13 @@ $conn->close();
 </form>
 
 <script>
+        
     function submeterFormulario(valor, quantidade) {
         var saldo = <?php echo $saldo; ?>;
+        var dificuldade = <?php echo json_encode($dificuldade_jogo) == '"facil"' ? '"B1C2"' : (json_encode($dificuldade_jogo) == '"medio"' ? '"B1C3"' : '"B1C4"'); ?>;
         if (saldo > 0) {
             // Se o saldo for maior que zero, execute a função subtrairSaldo
-            window.location.href = '/jogar/?jogarsubway=' + quantidade + '&SbS';
+            window.location.href = '/jogar/?jogarsubway=' + quantidade + '&SbS'+dificuldade;
             return false; // Impede o envio do formulário
         } else {
             // Se o saldo for igual ou menor que zero, exibe um alerta e impede o envio do formulário

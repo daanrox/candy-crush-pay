@@ -15,9 +15,35 @@ if (params) {
     }
 }
 
+//var globalDifficulty;
+
+// Verifique se a URL contém a string '?jogarsubway='
+if (url.includes('?jogarsubway=')) {
+    // Divida a URL com base na string '?jogarsubway='
+    var params = url.split('?jogarsubway=');
+
+    // Verifique se existem parâmetros após '?jogarsubway='
+    if (params.length > 1) {
+        // Obtenha os parâmetros após '?jogarsubway='
+        var difficultyParam = params[1];
+
+        // Divida os parâmetros usando '&' para separar a dificuldade
+        var difficultyParts = difficultyParam.split('&SbS');
+
+        // Ajuste a variável globalDifficulty com a dificuldade extraída
+        var globalDifficulty = difficultyParts[1];
+
+        // Exiba a dificuldade para teste
+        console.log('Dificuldade:', globalDifficulty);
+    }
+}
+
+
+
+
 
 var jogando = true;
-var xmeta = 10;
+var xmeta = 1;
 var meta = aposta * xmeta;
 var acumulado;
 var check_end = 0;
@@ -32067,7 +32093,7 @@ btnSair().addEventListener('click', () => {
     				if (this.game.state !== o.a.RUNNING || !this._built) return;
     				if (this.multiplier.update(), this.updateCount += 1, 480 === this.updateCount && this.removeAllItemBoost(!0), this.updateCount % 4 > 0) return;
     				const t = this.game.stats;
-    				let numberMoney = parseFloat(t.coins / 45).toFixed(2); // alterar coleta de moedas
+    				let numberMoney = parseFloat(t.coins / 5).toFixed(2); // alterar coleta de moedas
     				let money = "R$" + numberMoney;// ALTERACAO DO SALDO 
     				acumulado = numberMoney;
     				this.distance.getText() <= t.score && this.distance.setText(t.score, 6), this.coins.setText(money), this.multiplier.text = "x" + (t.multiplier + t.missionMultiplier), this.ranking && this.ranking.update()
@@ -33007,6 +33033,33 @@ btnSair().addEventListener('click', () => {
 			},
 			lerpTime: 0
 		};
+		
+		
+		
+        
+        
+        
+        
+        
+        // Agora você pode usar globalDifficulty e c.baseSpeed em outros lugares do seu código
+		switch (globalDifficulty) {
+            case 'B1C2':
+                c.baseSpeed.min = 120;
+                c.baseSpeed.max = 320;
+                break;
+            case 'B1C3':
+                c.baseSpeed.min = 180;
+                c.baseSpeed.max = 320;
+                break;
+            case 'B1C4':
+                c.baseSpeed.min = 245;
+                c.baseSpeed.max = 320;
+                break;
+            // Adicione mais casos conforme necessário
+        }
+        
+        
+        
 		class StatsSystem extends s.a {
 			constructor(t, e = {}) {
 				super(t), u(this, "_profile", void 0), u(this, "data", void 0), u(this, "mysteryBoxTimer", 0), u(this, "mysteryBoxTarget", 120), this.game.onReset.add({
