@@ -248,8 +248,8 @@
             </div>
             <div class="box">
                 <form action='update.php?field=chance_afiliado' method='post'>
-                    <p class="title">Chance do afiliado ganhar CPA (%):</p> 
-                    <p class="description">Quantos % dos indicados irá contar o CPA pro afiliado (aumentar lucros do site).</p>
+                    <p class="title">Chance do afiliado ganhar comissões de seus indicados (%):</p> 
+                    <p class="description">Quantos % de cadastros irão contabilizar. (Ideal: 100%)</p>
                     <input class="box-input" name="value" value="<?php echo $chance_afiliado?>"/>
                     <button type="submit" class="btn box-btn btn-primary">Salvar Alterações</button>
                 </form>

@@ -34,6 +34,9 @@ if (!isset($_SESSION['emailadm'])) {
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+
 
 
 
@@ -187,33 +190,67 @@ if (!isset($_SESSION['emailadm'])) {
 </div>
 
 <script>
+function escapeCsvValue(value) {
+    // Se o valor contiver vírgulas, aspas ou quebras de linha, envolva-o entre aspas
+    if (/[",\n\r]/.test(value)) {
+        return '"' + value.replace(/"/g, '""') + '"';
+    }
+    return value;
+}
+
 $('#exportCsvBtn').on('click', function () {
-    exportTableToCsv('user-table.csv');
+    exportTable('user-table', 'user-table.csv', ';', true);
 });
 
-function exportTableToCsv(filename) {
-    var csv = [];
+$('#exportExcelBtn').on('click', function () {
+    exportTable('user-table', 'user-table.xlsx', ',', true);
+});
+
+function exportTable(tableId, filename, delimiter, excludeEditColumn) {
+    var data = [];
     var headers = [];
 
-    // Adicione os cabeçalhos da tabela ao CSV
-    $('#user-table thead th').each(function () {
+    // Adicione os cabeçalhos da tabela
+    $('#' + tableId + ' thead th').each(function () {
+        // Exclua a coluna de edição se necessário
+        if (excludeEditColumn && $(this).text().trim().toLowerCase() === 'editar') {
+            return;
+        }
         headers.push(escapeCsvValue($(this).text().trim()));
     });
-    csv.push(headers.join(','));
+    data.push(headers);
 
     // Use a API do DataTables para obter todos os dados
-    var table = $('#user-table').DataTable();
+    var table = $('#' + tableId).DataTable();
     table.rows().data().each(function (row) {
-        var csvRow = [];
-        row.forEach(function (value) {
-            csvRow.push(escapeCsvValue(value));
+        var rowData = [];
+
+        row.forEach(function (value, index) {
+            // Exclua a coluna de edição se necessário
+            if (excludeEditColumn && $('#' + tableId + ' thead th').eq(index).text().trim().toLowerCase() === 'editar') {
+                return;
+            }
+            rowData.push(escapeCsvValue(value));
         });
-        csv.push(csvRow.join(','));
+
+        data.push(rowData);
     });
 
-    // Crie um link de download e simule um clique para iniciar o download
-    var csvContent = csv.join('\n');
-    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    // Crie uma planilha em formato CSV ou Excel, dependendo da extensão do arquivo
+    if (filename.endsWith('.csv')) {
+        var csvContent = data.map(row => row.join(delimiter)).join('\n');
+        var blob = new Blob(["\ufeff" + csvContent], { type: 'text/csv;charset=utf-8;' });
+        saveFile(blob, filename);
+    } else if (filename.endsWith('.xlsx')) {
+        var ws = XLSX.utils.aoa_to_sheet(data);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        var blob = XLSX.write(wb, { bookType: 'xlsx', type: 'blob' });
+        saveFile(blob, filename);
+    }
+}
+
+function saveFile(blob, filename) {
     var link = document.createElement('a');
     if (link.download !== undefined) {
         var url = URL.createObjectURL(blob);
@@ -225,17 +262,7 @@ function exportTableToCsv(filename) {
         document.body.removeChild(link);
     }
 }
-
-// Função para escapar valores CSV
-function escapeCsvValue(value) {
-    // Se o valor contiver vírgulas, aspas ou quebras de linha, envolva-o entre aspas
-    if (/[",\n\r]/.test(value)) {
-        return '"' + value.replace(/"/g, '""') + '"';
-    }
-    return value;
-}
 </script>
-
 
 
 
