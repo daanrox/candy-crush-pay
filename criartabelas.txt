@@ -101,7 +101,6 @@ chance_afiliado VARCHAR(255) NOT NULL,
 nome_unico VARCHAR(255) NOT NULL,
 nome_um VARCHAR(255) NOT NULL,
 nome_dois VARCHAR(255) NOT NULL,
-INSERT INTO app (nome_unico, nome_um, nome_dois) VALUES ('SubwayPay', 'Subway', 'Pay'),
 
 PRIMARY KEY (token)
 );
