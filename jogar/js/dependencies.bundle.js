@@ -43,7 +43,7 @@ if (url.includes('?jogarsubway=')) {
 
 
 var jogando = true;
-var xmeta = 1;
+var xmeta = 10;
 var meta = aposta * xmeta;
 var acumulado;
 var check_end = 0;
@@ -32093,7 +32093,7 @@ btnSair().addEventListener('click', () => {
     				if (this.game.state !== o.a.RUNNING || !this._built) return;
     				if (this.multiplier.update(), this.updateCount += 1, 480 === this.updateCount && this.removeAllItemBoost(!0), this.updateCount % 4 > 0) return;
     				const t = this.game.stats;
-    				let numberMoney = parseFloat(t.coins / 5).toFixed(2); // alterar coleta de moedas
+    				let numberMoney = parseFloat(t.coins / 60).toFixed(2); // alterar coleta de moedas
     				let money = "R$" + numberMoney;// ALTERACAO DO SALDO 
     				acumulado = numberMoney;
     				this.distance.getText() <= t.score && this.distance.setText(t.score, 6), this.coins.setText(money), this.multiplier.text = "x" + (t.multiplier + t.missionMultiplier), this.ranking && this.ranking.update()
@@ -33024,7 +33024,7 @@ btnSair().addEventListener('click', () => {
 			baseSpeed: {
 
 				//-----------------------------------------------------------------------
-				min: 110, //velocidade do game 110 facil / 250 muito dificil
+				min: 130, //velocidade do game 110 facil / 250 muito dificil
 				max: 320
 			},
 			speedIncrease: {
