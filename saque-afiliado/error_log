@@ -1,0 +1,3 @@
+[12-Feb-2024 22:36:15 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/saque-afiliado/index.php on line 4
+[12-Feb-2024 22:36:15 America/Sao_Paulo] PHP Warning:  Undefined array key "withdrawName" in /home/nubetgames/public_html/saque-afiliado/index.php on line 71
+[12-Feb-2024 22:36:15 America/Sao_Paulo] PHP Warning:  Undefined array key "withdrawCPF" in /home/nubetgames/public_html/saque-afiliado/index.php on line 72

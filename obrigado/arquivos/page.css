@@ -2287,7 +2287,10 @@ body {
     font-family: space mono, sans-serif;
     color: #1f2024;
     font-size: 16px;
-    line-height: 1.5em
+    line-height: 1.5em;
+    background-image: url(./candy-bg.png);
+    background-position: 50% 50%;
+    background-size: auto;
 }
 
 h1 {
@@ -2366,7 +2369,10 @@ li {
     align-items: center;
     background-color: #1fbffe;
     color: #fff;
-    text-align: center
+    text-align: center;
+    background-image: url(./candy-bg.png);
+    background-position: 50% 50%;
+    background-size: auto;
 }
 
 .hero-section.dark {

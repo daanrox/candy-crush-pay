@@ -1,0 +1,34 @@
+[12-Feb-2024 22:24:01 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:24:01 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:24:01 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 22:34:23 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:34:23 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:34:23 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 22:34:55 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:34:55 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:34:55 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 22:35:33 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:35:33 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:35:33 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 22:35:56 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:35:56 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:35:56 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 22:35:57 America/Sao_Paulo] PHP Warning:  Undefined array key "response" in /home/nubetgames/public_html/deposito/index.php on line 262
+[12-Feb-2024 22:35:57 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:35:57 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:35:57 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 22:36:32 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:36:32 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:36:32 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 22:37:57 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 22:37:57 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 22:37:57 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[12-Feb-2024 23:33:47 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[12-Feb-2024 23:33:47 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[12-Feb-2024 23:33:47 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[13-Feb-2024 00:26:21 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[13-Feb-2024 00:26:21 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[13-Feb-2024 00:26:21 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125
+[13-Feb-2024 02:41:32 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/deposito/index.php on line 4
+[13-Feb-2024 02:41:32 America/Sao_Paulo] PHP Warning:  Undefined array key "jogoteste" in /home/nubetgames/public_html/deposito/index.php on line 102
+[13-Feb-2024 02:41:32 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/deposito/index.php on line 125

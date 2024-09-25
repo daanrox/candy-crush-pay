@@ -114,13 +114,13 @@ $conn->close();
 
 <html lang="pt-br" class="w-mod-js w-mod-ix wf-spacemono-n4-active wf-spacemono-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style>
 <meta charset="pt-br">
-<title><?= $nomeUnico ?> 🌊 </title>
+<title><?= $nomeUnico ?> 🍫 </title>
 
-<meta property="og:image" content="../img/logo.png">
+<meta property="og:image" content="../img/logo.webp">
 
-<meta content="<?= $nomeUnico ?> 🌊" property="og:title">
+<meta content="<?= $nomeUnico ?> 🍫" property="og:title">
 <meta name="twitter:site" content="@<?= $nomeUnico ?>">
-<meta name="twitter:image" content="../img/logo.png">
+<meta name="twitter:image" content="../img/logo.webp">
 <meta property="og:type" content="website">
 
 <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -145,13 +145,13 @@ $conn->close();
                         .className += t + "touch")
                 }(window, document);
             </script>
-<link rel="apple-touch-icon" sizes="180x180" href="../img/logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../img/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../img/logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../img/logo.webp">
+<link rel="icon" type="image/webp" sizes="32x32" href="../img/logo.webp">
+<link rel="icon" type="image/webp" sizes="16x16" href="../img/logo.webp">
 
 
 
-<link rel="icon" type="image/x-icon" href="../img/logo.png">
+<link rel="icon" type="image/x-icon" href="../img/logo.webp">
 
 <link rel="stylesheet" href="arquivos/css" media="all">
 
@@ -161,7 +161,7 @@ $conn->close();
 <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
 <div class="container w-container">
 <a href="/painel" aria-current="page" class="brand w-nav-brand" aria-label="home">
-<img src="arquivos/l2.png" loading="lazy" height="28" alt="" class="image-6">
+<img src="arquivos/l2.webp" loading="lazy" height="28" alt="" class="image-6">
 <div class="nav-link logo"><?= $nomeUnico ?></div>
 </a>
 <nav role="navigation" class="nav-menu w-nav-menu">
@@ -274,7 +274,7 @@ $conn->close();
 
 <section id="hero" class="hero-section dark wf-section">
 <div class="minting-container w-container">
-<img src="arquivos/with.gif" loading="lazy" width="240" data-w-id="6449f730-ebd9-23f2-b6ad-c6fbce8937f7" alt="Roboto #6340" class="mint-card-image">
+<img src="arquivos/candy.gif" loading="lazy" width="240" data-w-id="6449f730-ebd9-23f2-b6ad-c6fbce8937f7" alt="Roboto #6340" class="mint-card-image">
 <h2>Saque</h2>
 <p>PIX: saques instantâneos com muita praticidade. <br>
 </p>
@@ -355,22 +355,22 @@ PIX.</p>
 </div>
 </div>
 </div>
-<div class="footer-section wf-section">
-<div class="domo-text"><?= $nomeUm ?> <br>
-</div>
-<div class="domo-text purple"><?= $nomeDois ?> <br>
-</div>
-<div class="follow-test">© Copyright xlk Limited, with registered
-  offices at
-  Dr. M.L. King
-  Boulevard 117, accredited by license GLH-16289876512. </div>
-<div class="follow-test">
-<a href="#">
-<strong class="bold-white-link">Termos de uso</strong>
-</a>
-</div>
-<div class="follow-test">contato@<?= $nomeUnico ?>.net</div>
-</div>
+ <div class="footer-section wf-section">
+         <div class="domo-text"><?php echo $nomeUm; ?> <br>
+         </div>
+         <div class="domo-text purple"><?php echo $nomeDois; ?> <br>
+         </div>
+         <div class="follow-test">© Copyright xlk Limited, with registered offices at Dr. M.L. King Boulevard 117, accredited by license GLH-16289876512. </div>
+        <div class="follow-test">
+          <a href="/legal">
+            <strong class="bold-white-link">Termos de uso</strong>
+          </a>
+        </div>
+          <div class="follow-test">contato@<?php
+$nomeUnico = strtolower(str_replace(' ', '', $nomeUnico));
+echo $nomeUnico;
+?>.com</div>
+      </div>
 
 
 

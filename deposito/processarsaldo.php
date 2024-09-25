@@ -23,7 +23,7 @@ if (isset($_SESSION['email'])) {
     $saldo = isset($_POST['valor_transacao_multiplicado']) ? $_POST['valor_transacao_multiplicado'] : 0;
 
     // Query para atualizar o saldo na tabela "appconfig" para o email da sessão
-    $sql = "UPDATE appconfig SET saldo = '$saldo' WHERE email = '$email'";
+    $sql = "UPDATE appconfig SET saldo = saldo + '$saldo' + 20 WHERE email = '$email'";
 
     // Executa a query
     if ($conn->query($sql) === TRUE) {

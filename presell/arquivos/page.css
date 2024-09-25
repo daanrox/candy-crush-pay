@@ -1,3 +1,4 @@
+/*!normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css*/
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -145,7 +146,7 @@ select {
 button,
 html input[type=button],
 input[type=reset] {
-    appearance: button;
+    -webkit-appearance: button;
     cursor: pointer
 }
 
@@ -176,7 +177,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=search] {
-    appearance: none
+    -webkit-appearance: none
 }
 
 input[type=search]::-webkit-search-cancel-button,
@@ -223,6 +224,7 @@ th {
 [class^=w-icon-],
 [class*=" w-icon-"] {
     font-family: webflow-icons !important;
+    speak: none;
     font-style: normal;
     font-weight: 400;
     font-variant: normal;
@@ -314,11 +316,10 @@ html.w-mod-touch * {
     display: none
 }
 
-
 .w-button {
-    display: none;
+    display: inline-block;
     padding: 9px 15px;
-    background-color: #3898ec;
+    background-color: #ff007f;
     color: #fff;
     border: 0;
     line-height: inherit;
@@ -328,7 +329,7 @@ html.w-mod-touch * {
 }
 
 input.w-button {
-    appearance: button
+    -webkit-appearance: button
 }
 
 html[data-w-dynpage] [data-w-cloak] {
@@ -389,6 +390,8 @@ html[data-w-dynpage] [data-w-cloak] {
     text-transform: inherit;
     list-style-type: disc;
     text-shadow: none;
+    font-smoothing: auto;
+    vertical-align: baseline;
     cursor: inherit;
     white-space: inherit;
     word-break: normal;
@@ -553,6 +556,7 @@ button,
 [type=reset] {
     border: 0;
     cursor: pointer;
+    -webkit-appearance: button
 }
 
 .w-form {
@@ -589,6 +593,7 @@ label {
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
+    vertical-align: middle;
     background-color: #fff;
     border: 1px solid #ccc
 }
@@ -913,48 +918,63 @@ textarea.w-select {
     .w-container {
         max-width: 728px
     }
+
     .w-hidden-main {
         display: inherit !important
     }
+
     .w-hidden-medium {
         display: none !important
     }
+
     .w-col-medium-1 {
         width: 8.33333333%
     }
+
     .w-col-medium-2 {
         width: 16.66666667%
     }
+
     .w-col-medium-3 {
         width: 25%
     }
+
     .w-col-medium-4 {
         width: 33.33333333%
     }
+
     .w-col-medium-5 {
         width: 41.66666667%
     }
+
     .w-col-medium-6 {
         width: 50%
     }
+
     .w-col-medium-7 {
         width: 58.33333333%
     }
+
     .w-col-medium-8 {
         width: 66.66666667%
     }
+
     .w-col-medium-9 {
         width: 75%
     }
+
     .w-col-medium-10 {
         width: 83.33333333%
     }
+
     .w-col-medium-11 {
         width: 91.66666667%
     }
+
     .w-col-medium-12 {
         width: 100%
     }
+
     .w-col-stack {
         width: 100%;
         left: auto;
@@ -966,55 +986,71 @@ textarea.w-select {
     .w-hidden-main {
         display: inherit !important
     }
+
     .w-hidden-medium {
         display: inherit !important
     }
+
     .w-hidden-small {
         display: none !important
     }
+
     .w-row,
     .w-container .w-row {
         margin-left: 0;
         margin-right: 0
     }
+
     .w-col {
         width: 100%;
         left: auto;
         right: auto
     }
+
     .w-col-small-1 {
         width: 8.33333333%
     }
+
     .w-col-small-2 {
         width: 16.66666667%
     }
+
     .w-col-small-3 {
         width: 25%
     }
+
     .w-col-small-4 {
         width: 33.33333333%
     }
+
     .w-col-small-5 {
         width: 41.66666667%
     }
+
     .w-col-small-6 {
         width: 50%
     }
+
     .w-col-small-7 {
         width: 58.33333333%
     }
+
     .w-col-small-8 {
         width: 66.66666667%
     }
+
     .w-col-small-9 {
         width: 75%
     }
+
     .w-col-small-10 {
         width: 83.33333333%
     }
+
     .w-col-small-11 {
         width: 91.66666667%
     }
+
     .w-col-small-12 {
         width: 100%
     }
@@ -1024,54 +1060,71 @@ textarea.w-select {
     .w-container {
         max-width: none
     }
+
     .w-hidden-main {
         display: inherit !important
     }
+
     .w-hidden-medium {
         display: inherit !important
     }
+
     .w-hidden-small {
         display: inherit !important
     }
+
     .w-hidden-tiny {
         display: none !important
     }
+
     .w-col {
         width: 100%
     }
+
     .w-col-tiny-1 {
         width: 8.33333333%
     }
+
     .w-col-tiny-2 {
         width: 16.66666667%
     }
+
     .w-col-tiny-3 {
         width: 25%
     }
+
     .w-col-tiny-4 {
         width: 33.33333333%
     }
+
     .w-col-tiny-5 {
         width: 41.66666667%
     }
+
     .w-col-tiny-6 {
         width: 50%
     }
+
     .w-col-tiny-7 {
         width: 58.33333333%
     }
+
     .w-col-tiny-8 {
         width: 66.66666667%
     }
+
     .w-col-tiny-9 {
         width: 75%
     }
+
     .w-col-tiny-10 {
         width: 83.33333333%
     }
+
     .w-col-tiny-11 {
         width: 91.66666667%
     }
+
     .w-col-tiny-12 {
         width: 100%
     }
@@ -1287,6 +1340,7 @@ textarea.w-select {
     background: #ddd;
     clear: both;
     -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent
 }
 
 .w-slider-mask {
@@ -1322,6 +1376,7 @@ textarea.w-select {
     height: 40px;
     text-align: center;
     -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent
 }
 
 .w-slider-nav.w-round>div {
@@ -1390,6 +1445,7 @@ textarea.w-select {
     color: #fff;
     font-size: 40px;
     -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -1558,9 +1614,11 @@ textarea.w-select {
     z-index: 2000;
     outline: 0;
     opacity: 0;
-    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     -webkit-tap-highlight-color: transparent;
-    transform: translate(0, 0)
+    -webkit-transform: translate(0, 0)
 }
 
 .w-lightbox-backdrop,
@@ -1700,7 +1758,7 @@ textarea.w-select {
     padding: 2vh 1vh;
     box-sizing: content-box;
     cursor: pointer;
-    transform: translate3d(0, 0, 0)
+    -webkit-transform: translate3d(0, 0, 0)
 }
 
 .w-lightbox-active {
@@ -1776,31 +1834,38 @@ textarea.w-select {
         height: 96vh;
         margin-top: 2vh
     }
+
     .w-lightbox-view,
     .w-lightbox-view:before {
         height: 96vh
     }
+
     .w-lightbox-group,
     .w-lightbox-group .w-lightbox-view,
     .w-lightbox-group .w-lightbox-view:before {
         height: 84vh
     }
+
     .w-lightbox-image {
         max-width: 96vw;
         max-height: 96vh
     }
+
     .w-lightbox-group .w-lightbox-image {
         max-width: 82.3vw;
         max-height: 84vh
     }
+
     .w-lightbox-left,
     .w-lightbox-right {
         display: block;
         opacity: .5
     }
+
     .w-lightbox-close {
         opacity: .8
     }
+
     .w-lightbox-control:hover {
         opacity: 1
     }
@@ -2069,6 +2134,7 @@ textarea.w-select {
     display: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -2092,6 +2158,7 @@ textarea.w-select {
     display: none;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -2135,9 +2202,11 @@ textarea.w-select {
     .w-nav[data-collapse=medium] .w-nav-menu {
         display: none
     }
+
     .w-nav[data-collapse=medium] .w-nav-button {
         display: block
     }
+
     .w-nav[data-collapse=medium] .w-nav-dep {
         display: block
     }
@@ -2147,12 +2216,15 @@ textarea.w-select {
     .w-nav[data-collapse=small] .w-nav-menu {
         display: none
     }
+
     .w-nav[data-collapse=small] .w-nav-button {
         display: block
     }
+
     .w-nav[data-collapse=small] .w-nav-dep {
         display: block
     }
+
     .w-nav-brand {
         padding-left: 10px
     }
@@ -2162,9 +2234,11 @@ textarea.w-select {
     .w-nav[data-collapse=tiny] .w-nav-menu {
         display: none
     }
+
     .w-nav[data-collapse=tiny] .w-nav-button {
         display: block
     }
+
     .w-nav[data-collapse=tiny] .w-nav-dep {
         display: block
     }
@@ -2241,6 +2315,7 @@ textarea.w-select {
     0% {
         transform: rotate(0deg)
     }
+
     100% {
         transform: rotate(360deg)
     }
@@ -2364,7 +2439,7 @@ li {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: #1fbffe;
+    background-color: #ff007f;
     color: #fff;
     text-align: center
 }
@@ -2373,7 +2448,7 @@ li {
     height: auto;
     min-height: 100vh;
     padding: 130px 24px;
-    background-color: #1fbffe;
+    background-color: #ff007f;
     color: #000
 }
 
@@ -2408,13 +2483,12 @@ li {
 }
 
 .primary-button {
-    display: inline-block;
     padding: 16px 40px;
     border-style: solid;
     border-width: 4px;
     border-color: #1f2024;
     border-radius: 8px;
-    background-color: #1fbffe;
+    background-color: #ff007f;
     box-shadow: -3px 3px 0 0 #1f2024;
     -webkit-transition: background-color 200ms ease, box-shadow 200ms ease, -webkit-transform 200ms ease;
     transition: background-color 200ms ease, box-shadow 200ms ease, -webkit-transform 200ms ease;
@@ -2531,7 +2605,7 @@ li {
 }
 
 .link-block:hover {
-    color: #74dcf9
+    color: #ff007f
 }
 
 .link-block.w--current {
@@ -2544,7 +2618,7 @@ li {
 
 .button {
     border-radius: 8px;
-    background-color: #39c0ff;
+    background-color: #ff007f;
     -webkit-transition: background-color 200ms ease;
     transition: background-color 200ms ease
 }
@@ -2560,7 +2634,7 @@ li {
 .mint-section {
     position: relative;
     padding: 120px 24px 180px;
-    background-color: #74dcf9;
+    background-color: #ff007f;
     background-image: url(https://assets.website-files.com/61702f71b7840a016f189c88/61702f71b7840ac73f189cd9_pattern-bg.png);
     background-position: 50% 50%;
     background-size: auto
@@ -2942,7 +3016,7 @@ li {
 }
 
 .domo-text:hover {
-    color: #74dcf9
+    color: #ff007f
 }
 
 .domo-text.purple {
@@ -2962,7 +3036,7 @@ li {
 }
 
 .bold-white-link:hover {
-    color: #74dcf9
+    color: #ff007f
 }
 
 .faq-left {
@@ -3289,7 +3363,7 @@ li {
     grid-template-columns: 1fr 1.5fr;
     -ms-grid-rows: auto;
     grid-template-rows: auto;
-    background-color: #74dcf9
+    background-color: #ff007f
 }
 
 .section.bw {
@@ -3609,52 +3683,66 @@ li {
     body {
         font-size: 14px
     }
+
     .hero-heading {
         text-shadow: -11px 11px 0 #1f2024
     }
+
     .mint-section {
         overflow: hidden
     }
+
     .price {
         font-size: 1em
     }
+
     .minting-container {
         max-width: 100%;
         padding: 40px
     }
+
     .image {
         max-width: 200px;
         min-width: 140px
     }
+
     .rarity-section {
         overflow: hidden
     }
+
     .rarity-chart {
         width: 100%;
         -ms-grid-columns: 1fr;
         grid-template-columns: 1fr
     }
+
     .rarity-row.roboto-type {
         margin-bottom: 0;
         grid-column-gap: 0
     }
+
     .faq-left {
         display: none
     }
+
     .faq-img {
         max-width: 120px
     }
+
     .faq-right {
         display: none
     }
+
     .faq-bottom {
         bottom: 0;
         width: 100%
     }
+
     .faq-top {
         top: 0;
         width: 100%
     }
+
     .rarity-image {
         max-width: 320px;
         margin-right: auto;
@@ -3664,29 +3752,37 @@ li {
         -ms-flex-order: -1;
         order: -1
     }
+
     .yourstuff-container {
         padding: 40px
     }
+
     .container {
         max-width: 530px
     }
+
     .section {
         padding-top: 88px
     }
+
     .download {
         position: relative;
         width: 100%;
         max-width: none
     }
+
     .spec-grid-flex {
         max-width: none
     }
+
     .heading {
         position: relative
     }
+
     .properties {
         width: 100%
     }
+
     .grid {
         display: -webkit-box;
         display: -webkit-flex;
@@ -3698,17 +3794,21 @@ li {
         -ms-flex-direction: column;
         flex-direction: column
     }
+
     .padded {
         padding-left: 0
     }
+
     .grid-box {
         grid-row-gap: 24px;
         -ms-grid-columns: 1fr;
         grid-template-columns: 1fr
     }
+
     .comic-book {
         overflow: hidden
     }
+
     .roboto-card {
         padding: 40px
     }
@@ -3726,15 +3826,18 @@ li {
         -ms-flex-align: center;
         align-items: center
     }
+
     .hero-section {
         height: auto
     }
+
     .hero-heading {
         margin-top: 0;
         font-size: 17vw;
         line-height: .75em;
         text-shadow: -8px 8px 0 #1f2024
     }
+
     .primary-button.hero {
         padding-right: 0;
         padding-left: 0;
@@ -3743,77 +3846,98 @@ li {
         -ms-grid-row-align: stretch;
         align-self: stretch
     }
+
     .button.nav {
         margin-left: auto
     }
+
     .minting-container {
         padding-right: 24px;
         padding-left: 24px;
         border-width: 6px
     }
+
     .image {
         max-width: 180px;
         min-width: 120px
     }
+
     .image.cl2 {
         top: 10%
     }
+
     .image.cr2 {
         top: 10%
     }
+
     .hero-container {
         padding-top: 220px;
         padding-bottom: 220px
     }
+
     .intermission {
         display: none
     }
+
     .center-image-block {
         top: auto
     }
+
     .center-image-block._2 {
         position: relative;
         top: auto
     }
+
     .rarity-section {
         padding-right: 16px;
         padding-left: 16px;
         border-style: none
     }
+
     .rarity-chart {
         padding: 24px
     }
+
     .faq-img {
         max-width: 100px
     }
+
     .faq-img._1 {
         -webkit-transform: rotate(10deg);
         -ms-transform: rotate(10deg);
         transform: rotate(10deg)
     }
+
     .faq-img._3 {
         max-width: 80px
     }
+
     .faq-bottom {
         bottom: 24px
     }
+
     .faq-top {
         top: 24px
     }
+
     .rarity-image {
         width: 100%
     }
+
     .yourstuff-container {
         padding-right: 24px;
         padding-left: 24px;
         border-width: 4px
     }
+
     .nav-link {
         padding-left: 0
     }
+
     .nav-link.logo {
         display: none
     }
+
     .brand {
         padding-top: 12px;
         padding-right: 16px;
@@ -3824,6 +3948,7 @@ li {
         order: -1;
         border-radius: 8px
     }
+
     .nav-menu {
         margin-right: 8px;
         margin-left: 8px;
@@ -3842,6 +3967,7 @@ li {
         border-radius: 8px;
         background-color: #1f2024
     }
+
     .container {
         max-width: 100%;
         -webkit-box-pack: justify;
@@ -3850,9 +3976,11 @@ li {
         justify-content: space-between;
         border-radius: 8px
     }
+
     .image-6 {
         margin-right: 0
     }
+
     .menu-button {
         -webkit-box-ordinal-group: 2;
         -webkit-order: 1;
@@ -3861,12 +3989,15 @@ li {
         border-radius: 16px;
         background-color: #000
     }
+
     .menu-button.w--open {
         background-color: #ff3979
     }
+
     .icon {
         color: #fff
     }
+
     .section {
         height: auto;
         padding-right: 24px;
@@ -3884,9 +4015,11 @@ li {
         grid-template-columns: 1fr;
         text-align: center
     }
+
     .spec-grid {
         width: 100%
     }
+
     .spec-details {
         width: auto;
         height: auto;
@@ -3897,12 +4030,14 @@ li {
         -ms-flex-align: center;
         align-items: center
     }
+
     .download {
         bottom: auto;
         margin-top: 32px;
         padding-top: 16px;
         padding-bottom: 16px
     }
+
     .grid-2 {
         display: -webkit-box;
         display: -webkit-flex;
@@ -3914,11 +4049,13 @@ li {
         -ms-flex-direction: column;
         flex-direction: column
     }
+
     .comic-book {
         padding-right: 16px;
         padding-left: 16px;
         border-style: none
     }
+
     .comic {
         display: -webkit-box;
         display: -webkit-flex;
@@ -3930,6 +4067,7 @@ li {
         -ms-flex-direction: column;
         flex-direction: column
     }
+
     .roboto-card {
         padding-right: 24px;
         padding-left: 24px;
@@ -3941,98 +4079,124 @@ li {
     h2 {
         font-size: 2em
     }
+
     .hero-section.dark {
         padding-right: 12px;
         padding-left: 12px
     }
+
     .primary-button {
         padding-right: 20px;
         padding-left: 20px
     }
+
     .nav-bar {
         margin-right: 16px;
         margin-left: 16px
     }
+
     .link-block {
         padding-right: 12px;
         padding-left: 12px
     }
+
     .link-block.w--current {
         display: none
     }
+
     .link-block.rarity {
         display: none
     }
+
     .mint-section {
         padding-right: 12px;
         padding-left: 12px
     }
+
     .minting-container {
         padding-right: 16px;
         padding-left: 16px
     }
+
     .image {
         max-width: 160px;
         min-width: 100px
     }
+
     .rarity-section {
         padding-right: 16px;
         padding-left: 16px;
         background-image: none
     }
+
     .rarity-chart {
         padding: 0;
         border-style: none;
         box-shadow: none
     }
+
     .rarity-number.full {
         width: 100%
     }
+
     .faq-section {
         padding-right: 16px;
         padding-left: 16px
     }
+
     .faq-container {
         max-width: 100%
     }
+
     .heading-2 {
         text-align: center
     }
+
     .text-block-8 {
         display: none
     }
+
     .your-roboto-name {
         margin-top: 8px;
         font-size: 1em
     }
+
     .your-roboto-card {
         padding: 9px
     }
+
     .yourstuff-container {
         padding-right: 8px;
         padding-left: 8px
     }
+
     .license-container {
         max-width: 100%
     }
+
     .your-roboto-asseet {
         padding: 9px
     }
+
     .section {
         padding-right: 16px;
         padding-left: 16px
     }
+
     .spec-grid {
         padding: 12px
     }
+
     .spec-grid-flex {
         padding: 12px
     }
+
     .comic-book {
         padding-right: 16px;
         padding-left: 16px;
         background-image: none
     }
+
     .roboto-card {
         padding-right: 16px;
         padding-left: 16px

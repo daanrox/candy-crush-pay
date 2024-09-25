@@ -1,0 +1,128 @@
+[12-Feb-2024 22:24:04 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:24:04 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:24:04 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:24:20 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:24:20 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:24:20 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:24:26 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:24:26 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:24:26 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:34:27 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:34:27 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:34:27 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:34:38 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:34:38 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:34:38 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:34:58 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:34:58 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:34:58 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:36:03 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:36:03 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:36:03 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:36:37 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:36:37 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:36:37 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:37:13 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:37:13 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 40
+[12-Feb-2024 22:37:13 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 102
+[12-Feb-2024 22:56:56 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 22:56:56 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 22:56:56 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 8
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 10
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 42
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $saldo in /home/nubetgames/public_html/painel/index.php on line 185
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 238
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 239
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 243
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUm in /home/nubetgames/public_html/painel/index.php on line 286
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeDois in /home/nubetgames/public_html/painel/index.php on line 287
+[12-Feb-2024 23:06:39 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 298
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 8
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 10
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 42
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $saldo in /home/nubetgames/public_html/painel/index.php on line 185
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 238
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 239
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 243
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUm in /home/nubetgames/public_html/painel/index.php on line 286
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeDois in /home/nubetgames/public_html/painel/index.php on line 287
+[12-Feb-2024 23:20:38 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 298
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 8
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 10
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 42
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $saldo in /home/nubetgames/public_html/painel/index.php on line 185
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 238
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 239
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 243
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUm in /home/nubetgames/public_html/painel/index.php on line 286
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeDois in /home/nubetgames/public_html/painel/index.php on line 287
+[12-Feb-2024 23:24:42 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 298
+[12-Feb-2024 23:29:11 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:29:11 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:29:11 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:29:42 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:29:42 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:29:42 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 8
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 10
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 42
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $saldo in /home/nubetgames/public_html/painel/index.php on line 185
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 238
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 239
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 243
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUm in /home/nubetgames/public_html/painel/index.php on line 286
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeDois in /home/nubetgames/public_html/painel/index.php on line 287
+[12-Feb-2024 23:31:07 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 298
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 8
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 10
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 42
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $saldo in /home/nubetgames/public_html/painel/index.php on line 185
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $dificuldade_jogo in /home/nubetgames/public_html/painel/index.php on line 186
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 238
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 239
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 243
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUm in /home/nubetgames/public_html/painel/index.php on line 286
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeDois in /home/nubetgames/public_html/painel/index.php on line 287
+[12-Feb-2024 23:31:10 America/Sao_Paulo] PHP Warning:  Undefined variable $nomeUnico in /home/nubetgames/public_html/painel/index.php on line 298
+[12-Feb-2024 23:33:50 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:33:50 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:33:50 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:35:19 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:35:19 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:35:19 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:35:20 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:35:20 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:35:20 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:36:15 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:36:15 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:36:15 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:37:22 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:37:22 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:37:22 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:37:24 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:37:24 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:37:24 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[12-Feb-2024 23:37:33 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[12-Feb-2024 23:37:33 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[12-Feb-2024 23:37:33 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[13-Feb-2024 00:26:32 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[13-Feb-2024 00:26:32 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[13-Feb-2024 00:26:32 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[13-Feb-2024 00:26:44 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[13-Feb-2024 00:26:44 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[13-Feb-2024 00:26:44 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97
+[13-Feb-2024 02:39:58 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[13-Feb-2024 02:41:09 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[13-Feb-2024 02:42:05 America/Sao_Paulo] PHP Warning:  Undefined array key "db_host" in /home/nubetgames/public_html/painel/index.php on line 4
+[13-Feb-2024 02:42:05 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 37
+[13-Feb-2024 02:42:05 America/Sao_Paulo] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in /home/nubetgames/public_html/painel/index.php on line 97

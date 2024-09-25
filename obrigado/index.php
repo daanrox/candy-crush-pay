@@ -50,7 +50,6 @@ $saldo = 1;
 
 <!DOCTYPE html>
 
-
 <html lang="pt-br" class="w-mod-js w-mod-ix wf-spacemono-n4-active wf-spacemono-n7-active wf-active">
 
 <head>
@@ -67,7 +66,7 @@ $saldo = 1;
     <meta name="twitter:image" content="../img/logo.png">
 
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link href="../arquivos/page.css" rel="stylesheet" type="text/css">
+    <link href="./arquivos/page.css" rel="stylesheet" type="text/css">
 
 
 
@@ -99,6 +98,7 @@ $saldo = 1;
         
 
 </head>
+
 
 <body>
 

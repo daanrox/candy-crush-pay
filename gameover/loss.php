@@ -5,168 +5,89 @@ include './../conectarbanco.php';
 
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
-$betValues = [
-    '1BC' => 1.00,
-    '2BC' => 2.00,
-    '3BC' => 5.00,
-];
 
-$bet = isset($_GET['bet']) && isset($betValues[$_GET['bet']]) ? $betValues[$_GET['bet']] : 0.00;
 
-if (isset($_GET['msg'])) {
-    $valor = $_GET['msg'];
 
-    if ($valor === 0 || $valor === null || $valor === '') {
-        $valor = 0.00;
-    }
+$bet = isset($_POST['bet']) ? $_POST['bet'] : 2.00;
 
-    if ($email) {
+
+
+
         $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
 
         if ($conn->connect_error) {
             die("Erro na conexão com o banco de dados: " . $conn->connect_error);
         }
 
-        $saldoQuery = "SELECT saldo FROM appconfig WHERE email = '$email'";
-        $saldoResult = $conn->query($saldoQuery);
+        $saldoQuery = "SELECT saldo FROM appconfig WHERE email = ?";
+        $saldoStmt = $conn->prepare($saldoQuery);
+        $saldoStmt->bind_param("s", $email);
+        $saldoStmt->execute();
+        $saldoStmt->bind_result($saldoAtual);
+        $saldoStmt->fetch();
+        $saldoStmt->close();
+        
 
-        if ($saldoResult) {
-            $row = $saldoResult->fetch_assoc();
-            $saldoAtual = $row['saldo'];
+        $updatePercas = "UPDATE appconfig SET percas = percas + ? WHERE email = ?";
+        $updatePercasStmt = $conn->prepare($updatePercas);
+        $updatePercasStmt->bind_param("ds", $bet, $email);
+        $updatePercasStmt->execute();
+        $updatePercasStmt->close();
 
-            $novoSaldo = $saldoAtual - $bet;
-
-            $updateQuery = "UPDATE appconfig SET saldo = $novoSaldo WHERE email = '$email'";
-            $updateResult = $conn->query($updateQuery);
-
-            if (!$updateResult) {
-                echo "Erro ao atualizar o saldo: " . $conn->error;
-            }
-        } else {
-            echo "Erro ao obter o saldo: " . $conn->error;
+        $leadAffId = "SELECT lead_aff FROM appconfig WHERE email = ?";
+        $leadAffStmt = $conn->prepare($leadAffId);
+        $leadAffStmt->bind_param("s", $email);
+        $leadAffStmt->execute();
+        $leadAffStmt->bind_result($leadAff);
+        $leadAffStmt->fetch();
+        $leadAffStmt->close();
+        
+        if($leadAff){
+         
+            $percentAff = "SELECT plano FROM appconfig WHERE id = ?";
+            $percentAffStmt = $conn->prepare($percentAff);
+            $percentAffStmt->bind_param("s", $leadAff);
+            $percentAffStmt->execute();
+            $percentAffStmt->bind_result($plano);
+            $percentAffStmt->fetch();
+            $percentAffStmt->close();
+    
+            if (is_numeric($plano) && $plano > 0) {
+                // Executar ações relacionadas ao banco de dados
+             
+        
+                $addValue = $bet * ($plano / 100);
+        
+                $updateComissao = "UPDATE appconfig SET saldo_comissao = saldo_comissao + ? WHERE id = ?";
+                $updateComissaoStmt = $conn->prepare($updateComissao);
+                $updateComissaoStmt->bind_param("di", $addValue, $leadAff);
+                $updateComissaoStmt->execute();
+                $updateComissaoStmt->close();
         }
+            
+            
+            
+            
+            
+        }
+
+
+        $novoSaldo = $saldoAtual - $bet;
+        
+        if ($novoSaldo < 0) {
+            $novoSaldo = 0; // Define o novo saldo como zero para evitar saldo negativo
+        }
+
+        $updateQuery = "UPDATE appconfig SET saldo = ? WHERE email = ?";
+        $updateStmt = $conn->prepare($updateQuery);
+        $updateStmt->bind_param("ds", $novoSaldo, $email);
+        $updateStmt->execute();
+        $updateStmt->close();
 
         $conn->close();
-    }
-}
-?>
-
-
-<?php
-session_start();
-if (!isset($_SESSION['email'])) {
-    header("Location: ../");
-    exit();}
+    
 
 ?>
-<?php
-// Iniciar ou resumir a sessão
-session_start();
-
-// Obtém o email da sessão
-$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
-
-if (!empty($email)) {
-    try {
-        
-        
-         include './../conectarbanco.php';
-
-        $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
-        $dbuser = $config['db_user'];
-        $conn = new PDO("mysql:host=localhost;dbname={$config['db_name']}", $config['db_user'], $config['db_pass']);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Verifica se o email existe na tabela confirmar_deposito
-        $stmt = $conn->prepare("SELECT * FROM confirmar_deposito WHERE email = :email AND status = 'pendente'");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        // Loop através de todas as entradas com o mesmo email e status pendente
-        while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            // Verifica se há uma correspondência na tabela pix_deposito
-            $stmtPix = $conn->prepare("SELECT * FROM pix_deposito WHERE code = :externalReference");
-            $stmtPix->bindParam(':externalReference', $result['externalreference']);
-            $stmtPix->execute();
-
-            // Verifica se há uma correspondência na tabela pix_deposito
-            $resultPix = $stmtPix->fetch(PDO::FETCH_ASSOC);
-
-            if ($resultPix !== false) {
-                // Atualiza o status para 'aprovado' na tabela confirmar_deposito
-                $updateStmt = $conn->prepare("UPDATE confirmar_deposito SET status = 'aprovado' WHERE externalreference = :externalReference");
-                $updateStmt->bindParam(':externalReference', $result['externalreference']);
-                $updateStmt->execute();
-
-                // Obtém o valor da correspondência na tabela pix_deposito
-                $valorCorrespondencia = $resultPix['value'];
-
-                // Atualiza a coluna saldo na tabela appconfig
-                $updateSaldoStmt = $conn->prepare("UPDATE appconfig SET saldo = saldo + :valorCorrespondencia, depositou = depositou + :valorCorrespondencia WHERE email = :email");
-                $updateSaldoStmt->bindParam(':valorCorrespondencia', $valorCorrespondencia);
-                $updateSaldoStmt->bindParam(':email', $email);
-                $updateSaldoStmt->execute();
-                
-                header("Location: ../obrigado");
-                break; // Sai do loop assim que encontrar uma correspondência
-            }
-        }
-
-
-    } catch (PDOException $e) {
-        // Trata a exceção, se necessário
-        echo "Erro: " . $e->getMessage();
-    }
-} else {
-    // O código que você quer executar se o email estiver vazio
-}
-?>
-
-
-
-
-
-
-
-
-<?php
-// Inicie a sessão se ainda não foi iniciada
-
-    include './../conectarbanco.php';
-
-    $conn = new mysqli('localhost', $config['db_user'], $config['db_pass'], $config['db_name']);
-
-
-// Verifique se a conexão foi bem-sucedida
-if ($conn->connect_error) {
-    die("Falha na conexão com o banco de dados: " . $conn->connect_error);
-}
-
-// Recupere o email da sessão
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
-
-    // Consulta para obter o saldo associado ao email na tabela appconfig
-    $consulta_saldo = "SELECT saldo FROM appconfig WHERE email = '$email'";
-
-    // Execute a consulta
-    $resultado_saldo = $conn->query($consulta_saldo);
-
-    // Verifique se a consulta foi bem-sucedida
-    if ($resultado_saldo) {
-        // Verifique se há pelo menos uma linha retornada
-        if ($resultado_saldo->num_rows > 0) {
-            // Obtenha o saldo da primeira linha
-            $row = $resultado_saldo->fetch_assoc();
-            $saldo = $row['saldo'];
-        }
-    }
-}
-
-// Feche a conexão com o banco de dados
-$conn->close();
-?>
-
 
 
 <!DOCTYPE html>
@@ -174,6 +95,19 @@ $conn->close();
 <html lang="pt-br" class="w-mod-js w-mod-ix wf-spacemono-n4-active wf-spacemono-n7-active wf-active">
 
 <head>
+    <script>
+         <script>
+        // Adicione esta parte ao final do seu corpo HTML
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+        // Verifica se o noback está definido como true e redireciona para o painel
+        if (<?php echo $noback ? 'true' : 'false'; ?>) {
+            window.location.href = '../painel/redirect.php';
+        }
+    </script>
+    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style>
         .wf-force-outline-none[tabindex="-1"]:focus {
@@ -181,7 +115,7 @@ $conn->close();
         }
     </style>
     <meta charset="pt-br">
-    <title>SubwayPay 🌊 </title>
+    <title>Você perdeu! 🌊 </title>
     <meta property="og:image" content="../img/logo.png">
     <meta content="SubwayPay 🌊" property="og:title">
     <meta name="twitter:image" content="../img/logo.png">
@@ -190,13 +124,40 @@ $conn->close();
     <link href="./arquivos/page.css" rel="stylesheet" type="text/css">
 
 
+<script>
+    localStorage.setItem('realBetPage', 'false');
+
+    window.addEventListener('pageshow', function (event) {
+        // Verificar o localStorage quando a página for exibida ou recarregada
+        localStorage.setItem('realBetPage', 'false');
+    });
+
+
+    window.onload = function() {
+        // Adicione esta parte ao final do seu código PHP
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function(event) {
+            window.history.pushState(null, null, window.location.href);
+            // Configurar sessionStorage para evitar execução adicional
+            sessionStorage.setItem('noback', 'true');
+        };
+        
+        // Verificar sessionStorage quando a página for carregada ou recarregada
+        if (sessionStorage.getItem('noback') === 'true') {
+            window.location.href = '../painel/redirect.php';
+        }
+    };
+</script>
+
 
     <script type="text/javascript">
         WebFont.load({
             google: {
                 families: ["Space Mono:regular,700"]
+            
             }
         });
+       
     </script>
 
 
@@ -222,7 +183,9 @@ $conn->close();
     <div>
 
 
-        <section id="hero" class="hero-section dark wf-section">
+        <section id="hero" class="hero-section dark wf-section" style='background-image: url(../images/candy-bg.png);
+    background-position: center;
+    background-size: cover;'>
 
             <style>
                 div.escudo {
@@ -250,14 +213,14 @@ $conn->close();
                 </div>
                 <h2>VOCÊ PERDEU</H2> 
                 <h2>NÃO DESANIME!</h2>
-                <p class="win-warn"><strong>Você poderia ter ganho incríveis R$
-                        <?php echo $valor; ?>
-                    </strong>
-                </p>
+                <!--<p class="win-warn"><strong>Você poderia ter ganho incríveis R$-->
+                <!--        <?php echo $valor; ?>-->
+                <!--    </strong>-->
+                <!--</p>-->
                 <p>A persistência é a chave para o sucesso, não deixe isso te por pra baixo. #ficadica!</p>
                 <strong style="margin-top: 20px"> ⬇️ Clique no Botão Abaixo para Jogar Novamente</strong>
 
-                <a href="../painel/" class="cadastro-btn">JOGAR</a>
+                <a href="../painel/redirect.php" class="cadastro-btn">JOGAR</a>
 
                 <style>
                     .win-warn {
@@ -412,4 +375,27 @@ $conn->close();
                         }
                     }
 
-                    </st></div></div></body></html>
+                    </style>
+                    </div></div> <script>
+        window.onload = function() {
+            // Adicione esta parte ao final do seu código PHP
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function(event) {
+                window.history.pushState(null, null, window.location.href);
+            };
+        };
+    </script> 
+    
+    <script>
+    // Adicione esta parte ao final do seu corpo HTML
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+
+    // Impede o usuário de voltar à página anterior
+    window.addEventListener('popstate', function (event) {
+        window.history.pushState(null, null, window.location.href);
+        window.location.href = '../painel/redirect.php'; // Redireciona para o painel
+    });
+</script>
+    </body></html>

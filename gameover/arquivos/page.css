@@ -2364,7 +2364,10 @@ li {
     -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: #1fbffe;
+    background-image: url(https://res.cloudinary.com/dpqjdd8gi/image/upload/v1706018199/grola5tpr3aqyifcbk27.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #fff;
     text-align: center
 }
@@ -2373,7 +2376,7 @@ li {
     height: auto;
     min-height: 100vh;
     padding: 130px 24px;
-    background-color: #1fbffe;
+    background-color: #black;
     color: #000
 }
 

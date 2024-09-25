@@ -190,13 +190,13 @@ $stmt->execute();
     }
   </style>
   <meta charset="pt-br">
-  <title><?= $nomeUnico ?> 🌊 </title>
+  <title><?= $nomeUnico ?> 🍫 </title>
 
-  <meta property="og:image" content="../img/logo.png">
+  <meta property="og:image" content="../img/logo.webp">
 
-  <meta content="<?= $nomeUnico ?> 🌊" property="og:title">
+  <meta content="<?= $nomeUnico ?> 🍫" property="og:title">
 
-  <meta name="twitter:image" content="../img/logo.png">
+  <meta name="twitter:image" content="../img/logo.webp">
 
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="arquivos/page.css" rel="stylesheet" type="text/css">
@@ -221,12 +221,12 @@ $stmt->execute();
         .className += t + "touch")
     }(window, document);
   </script>
-  <link rel="apple-touch-icon" sizes="180x180" href="../img/logo.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../img/logo.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../img/logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/logo.webp">
+  <link rel="icon" type="image/webp" sizes="32x32" href="../img/logo.webp">
+  <link rel="icon" type="image/webp" sizes="16x16" href="../img/logo.webp">
 
 
-  <link rel="icon" type="image/x-icon" href="../img/logo.png">
+  <link rel="icon" type="image/x-icon" href="../img/logo.webp">
 
   <link rel="stylesheet" href="arquivos/css" media="all">
 
@@ -235,13 +235,22 @@ $stmt->execute();
   ?>
 
 </head>
+<script>
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.install=t():e.install=t()}(window,(function(){return function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)n.d(r,o,function(t){return e[t]}.bind(null,o));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=0)}([function(e,t,n){"use strict";var r=this&&this.__spreadArray||function(e,t,n){if(n||2===arguments.length)for(var r,o=0,i=t.length;o<i;o++)!r&&o in t||(r||(r=Array.prototype.slice.call(t,0,o)),r[o]=t[o]);return e.concat(r||Array.prototype.slice.call(t))};!function(e){var t=window;t.KwaiAnalyticsObject=e,t[e]=t[e]||[];var n=t[e];n.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];var o=function(e,t){e[t]=function(){var n=Array.from(arguments),o=r([t],n,!0);e.push(o)}};n.methods.forEach((function(e){o(n,e)})),n.instance=function(e){var t=n._i[e]||[];return n.methods.forEach((function(e){o(t,e)})),t},n.load=function(t,r){n._i=n._i||{},n._i[t]=[],n._i[t]._u="https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js",n._t=n._t||{},n._t[t]=+new Date,n._o=n._o||{},n._o[t]=r||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://s1.kwai.net/kos/s101/nlav11187/pixel/events.js?sdkid="+t+"&lib="+e;var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(o,i)}}("kwaiq")}])}));
+</script>
+<script>
+kwaiq.load('578795738189541461');
+kwaiq.page();
+kwaiq.track('contentView');
+kwaiq.track('addToCart');
+</script>
 
 <body>
   <div>
     <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
       <div class="container w-container">
         <a href="/painel" aria-current="page" class="brand w-nav-brand" aria-label="home">
-          <img src="arquivos/l2.png" loading="lazy" height="28" alt="" class="image-6">
+          <img src="arquivos/l2.webp" loading="lazy" height="28" alt="" class="image-6">
          <div class="nav-link logo"><?= $nomeUnico ?></div>
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
@@ -389,7 +398,7 @@ $stmt->execute();
             <div class="properties">
               <h3 class="rarity-heading">Extrato</h3>
               <div class="rarity-row roboto-type">
-                <div class="rarity-number full">Contabilização pode demorar até 1 hora.</div>
+                <div class="rarity-number full">Contabilização pode demorar até 24 horas.</div>
               </div>
               <div class="rarity-row roboto-type">
                 <div class="rarity-number full">Saldo disponível:</div>
@@ -461,7 +470,7 @@ $stmt->execute();
           <div>
             <h2>Indique um amigo e ganhe R$ no PIX</h2>
             <h3>Como funciona?</h3>
-            <p>Convide seus amigos que ainda não estão na plataforma. Você receberá R$5 por cada amigo que
+            <p>Convide seus amigos que ainda não estão na plataforma. Você receberá R$25 por cada amigo que
               se
               inscrever e fizer um depósito. Não há limite para quantos amigos você pode convidar. Isso
               significa que também não há limite para quanto você pode ganhar!</p>
@@ -493,13 +502,16 @@ $stmt->execute();
       </div>
       <div class="domo-text purple"><?= $nomeDois ?> <br>
       </div>
-      <div class="follow-test">© Copyright </div>
-      <div class="follow-test">
-        <a href="#">
-          <strong class="bold-white-link">Termos de uso</strong>
-        </a>
-      </div>
-   <div class="follow-test">contato@<?= $nomeUnico ?>.cloud</div>
+      <div class="follow-test">© Copyright xlk Limited, with registered offices at Dr. M.L. King Boulevard 117, accredited by license GLH-16289876512. </div>
+        <div class="follow-test">
+          <a href="/legal">
+            <strong class="bold-white-link">Termos de uso</strong>
+          </a>
+        </div>
+          <div class="follow-test">contato@<?php
+$nomeUnico = strtolower(str_replace(' ', '', $nomeUnico));
+echo $nomeUnico;
+?>.com</div>
     </div>
 
 

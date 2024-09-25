@@ -1,0 +1,75 @@
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  include(../conectarbanco.php): Failed to open stream: No such file or directory in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  include(): Failed opening '../conectarbanco.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:23 America/Sao_Paulo] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /home/nubetgames/public_html/painel/game/index.php:4
+Stack trace:
+#0 /home/nubetgames/public_html/painel/game/index.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  include(../conectarbanco.php): Failed to open stream: No such file or directory in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  include(): Failed opening '../conectarbanco.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:35:59 America/Sao_Paulo] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /home/nubetgames/public_html/painel/game/index.php:4
+Stack trace:
+#0 /home/nubetgames/public_html/painel/game/index.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  include(../conectarbanco.php): Failed to open stream: No such file or directory in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  include(): Failed opening '../conectarbanco.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:04 America/Sao_Paulo] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /home/nubetgames/public_html/painel/game/index.php:4
+Stack trace:
+#0 /home/nubetgames/public_html/painel/game/index.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  include(../conectarbanco.php): Failed to open stream: No such file or directory in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  include(): Failed opening '../conectarbanco.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:12 America/Sao_Paulo] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /home/nubetgames/public_html/painel/game/index.php:4
+Stack trace:
+#0 /home/nubetgames/public_html/painel/game/index.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  include(../conectarbanco.php): Failed to open stream: No such file or directory in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  include(): Failed opening '../conectarbanco.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nubetgames/public_html/painel/game/index.php on line 2
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Undefined variable $config in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Warning:  Trying to access array offset on value of type null in /home/nubetgames/public_html/painel/game/index.php on line 4
+[12-Feb-2024 23:36:18 America/Sao_Paulo] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user ''@'localhost' (using password: NO) in /home/nubetgames/public_html/painel/game/index.php:4
+Stack trace:
+#0 /home/nubetgames/public_html/painel/game/index.php(4): mysqli->__construct()
+#1 {main}
+  thrown in /home/nubetgames/public_html/painel/game/index.php on line 4

@@ -80,7 +80,14 @@ if (isset($_GET['msg'])) {
 
 <body>
 
-
+<script>
+        const betValue = sessionStorage.getItem('betValue') || 0;
+        const saldo = sessionStorage.getItem('saldoInfluencer') || 20;
+        const newSaldo = Number(saldo) - Number(betValue);
+        sessionStorage.setItem('saldoInfluencer', newSaldo)
+        sessionStorage.removeItem('betValue');
+        
+    </script>
 
     <div>
 
@@ -113,14 +120,14 @@ if (isset($_GET['msg'])) {
                 </div>
                 <h2>VOCÊ PERDEU</H2> 
                 <h2>NÃO DESANIME!</h2>
-                <p class="win-warn"><strong>Você poderia ter ganho incríveis R$
-                        <?php echo $valor; ?>
+                <p class="win-warn"><strong>Essa foi por pouco!
+                        
                     </strong>
                 </p>
                 <p>A persistência é a chave para o sucesso, não deixe isso te por pra baixo. #ficadica!</p>
                 <strong style="margin-top: 20px"> ⬇️ Clique no Botão Abaixo para Jogar Novamente</strong>
 
-                <a href="../painel/" class="cadastro-btn">JOGAR</a>
+                <a href="/influencer/" class="cadastro-btn">JOGAR</a>
 
                 <style>
                     .win-warn {

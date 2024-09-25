@@ -118,4 +118,3 @@ if ($status === 'PAID_OUT') {
     http_response_code(200);
     exit;
 }
-
