@@ -43,7 +43,7 @@ if ($conn->connect_error) {
   die("Erro na conexão com o banco de dados: " . $conn->connect_error);
 }
 
-// Verificar se o email está presente na sessão
+
 if (isset($_SESSION['email'])) {
   $email = $_SESSION['email'];
 
