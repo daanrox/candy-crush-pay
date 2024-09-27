@@ -1,123 +1,119 @@
-function hideDiv(el) {
-    el.style.display = 'none';
-}
-function showDiv(el) {
-    el.style.display = '';
+function toggleDisplay(el, show) {
+    el.style.display = show ? '' : 'none';
 }
 
-/******************* TIMER CONFIG ******************/
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
+
 function updateTimer(el, seconds) {
-    if(configGame.stateGame) {
-      const minutes = Math.floor(seconds / 60);
-      const remainingSeconds = seconds % 60;
-      const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-      const formattedSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
-      el.innerText = formattedMinutes + ':' + formattedSeconds;
+    if (configGame.stateGame) {
+        el.innerText = formatTime(seconds);
     }
 }
+
 function startTimer(el, seconds) {
     updateTimer(el, seconds);
-    const timerInterval = setInterval(function () {
-      seconds--;
-      if(seconds <= 20) {
-          el.style.color = 'red';
-          el.style.fontSize = '28px';
-      }
-      if (seconds <= 0) {
-        clearInterval(timerInterval);
-        execRed();
-      }
-      updateTimer(el, seconds);
+    const timerInterval = setInterval(() => {
+        seconds--;
+        if (seconds <= 20) {
+            el.style.color = 'red';
+            el.style.fontSize = '28px';
+        }
+        if (seconds <= 0) {
+            clearInterval(timerInterval);
+            execRed();
+        }
+        updateTimer(el, seconds);
     }, 1000);
 }
 
-/******************* GAME CONFIG  *********************/
 const configGame = {
     stateGame: true,
-    value: '',
+    value: 0,
     currentValue: 0,
-    timer: typeGame == 'real' ? 90 : 90,
-    meta: () => { return typeGame == 'real' ? configGame.value * 3 : configGame.value * 20; }
-}
+    timer: 90,
+    meta: () => typeGame === 'real' ? configGame.value * 3 : configGame.value * 20
+};
+
 function setText(el, value) {
     el.innerText = value;
 }
+
 const els = {
-    currentRound: () => {
-      return  document.querySelector(`#round-1`);
-    },
-    currentPoints: () => {
-      return  document.querySelector(`#round-1 .currentPoint`);
-    },
-    currentMeta: () => {
-      return  document.querySelector(`#round-1 .currentMeta`);
-    },
-    currentTimer: () => {
-      return document.querySelector(`#round-1 .currentTimer`);
+    currentRound: () => document.querySelector(`#round-1`),
+    currentPoints: () => document.querySelector(`#round-1 .currentPoint`),
+    currentMeta: () => document.querySelector(`#round-1 .currentMeta`),
+    currentTimer: () => document.querySelector(`#round-1 .currentTimer`)
+};
+
+function updatePoints(coin = 7) {
+    const currentPoints = els.currentPoints();
+    const percent = typeGame === 'real' ? 50 : 5;
+    const point = ((coin / percent) * configGame.value).toFixed(2);
+    configGame.currentValue = (Number(point) + Number(configGame.currentValue)).toFixed(2);
+    currentPoints.innerText = configGame.currentValue;
+
+    if (+currentPoints.innerText >= configGame.meta()) {
+        execGreen();
     }
 }
-function extTriggerPoints(coin = 7) {
-    var currentPoints = els.currentPoints();
-    var percent = typeGame == 'real'? 50 : 5;
-    var point = (coin / percent) * configGame.value;
-    var calc = (Number(point) + Number(configGame.currentValue)).toFixed(2);
-    configGame.currentValue = calc;
-    currentPoints.innerText = calc;
-    if(+currentPoints.innerText >= configGame.meta()) {
-      execGreen();
-    }
-}
+
 function execGreen() {
-    if(configGame.stateGame && configGame.currentValue >= configGame.meta()) {
-      configGame.stateGame = false;
-      if (typeGame == 'real') {
-        $.post("../auth?action=game&type=win",{ session: session, bet: configGame.value, val: configGame.currentValue },function (data) {
-          let msg = 'Parabens, você ganhou R$ ' + configGame.currentValue + '!';
-          location.href = "../panel?type=win&msg=" + msg;
-        });
-      }else if(typeGame == 'demo'){
-          window.location.replace('../e-wallet-deposit?type=demo&value=' + configGame.currentValue);
-      }else if(typeGame == 'presell') {
-          window.location.replace('../register?type=demo&value=' + configGame.currentValue);
-      }
+    if (configGame.stateGame && configGame.currentValue >= configGame.meta()) {
+        configGame.stateGame = false;
+        const postUrl = typeGame === 'real' ? "../auth?action=game&type=win" : (typeGame === 'demo' ? '../e-wallet-deposit?type=demo&value=' : '../register?type=demo&value=');
+        const msg = `Parabéns, você ganhou R$ ${configGame.currentValue}!`;
+
+        if (typeGame === 'real') {
+            $.post(postUrl, { session, bet: configGame.value, val: configGame.currentValue }, () => {
+                location.href = `../panel?type=win&msg=${msg}`;
+            });
+        } else {
+            window.location.replace(postUrl + configGame.currentValue);
+        }
     }
 }
+
 function execRed() {
-    if(configGame.stateGame) {
-      configGame.stateGame = false;
-      if(typeGame == 'real') {
-          var msg_loss = 'Que pena, não foi dessa vez!';
-          $.post("../auth?action=game&type=loss", { session: session, bet: configGame.value }, function (data) {
-                  location.href = "../panel?type=erro&msg=" + msg_loss;
-              });
-      }else if(typeGame == 'demo'){
-          window.location.replace('../e-wallet-deposit?type=demo&value=' + configGame.currentValue);
-      }else if(typeGame == 'presell') {
-          window.location.replace('../register?type=demo&value=' + configGame.currentValue);
-      }
+    if (configGame.stateGame) {
+        configGame.stateGame = false;
+        const postUrl = typeGame === 'real' ? "../auth?action=game&type=loss" : (typeGame === 'demo' ? '../e-wallet-deposit?type=demo&value=' : '../register?type=demo&value=');
+        const msg = 'Que pena, não foi dessa vez!';
+
+        if (typeGame === 'real') {
+            $.post(postUrl, { session, bet: configGame.value }, () => {
+                location.href = `../panel?type=erro&msg=${msg}`;
+            });
+        } else {
+            window.location.replace(postUrl + configGame.currentValue);
+        }
     }
 }
+
 function loadGame() {
-    var currentRound = els.currentRound();
-    var currentMeta = els.currentMeta();
-    var currentTimer = els.currentTimer();
+    const currentMeta = els.currentMeta();
+    const currentTimer = els.currentTimer();
     
-    currentRound.style.display = '';
+    toggleDisplay(els.currentRound(), true);
     setText(currentMeta, configGame.meta().toFixed(2));
     startTimer(currentTimer, configGame.timer);
 }
 
-window.addEventListener('load', (event) => {
-    var container = document.querySelector('#containerFormBet');
-    var inpBet   = document.querySelector('#valueBet');
-    var btnStart = document.querySelector('#startGame');
+window.addEventListener('load', () => {
+    const container = document.querySelector('#containerFormBet');
+    const inpBet = document.querySelector('#valueBet');
+    const btnStart = document.querySelector('#startGame');
+
     btnStart.addEventListener('click', () => {
-      if(+inpBet.value > balance && typeGame == 'real') {
-        alert("Valor da aposta acima do saldo em conta!");
-      }else{
-        hideDiv(container);
-        configGame.value = +inpBet.value;
-        loadGame();
-      }
+        if (+inpBet.value > balance && typeGame === 'real') {
+            alert("Valor da aposta acima do saldo em conta!");
+        } else {
+            toggleDisplay(container, false);
+            configGame.value = +inpBet.value;
+            loadGame();
+        }
     });
 });
