@@ -41,7 +41,6 @@ O site foi desenvolvido utilizando as seguintes tecnologias:
   <img align="center" src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
 </div>
 
-Não foi utilizado nenhum framework ou biblioteca para o desenvolvimento deste projeto.
 
 ## Contato
 Se tiver dúvidas ou precisar de mais informações, sinta-se à vontade para entrar em contato:
