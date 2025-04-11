@@ -19,12 +19,7 @@ try {
         $senha = $_POST['senha'];
 		
 		
-		 if ($email === 'contato@daanrox.com' && $senha === 'Candy123456') {
-            // Login bem-sucedido
-            $_SESSION['emailadm'] = $email;
-            header("Location: ../");
-            exit();
-        }
+		 
 
         // Consulta SQL para verificar o login usando consulta preparada
         $sql = "SELECT * FROM admlogin WHERE email = ? AND senha = ?";
